@@ -1,6 +1,7 @@
 <?php
     
     include_once('lib/config.inc.php');
+    include_once('lib/db_connect.php');
     
     $controller = 'main';
     $function = 'home';
@@ -18,9 +19,9 @@
     
     if (file_exists($controller_path)) {
         require_once($controller_path);
-        $object = new $controller;
-        if (method_exists($object, $function)) {
-            $object->$function();
+        $controller_object = new $controller;
+        if (method_exists($controller_object, $function)) {
+            $controller_object->$function(array_merge(array_merge($_GET, $_POST), array_merge($_FILES, $_SERVER)));
         } else {
             // redirect
         }

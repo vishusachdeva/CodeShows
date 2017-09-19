@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteRule ^img/(.+)$ img/$1 [L]
+RewriteRule ^js/(.+)$ js/$1 [L]
+RewriteRule ^css/(.+)$ css/$1 [L]
+RewriteRule ^Controller/(.+)$ controller/$1 [L]
+RewriteRule ^lib/(.+)$ lib/$1 [L]
+RewriteRule ^Model/(.+)$ model/$1 [L]
+RewriteRule ^View/(.+)$ view/$1 [L]
+RewriteRule ^uploads/(.+)$ uploads/$1 [L]
+RewriteRule ^(.*)/(.*)$ /index.php?controller=$1&function=$2 [L]
