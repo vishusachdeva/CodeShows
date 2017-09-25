@@ -1,10 +1,10 @@
 <?php
-    
+
     /*
      *use mysqli instead of mysql(only upto php5)
      */
-    
-    function connect() {
+
+    function db_connect() {
         $username = 'vishusachdeva';
         $password = 'v1kCjsvLYytrBTGV';
         $hostname = 'localhost';
@@ -16,7 +16,11 @@
         }
         return $db;
     }
-    
+
+    function db_close($db) {
+        mysqli_close($db);
+    }
+
     function query($db, $sql) {
         $result = mysqli_query($db, $sql);
         if ($result === false) {
@@ -32,5 +36,9 @@
         }
         return $rows;
     }
-    
+
+    function db_last_id($db) {
+        return mysqli_insert_id($db);
+    }
+
 ?>

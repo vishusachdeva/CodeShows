@@ -1,14 +1,15 @@
 <?php
-    
+
     define('ROOT', '/home/ubuntu/workspace/codeshows/');
+    define('SITE_ROOT', 'https://ide50-vishusachdeva.cs50.io/');
     define('CONTROLLER_PATH', ROOT.'controller/');
     define('MODEL_PATH', ROOT.'model/');
     define('VIEW_PATH', ROOT.'view/');
-    
+
     function generate_link($controller, $function) {
         return '/'.$controller.'/'.$function;
     }
-    
+
     function loadView($view, $data = []) {
         extract($data);
         $view_path = VIEW_PATH.$view.'.php';
@@ -18,7 +19,7 @@
             // redirect
         }
     }
-    
+
     function loadModel($model, $function, $data) {
         $model_class = $model.'_model';
         $model_path = MODEL_PATH.$model.'.php';
@@ -34,5 +35,9 @@
             // redirect
         }
     }
-    
+
+    function redirect($controller, $function) {
+        header('Location: /'.$controller.'/'.$function);
+    }
+
 ?>
