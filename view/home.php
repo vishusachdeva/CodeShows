@@ -2,7 +2,7 @@
 
     if(!isset($user_id) and empty($user_id)) { ?>
         <button onclick='login()' type='button' id='login_button'>LogIn</button>
-        <a href=<?php echo(generate_link('user', 'signup')); ?>>SignUp</a>
+        <button type="button" onclick="location.href='<?php echo(generate_link('user', 'signup')); ?>'">SignUp</button>
         <div id='login_form' style='display:none'>
             <form method='post' action='<?php echo(generate_link('user', 'login')); ?>'>
                 <input type='email' name='email' placeholder='Email Id' required autofocus><br/>

@@ -26,11 +26,11 @@
     function query($db, $sql) {
         $result = mysqli_query($db, $sql);
         if ($result === false) {
-            // redirect
             print("Please check query : ".$sql);
             redirect_sleep('main','home',5);
             exit();
         }
+        if ($result === true) return $result;
         $rows = [];
         // if result is not boolean only then fetch data
         if (!($result === true || $result === false)) {
@@ -41,8 +41,10 @@
         return $rows;
     }
 
-    function db_last_id($db) {
-        return mysqli_insert_id($db);
+    function db_last_id($db, $table, $id) {
+        $sql = "SELECT * FROM $table WHERE $id=".mysqli_insert_id($db);
+        $result = query($db, $sql);
+        return $result[0];
     }
 
 ?>

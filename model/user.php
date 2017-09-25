@@ -67,6 +67,9 @@
             `dob`, `batch`, `about_me`) VALUES('$fname', '$lname', '$username', '$institute_id', '$email',
             '".password_hash($password, PASSWORD_BCRYPT)."', $sem, $cg, '$branch', '$dob', '$batch', '$about_me')";
             $result = query($this->db, $sql);
+            if ($result === true) {
+                $result = db_last_id($this->db, 'user', 'user_id');
+            }
             db_close($this->db);
             return $result;
         }
