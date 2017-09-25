@@ -5,13 +5,15 @@
      */
 
     function db_connect() {
-        $username = 'vishusachdeva';
-        $password = 'v1kCjsvLYytrBTGV';
+        $username = 'shivanjal_arora';
+        $password = 'hIsIfff0MvpNobzq';
         $hostname = 'localhost';
         $database = 'codeshows';
         $db = mysqli_connect($hostname, $username, $password, $database);
         if ($db === false) {
             // redirect
+            print("Database not responding");
+            redirect_sleep('main','home',5);
             exit();
         }
         return $db;
@@ -25,6 +27,8 @@
         $result = mysqli_query($db, $sql);
         if ($result === false) {
             // redirect
+            print("Please check query : ".$sql);
+            redirect_sleep('main','home',5);
             exit();
         }
         $rows = [];

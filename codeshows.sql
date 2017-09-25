@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2017 at 07:56 PM
--- Server version: 5.5.46-0ubuntu0.14.04.2
--- PHP Version: 5.5.9-1ubuntu4.20
+-- Generation Time: Sep 25, 2017 at 06:53 PM
+-- Server version: 5.5.57-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -33,9 +33,9 @@ CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(20) NOT NULL,
   `institute_id` char(15) NOT NULL,
   `email` varchar(40) NOT NULL,
-  `password` varchar(20) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `sem` int(11) NOT NULL,
-  `cg` decimal(10,0) NOT NULL,
+  `cg` double(10,2) NOT NULL,
   `branch` char(20) NOT NULL,
   `dob` date NOT NULL,
   `batch` varchar(5) NOT NULL,
@@ -51,8 +51,8 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `email`, `password`, `sem`, `cg`, `branch`, `dob`, `batch`, `about_me`) VALUES
-(1, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015ucp1057', 'vishusachdeva228@gmail.com', '$2y$10$A6l6y0IMGebMv', 5, '10', 'CSE', '1998-02-06', 'A', 'fuck'),
-(2, 'Shivanjal', 'Arora', 'shivi6011', '2015ucp1229', 'shivanjal9@gmail.com', '$2y$10$wKx/RPrZq/y0S', 5, '10', 'CSE', '1997-03-07', 'A', 'jhaatu Rockstar of MNIT');
+(1, 'b', 'b', 'b', 'b', 'b@gmail.com', '$2y$10$weoksPS6HYql3nWVXtq/MefTUwFvv6PUNKAlTaG3vsKWMrkZmHwmu', 1, 45.00, 'Computer Science And', '2016-11-30', 'abi', 'alskmnd'),
+(2, 'Shivanjal', 'Arora', 'shivi6011', '2015UCp1220', 'shivanjal9@gmail.com', '$2y$10$NGTCgo8fgV5FHIy4/pVLouwcGI4TyKmJcmLKuX4J98Zp06.s97.8q', 5, 1.00, 'CSE', '2017-01-01', 'baj', 'adjkl');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

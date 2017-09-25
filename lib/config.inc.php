@@ -1,10 +1,11 @@
 <?php
 
     define('ROOT', '/home/ubuntu/workspace/codeshows/');
-    define('SITE_ROOT', 'https://ide50-vishusachdeva.cs50.io/');
+    define('SITE_ROOT', '/');
     define('CONTROLLER_PATH', ROOT.'controller/');
     define('MODEL_PATH', ROOT.'model/');
     define('VIEW_PATH', ROOT.'view/');
+    define('JS_PATH', SITE_ROOT.'js/');
 
     function generate_link($controller, $function) {
         return '/'.$controller.'/'.$function;
@@ -17,6 +18,8 @@
             require_once($view_path);
         } else {
             // redirect
+            print("View Doesn't exist");
+            redirect_sleep('main','home',5);
         }
     }
 
@@ -27,17 +30,23 @@
             require_once($model_path);
             $model_object = new $model_class;
             if (method_exists($model_object, $function)) {
-                $model_object->$function($data);
+                return $model_object->$function($data);
             } else {
-                // redirect
+                print("Model Function does not exist");
+                redirect_sleep('main','home',5);
             }
         } else {
             // redirect
+            print("Model does not exist");
+            redirect_sleep('main','home',5);
         }
     }
-
+    function redirect_sleep($controller, $function,$time)
+    {
+        header( "refresh:$time;url=".generate_link($controller,$function) );
+    }
     function redirect($controller, $function) {
-        header('Location: /'.$controller.'/'.$function);
+        header('Location: '.generate_link($controller,$function));
     }
 
 ?>
