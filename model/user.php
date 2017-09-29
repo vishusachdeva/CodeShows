@@ -13,7 +13,19 @@
             $i_patt = '/2[0-9]{3}[a-zA-Z]{3}[0-9]{4}/';
             $e_patt = '/.+@.+\..+/';
             $msg = "";
-            if (!ctype_alpha($fname) || strlen($fname) > 20) {
+            $sql = "SELECT * FROM `user` WHERE username='$username'";
+            $result1 = query($this->db, $sql);
+            $sql = "SELECT * FROM `user` WHERE institute_id='$institute_id'";
+            $result2 = query($this->db, $sql);
+            $sql = "SELECT * FROM `user` WHERE email='$email'";
+            $result3 = query($this->db, $sql);
+            if (count($result1)) {
+                $msg = "Username Already exist";
+            } else if (count($result2)) {
+                $msg = "Institute ID Already exist";
+            } else if (count($result3)) {
+                $msg = "Email-ID Already exist";
+            } else if (!ctype_alpha($fname) || strlen($fname) > 20) {
                 $msg = "Invalid First Name";
             } else if (!ctype_alpha($lname) || strlen($lname) > 20) {
                 $msg = "Invalid Last Name";
@@ -35,6 +47,8 @@
                 $msg = "Invalid Branch";
             } else if (!ctype_alnum($batch)) {
                 $msg = "Invalid Batch";
+            } else if ($dob >= date("Y-m-d")) {
+                $msg = "Invalid Date of Birth";
             }
             return $msg;
         }

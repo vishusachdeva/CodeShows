@@ -12,7 +12,7 @@
     }
 
     function loadView($view, $data = []) {
-        extract($data);
+        extract($data, EXTR_PREFIX_INVALID, "num");
         $view_path = VIEW_PATH.$view.'.php';
         if (file_exists($view_path)) {
             require_once($view_path);

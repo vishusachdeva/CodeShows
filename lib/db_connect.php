@@ -5,8 +5,8 @@
      */
 
     function db_connect() {
-        $username = 'shivanjal_arora';
-        $password = 'hIsIfff0MvpNobzq';
+        $username = 'vishusachdeva';
+        $password = 'v1kCjsvLYytrBTGV';
         $hostname = 'localhost';
         $database = 'codeshows';
         $db = mysqli_connect($hostname, $username, $password, $database);

@@ -1,5 +1,6 @@
 RewriteEngine On
 RewriteRule ^img/(.+)$ img/$1 [L]
+RewriteRule ^favicon/(.+)$ favicon/$1 [L]
 RewriteRule ^js/(.+)$ js/$1 [L]
 RewriteRule ^css/(.+)$ css/$1 [L]
 RewriteRule ^Controller/(.+)$ controller/$1 [L]
