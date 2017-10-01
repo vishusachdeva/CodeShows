@@ -22,3 +22,16 @@ function p_tab_switch(dif)
         hard.style.display = 'block';
     }
 }
+
+function submit_mode_switch(mode) {
+    var editor = document.getElementById('editor_block');
+    var file = document.getElementById('file_block');
+    if(mode == 1) {
+        editor.style.display = 'block';
+        file.style.display = 'none';
+    }
+    else if(mode==2) {
+        editor.style.display = 'none';
+        file.style.display = 'block';
+    }
+}

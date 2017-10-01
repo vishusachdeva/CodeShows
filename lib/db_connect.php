@@ -5,18 +5,14 @@
      */
 
     function db_connect() {
-        /*$username = 'vishusachdeva';
+        $username = 'vishusachdeva';
         $password = 'v1kCjsvLYytrBTGV';
-        $hostname = 'localhost';
-        $database = 'codeshows';*/
-        $username = 'shivanjal_arora';
-        $password = 'hIsIfff0MvpNobzq';
+        /*$username = 'shivanjal_arora';
+        $password = 'hIsIfff0MvpNobzq';*/
+        /*$username = 'vishusachdeva';
+        $password = 'v1kCjsvLYytrBTGV';*/
         $hostname = 'localhost';
         $database = 'codeshows';
-        /*$username = 'vishusachdeva';
-        $password = 'v1kCjsvLYytrBTGV';
-        $hostname = 'localhost';
-        $database = 'codeshows';*/
         $db = mysqli_connect($hostname, $username, $password, $database);
         if ($db === false) {
             // redirect

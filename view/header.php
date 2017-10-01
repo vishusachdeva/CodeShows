@@ -4,7 +4,7 @@
             <?php echo($title); ?>
         </title>
         <script src="<?php echo JS_PATH.'validation.js'; ?>" ></script>
-        <script src="<?php echo JS_PATH.'p_tab_switch.js'; ?>" ></script>
+        <script src="<?php echo JS_PATH.'tab_switch.js'; ?>" ></script>
         <meta charset="utf-8"/>
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">

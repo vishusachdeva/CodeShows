@@ -2,11 +2,15 @@
 
     class user {
 
+        private $data = array();
         private $auth = 0;
 
         function __construct() {
             session_start();
-            if (isset($_SESSION) && !empty($_SESSION)) $this->auth = 1;
+            if(isset($_SESSION) && !empty($_SESSION)) {
+                $this->data = $_SESSION;
+                $this->auth = 1;
+            }
             else $this->auth = 0;
         }
 
@@ -50,7 +54,7 @@
                 redirect_sleep('main', 'home', 5);
                 exit();
             }
-            loadView('header', ['title' => 'SignUp - CodeShows']);
+            loadView('header', array_merge($this->data, ['title' => 'SignUp - CodeShows']));
             loadView('signup');
             loadView('footer');
         }
