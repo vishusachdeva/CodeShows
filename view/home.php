@@ -1,6 +1,6 @@
 <?php
 
-    if(!isset($user_id) and empty($user_id)) { ?>
+    /*if(!isset($user_id) and empty($user_id)) { ?>
         <button onclick='login()' type='button' id='login_button'>LogIn</button>
         <button type="button" onclick="location.href='<?php echo(generate_link('user', 'signup')); ?>'">SignUp</button>
         <div id='login_form' style='display:none'>
@@ -20,5 +20,5 @@
     <?php } else { ?>
         <?php echo($username); ?>
         <button onclick = "location.href = '<?php echo(generate_link('user','logout')); ?>'">LogOut</button>
-    <?php }
+    <?php }*/
 ?>

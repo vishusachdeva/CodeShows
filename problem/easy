@@ -1,0 +1,9 @@
+client-id: 3a6cb52c7ee801f50e512af9323784f83990e4e0ce19.api.hackerearth.com
+client-secret-key: b9655b4b6d013a5af14743d8ec74c8b3441a67aa
+
+compile-output:
+Array ( [async] => 0 [compile_status] => OK [web_link] => https://code.hackerearth.com/ae9bb7L [code_id] => ae9bb7L [id] => ae9bb7L )
+
+run-output
+Array ( [run_status] => Array ( [memory_used] => 64 [time_limit] => 1 [output_html] => Hello! Vipin
+[memory_limit] => 1 [time_used] => 0.100583 [signal] => OTHER [status_detail] => NA [status] => MLE [stderr] => [output] => Hello! Vipin [async] => 0 [request_NOT_OK_reason] => [request_OK] => True ) [compile_status] => OK [web_link] => https://code.hackerearth.com/bcce40q [code_id] => bcce40q )

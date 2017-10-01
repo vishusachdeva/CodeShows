@@ -6,6 +6,7 @@
     define('MODEL_PATH', ROOT.'model/');
     define('VIEW_PATH', ROOT.'view/');
     define('JS_PATH', SITE_ROOT.'js/');
+    define('PROBLEM_PATH', ROOT.'problem/');
 
     function generate_link($controller, $function) {
         return '/'.$controller.'/'.$function;
