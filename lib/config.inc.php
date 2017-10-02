@@ -7,6 +7,10 @@
     define('VIEW_PATH', ROOT.'view/');
     define('JS_PATH', SITE_ROOT.'js/');
     define('PROBLEM_PATH', ROOT.'problem/');
+    define('SAMPLE_TESTCASE_PATH', ROOT.'testcase/sample/');
+    define('SUBMIT_TESTCASE_PATH', ROOT.'testcase/submit/');
+    define('API_PATH', SITE_ROOT.'api/');
+    define('COMPILER_PATH', ROOT.'api/compiler/');
 
     function generate_link($controller, $function) {
         return '/'.$controller.'/'.$function;
@@ -44,10 +48,21 @@
     }
     function redirect_sleep($controller, $function,$time)
     {
-        header( "refresh:$time;url=".generate_link($controller,$function) );
+        header("refresh:$time;url=".generate_link($controller,$function) );
     }
     function redirect($controller, $function) {
         header('Location: '.generate_link($controller,$function));
     }
-
+    function file_open($file_path,$error_msg){
+            if(file_exists($file_path))
+            {
+                return file_get_contents($file_path);
+            }
+            else
+            {
+                print($error_msg);
+                redirect_sleep('main','home',3);
+                exit();
+            }
+    }
 ?>

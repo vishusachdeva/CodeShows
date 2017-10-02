@@ -23,15 +23,7 @@
         function fetch_problem($data) {
             $sql = "SELECT * FROM `problem` WHERE `p_id`=".$data['p_id'];
             $result = query($this->db, $sql);
-            if(file_exists(PROBLEM_PATH.$result[0]['p_name']))
-            {
-                $problem = file_get_contents(PROBLEM_PATH.$result[0]['p_name']);
-            }
-            else
-            {
-                redirect_sleep('main','home',3);
-                exit();
-            }
+            $problem = file_open(PROBLEM_PATH.$result[0]['p_name'], "Problem File doesn't exist.");
             return ['p_name' => $result[0]['p_name'], 'p_statement' => $problem];
         }
 

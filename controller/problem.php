@@ -25,8 +25,9 @@
             $data = loadModel('problem', 'fetch_problem', $arguments);
             loadView("header", array_merge($this->data, ['title' => $data['p_name']." - CodeShows"]));
             loadView("p_statement", array_merge($data));
-            loadView('editor');
-            loadView('p_submit', ['auth' => $this->auth]);
+            loadView('editor', ['auth' => $this->auth , 'p_id' => $arguments['p_id']]);
+            loadView('p_submit', ['auth' => $this->auth , 'p_id' => $arguments['p_id']]);
+            loadView('result');
             loadView("footer");
         }
     }
