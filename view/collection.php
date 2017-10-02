@@ -6,7 +6,7 @@
     $i = 0;
     $x = "num_$i";
     while(${$x}['difficulty'] == 1) {
-        print("<a href=''>{${$x}['p_name']}</a>&nbsp;{${$x}['p_code']}<br/>");
+        print("<a href='".generate_link('problem', '?p_id='.${$x}['p_id'])."'>{${$x}['p_name']}</a>&nbsp;{${$x}['p_code']}<br/>");
         $i++;
         $x = "num_$i";
     }
@@ -16,7 +16,7 @@
 <?php
     $x = "num_$i";
     while(${$x}['difficulty'] == 2) {
-        print("<a href=''>{${$x}['p_name']}</a>&nbsp;{${$x}['p_code']}<br/>");
+        print("<a href='".generate_link('problem', '?p_id='.${$x}['p_id'])."'>{${$x}['p_name']}</a>&nbsp;{${$x}['p_code']}<br/>");
         $i++;
         $x = "num_$i";
     }
@@ -27,7 +27,7 @@
 <?php
     $x = "num_$i";
     while(${$x}['difficulty'] == 3) {
-        print("<a href=''>{${$x}['p_name']}</a>&nbsp;{${$x}['p_code']}<br/>");
+        print("<a href='".generate_link('problem', '?p_id='.${$x}['p_id'])."'>{${$x}['p_name']}</a>&nbsp;{${$x}['p_code']}<br/>");
         $i++;
         $x = "num_$i";
     }

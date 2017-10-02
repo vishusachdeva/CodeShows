@@ -11,7 +11,8 @@
         <input type= 'file' id = 'solution'>
         <br/><br/>
         <?php if ($auth) { ?>
-            <button type='button' onclick="submit('<?php echo(API_PATH.'eval.php'); ?>', 0, document.getElementById('language').value, <?php echo($p_id); ?>, this)">Submit Solution</button>
+            <button type='button' onclick="submit('<?php echo(API_PATH.'eval.php'); ?>', 0,
+            document.getElementById('language').value, <?php echo($p_id); ?>, document.getElementById('solution').files[0])">Submit Solution</button>
         <?php } else { ?>
             <span>Please Login to Submit</span>
         <?php } ?>
