@@ -1,21 +1,47 @@
+<?php
+    $map = [
+        "C" => 1,
+        "CPP" => 2,
+        "Java" => 3,
+        "C#" => 9,
+        "PHP" => 7,
+        "Ruby" => 8,
+        "Python" => 5,
+        "Perl" => 6,
+        "Haskell" => 12,
+        "Clojure" => 13,
+        "Scala" => 15,
+        "Bash" => 14,
+        "Mysql" => 10,
+        "Oracle" => 11,
+        "Erlang" => 16,
+        "CLISP" => 17,
+        "Lua" => 18,
+        "Go" => 21
+        ];
+?>
+<script src="<?php echo JS_PATH.'compiler.js'; ?>" ></script>
 <span onclick = 'submit_mode_switch(1);' onmouseover="this.style.cursor='pointer'">Write Code</span>
 <span onclick = 'submit_mode_switch(2);' onmouseover="this.style.cursor='pointer'">Submit File</span>
 <div id="editor_block">
     <form>
+        <textarea name="editor_solution" id="editor_solution"></textarea>
+        <br/><br/>
         <label for="input">Custom Input</label><textarea name="input" id="input"></textarea>
         <br/><br/>
-        <label for = 'language'>Select Language</label>
-        <select id = 'language'>
-            <option value = 'C'>C</option>
-            <option value = 'C++'>C++</option>
-            <option value = 'Java'>Java</option>
-            <option value = 'Python'>Python</option>
+        <label for = 'language_editor'>Select Language</label>
+        <select id = 'language_editor' name='language_editor'>
+            <?php foreach($map as $key => $value) { ?>
+                <option value = '<?php echo($value);?>'><?php echo($key); ?></option>
+            <?php } ?>
         </select>
         <br/><br/>
-        <button type="button" onclick="run()">Run Code</button>
+        <button type="button" id = "run" onclick="run_code('<?php echo(API_PATH.'run.php'); ?>',
+            document.getElementById('language_editor').value, <?php echo($p_id); ?>,
+            document.getElementById('editor_solution').value, document.getElementById('input').value)">Run Code</button>
         <br/><br/>
         <?php if ($auth) { ?>
-            <button type = 'submit' onclick="location.href=''">Submit Solution</button>
+            <button id="editor_submit_solution" type = 'submit' onclick="location.href=''">Submit Solution</button>
         <?php } else { ?>
             <span>Please Login to Submit</span>
         <?php } ?>

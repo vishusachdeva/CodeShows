@@ -1,41 +1,26 @@
 <?php
     include_once('../lib/config.inc.php');
-    if (isset($_POST) && !empty($_POST)){
+     if (isset($_POST) && !empty($_POST) && isset($_POST['solution']) && !empty($_POST['solution'])
+     && isset($_POST['p_id']) && !empty($_POST['p_id'])){
         extract($_POST);
-        if ($submit_mode == '0'){
-            $testcase = file_open(SUBMIT_TESTCASE_PATH.$p_id.'.txt',"TestCase File Doesn't exist.");
-            $target_dir = "uploads/";
-            $target_file = $target_dir . basename($_FILES["solution"]["name"]);
-            $uploadOk = 1;
-            $file_type = pathinfo($target_file, PATHINFO_EXTENSION);
-            if ($_FILES["solution"]["size"] > 500000) {
-                echo "Sorry, your file is too large.";
-                $uploadOk = 0;
-            }
-            if($file_type != "c" && $file_type != "cpp" && $file_type != "py"
-            && $file_type != "java" ) {
-                echo "Wrong file extension";
-                $uploadOk = 0;
-            }
-            if ($uploadOk == 0) {
-                echo "Sorry, your file was not uploaded.";
-            } else {
-                if (move_uploaded_file($_FILES["solution"]["tmp_name"], $target_file)) {
-                    echo "The file ". basename( $_FILES["solution"]["name"]). " has been uploaded.";
-                } else {
-                    echo "Sorry, there was an error uploading your file.";
-                }
-            }
-        }
-        else if(isset($submit_mode) && !empty($submit_mode) && $submit_mode == 1){
-
-        }
-        $client="b9655b4b6d013a5af14743d8ec74c8b3441a67aa";
-        require_once(COMPILER_PATH.'hackapi.php');
-        $hack = new HackApi;
-        $hack->set_client_secret($client);
-        $hack->init($language,$solution,$testcase);
-        $hack->run();
-        echo $hack->compile_status;
+        $testcase = file_open(SUBMIT_TESTCASE_PATH.$p_id.'.txt', 'Test Case File doesn\'t exist');
+        $url = 'http://api.hackerrank.com/checker/submission.json';
+        $data = array('source' => $solution, 'lang' => $language, 'testcases' => "[\"$testcase\"]",
+        'api_key' => 'hackerrank|1410655-1970|60b06e493f0bcb8e50098333c418ad800fafcacc', 'format' => 'JSON', 'wait' => "true");
+        $options = array(
+            'http' => array(
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'POST',
+                'content' => http_build_query($data)
+            )
+        );
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+        if ($result === FALSE) { print('error'); exit(); }
+        $out_file = file_open(SUBMIT_TESTCASE_PATH.$p_id.'o.txt', 'Output File doesn\'t exist');
+        if ($out_file == json_decode($result)->result->stdout[0]) print("Accept");
+        else print('WA');
+    } else {
+        print('Error!! Please Try Later');
     }
 ?>

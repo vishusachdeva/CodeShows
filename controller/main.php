@@ -11,7 +11,7 @@
         }
 
         function home() {
-            loadView('header', array_merge($this->data, ['title' => 'Home']));
+            loadView('header', array_merge($this->data, ['title' => 'Home - CodeShows']));
             loadView('home');
             loadView('footer');
         }
