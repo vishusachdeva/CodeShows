@@ -6,7 +6,7 @@
         "C#" => 9,
         "PHP" => 7,
         "Ruby" => 8,
-        "Python" => 5,
+        "Python 2.0" => 5,
         "Perl" => 6,
         "Haskell" => 12,
         "Clojure" => 13,
@@ -33,7 +33,7 @@
         <?php if ($auth) { ?>
             <button type='button' id = 'submit_solution' onclick="submit('<?php echo(API_PATH.'eval.php'); ?>',
             document.getElementById('language_file').value,
-            <?php echo($p_id); ?>, document.getElementById('solution'))">Submit Solution</button>
+            <?php echo($p_id); ?>, document.getElementById('solution'),<?php echo($time_limit); ?>)">Submit Solution</button>
         <?php } else { ?>
             <span>Please Login to Submit</span>
         <?php } ?>

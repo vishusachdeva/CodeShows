@@ -6,7 +6,7 @@
         "C#" => 9,
         "PHP" => 7,
         "Ruby" => 8,
-        "Python" => 5,
+        "Python 2.0" => 5,
         "Perl" => 6,
         "Haskell" => 12,
         "Clojure" => 13,
@@ -25,7 +25,7 @@
 <span onclick = 'submit_mode_switch(2);' onmouseover="this.style.cursor='pointer'">Submit File</span>
 <div id="editor_block">
     <form>
-        <textarea name="editor_solution" id="editor_solution"></textarea>
+        <textarea name="editor_solution" id="editor_solution" cols="40" rows="15"></textarea>
         <br/><br/>
         <label for="input">Custom Input</label><textarea name="input" id="input"></textarea>
         <br/><br/>
@@ -38,10 +38,12 @@
         <br/><br/>
         <button type="button" id = "run" onclick="run_code('<?php echo(API_PATH.'run.php'); ?>',
             document.getElementById('language_editor').value, <?php echo($p_id); ?>,
-            document.getElementById('editor_solution').value, document.getElementById('input').value)">Run Code</button>
+            document.getElementById('editor_solution').value, document.getElementById('input').value, <?php echo($time_limit); ?>)">Run Code</button>
         <br/><br/>
         <?php if ($auth) { ?>
-            <button id="editor_submit_solution" type = 'submit' onclick="location.href=''">Submit Solution</button>
+            <button id="editor_submit_solution" type = 'button' onclick="editor_submit('<?php echo(API_PATH.'eval.php'); ?>',
+            document.getElementById('language_editor').value,
+            <?php echo($p_id); ?>, document.getElementById('editor_solution').value, <?php echo($time_limit); ?>)">Submit Solution</button>
         <?php } else { ?>
             <span>Please Login to Submit</span>
         <?php } ?>

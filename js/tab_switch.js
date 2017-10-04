@@ -23,6 +23,31 @@ function p_tab_switch(dif)
     }
 }
 
+function c_tab_switch(time)
+{
+    var present = document.getElementById('present_block');
+    var past = document.getElementById('past_block');
+    var future = document.getElementById('future_block');
+    if(time == 1)
+    {
+        present.style.display = 'block';
+        past.style.display = 'none';
+        future.style.display = 'none';
+    }
+    else if(time==2)
+    {
+        present.style.display = 'none';
+        past.style.display = 'none';
+        future.style.display = 'block';
+    }
+    else if(time == 3)
+    {
+        present.style.display = 'none';
+        past.style.display = 'block';
+        future.style.display = 'none';
+    }
+}
+
 function submit_mode_switch(mode) {
     var editor = document.getElementById('editor_block');
     var file = document.getElementById('file_block');

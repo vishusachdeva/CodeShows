@@ -11,7 +11,7 @@
         function fetch($data) {
             $sql = "SELECT * FROM problem WHERE ";
             if ($data['by'] == 'all') {
-                $sql .= "`status`=1 AND 1";
+                $sql .= "`status`=0 AND 1";
             }
             else {
                // $sql .= "`c_id`=".$data['c_id'];
@@ -24,7 +24,7 @@
             $sql = "SELECT * FROM `problem` WHERE `p_id`=".$data['p_id'];
             $result = query($this->db, $sql);
             $problem = file_open(PROBLEM_PATH.$result[0]['p_name'], "Problem File doesn't exist.");
-            return ['p_name' => $result[0]['p_name'], 'p_statement' => $problem];
+            return ['p_name' => $result[0]['p_name'], 'p_statement' => $problem, 'time_limit'=> $result[0]['time_limit']];
         }
 
     }

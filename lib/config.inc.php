@@ -28,7 +28,7 @@
         }
     }
 
-    function loadModel($model, $function, $data) {
+    function loadModel($model, $function, $data =[]) {
         $model_class = $model.'_model';
         $model_path = MODEL_PATH.$model.'.php';
         if (file_exists($model_path)) {

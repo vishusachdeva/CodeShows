@@ -22,7 +22,7 @@ Constraints
 1 ≤ Ai ≤ 109
 
 
-Subtasks
+Subtasks:
 Subtask #1 (10 points) 1 ≤ T ≤ 10, 2 ≤ N ≤ 9, 1 ≤ Ai ≤ 500
 Subtask #2 (20 points) 1 ≤ T ≤ 10, 2 ≤ N ≤ 500, 1 ≤ Ai ≤ 1000
 Subtask #3 (70 points) original constraints

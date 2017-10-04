@@ -15,12 +15,18 @@
         }
 
         function all($arguments) {
-            $data = loadModel("problem", "fetch", ['by' => $arguments['c_id']]);
-            loadView("header", array_merge($this->data, ['title' => $data['c_name']." - CodeShows"]));
-            //loadView("collection", array_merge($data, ['len' => count($data)]));
+            $data = loadModel("contest", "fetch");
+            loadView("header", array_merge($this->data, ['title' => 'Contests - CodeShows']));
+            loadView("contest_collection", array_merge($data, ['len' => count($data), 'curr_time' => date("Y-m-d G:i:s")]));
             loadView("footer");
         }
 
+        function fetch_contest($arguments) {
+            $data = loadModel("contest", "fetch_contest", $arguments);
+            loadView("header", array_merge($this->data, ['title' => $data['contest_name']." - CodeShows"]));
+            loadView("contest_problems", array_merge($data, ['len' => count($data)]));
+            loadView("footer");
+        }
 
     }
 ?>

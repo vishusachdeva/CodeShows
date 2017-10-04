@@ -5,10 +5,10 @@
      */
 
     function db_connect() {
-        $username = 'vishusachdeva';
-        $password = 'v1kCjsvLYytrBTGV';
-        /*$username = 'shivanjal_arora';
-        $password = 'hIsIfff0MvpNobzq';*/
+        /*$username = 'vishusachdeva';
+        $password = 'v1kCjsvLYytrBTGV';*/
+        $username = 'shivanjal_arora';
+        $password = 'hIsIfff0MvpNobzq';
         /*$username = 'vishusachdeva';
         $password = 'v1kCjsvLYytrBTGV';*/
         $hostname = 'localhost';
