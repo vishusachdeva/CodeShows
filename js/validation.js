@@ -38,8 +38,8 @@ function validate(str) {
     var fname=document.getElementsByName('fname')[0];
     var lname=document.getElementsByName('lname')[0];
     var username=document.getElementsByName('username')[0];
-    var email=document.getElementsByName('email')[0];
-    var password=document.getElementsByName('password')[0];
+    var email=document.getElementsByName('email')[1];
+    var password=document.getElementsByName('password')[1];
     var confirm=document.getElementsByName('confirm')[0];
     var sem=document.getElementsByName('sem')[0];
     var cg=document.getElementsByName('cg')[0];
@@ -148,6 +148,18 @@ function validate(str) {
             er_password.style.display = 'none';
             password.style.borderColor = 'inherit';
         }
+
+        if (confirm.value !== password.value) {
+            er_confirm.style.display = 'initial';
+            er_confirm.innerHTML = 'Passwords do not match<br/>';
+            confirm.style.borderColor = 'red';
+            error = false;
+        }
+        else {
+            er_confirm.style.display = 'none';
+            confirm.style.borderColor = 'inherit';
+        }
+
         if (str == 'password') return;
     }
 

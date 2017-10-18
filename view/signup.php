@@ -46,7 +46,7 @@
         <?php } ?>
       </select><br/>
     <div id="er_cg" style="display:none"></div>
-    <input type='text' name='cg' placeholder='CGPA' onchange="validate('cg')" required><br>
+    <input type='number' name='cg' placeholder='CGPA' onchange="validate('cg')" min="0" max="10" step="0.01" required><br>
     <div id="er_branch" style="display:none"></div>
     <label for='branch'>Branch &nbsp</label><select id="branch" name = 'branch' onchange="validate('branch')" required>
         <option value="0" disabled selected>Select Branch</option>
@@ -58,4 +58,5 @@
     <input type='text' name='batch' placeholder='Batch' onchange="validate('batch')" required><br>
     <textarea name='about_me' placeholder='About Me' rows = "10" cols = "30" ></textarea><br>
     <input type='submit' name='signup' value='SignUp'>
+    <input type='reset' name='reset' value='Reset'>
 </form>
