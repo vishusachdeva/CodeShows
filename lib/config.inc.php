@@ -1,11 +1,14 @@
 <?php
 
+    /*define('ROOT', $_SERVER['DOCUMENT_ROOT'].'/');*/
     define('ROOT', '/home/ubuntu/workspace/codeshows/');
     define('SITE_ROOT', '/');
     define('CONTROLLER_PATH', ROOT.'controller/');
     define('MODEL_PATH', ROOT.'model/');
     define('VIEW_PATH', ROOT.'view/');
     define('JS_PATH', SITE_ROOT.'js/');
+    define('CSS_PATH', SITE_ROOT.'css/');
+    define('IMAGE_PATH', SITE_ROOT.'images/');
     define('PROBLEM_PATH', ROOT.'problem/');
     define('SAMPLE_TESTCASE_PATH', ROOT.'testcase/sample/');
     define('SUBMIT_TESTCASE_PATH', ROOT.'testcase/submit/');

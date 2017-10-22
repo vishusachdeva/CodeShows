@@ -14,11 +14,11 @@
         //$function = 'e404';
         // redirect
         print("Please check url");
-        redirect_sleep('main','home',5);
+        redirect_sleep('main', 'home', 5);
     }
 
     $controller_path = CONTROLLER_PATH.$controller.'.php';
-
+	
     if (file_exists($controller_path)) {
         require_once($controller_path);
         $controller_object = new $controller;
@@ -27,12 +27,12 @@
         } else {
             // redirect
             print("Controller Function does not exist");
-                redirect_sleep('main','home',5);
+			redirect_sleep('main', 'home', 5);
         }
     } else {
         // redirect
         print("Controller does not exist");
-        redirect_sleep('main','home',5);
+        redirect_sleep('main', 'home', 5);
     }
 
 ?>

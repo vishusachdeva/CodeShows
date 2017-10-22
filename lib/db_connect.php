@@ -5,12 +5,12 @@
      */
 
     function db_connect() {
-        /*$username = 'vishusachdeva';
-        $password = 'v1kCjsvLYytrBTGV';*/
-        $username = 'shivanjal_arora';
-        $password = 'hIsIfff0MvpNobzq';
-        /*$username = 'vishusachdeva';
-        $password = 'v1kCjsvLYytrBTGV';*/
+        $username = 'vishusachdeva';
+        $password = 'v1kCjsvLYytrBTGV';
+        /*$username = 'shivanjal_arora';
+        $password = 'hIsIfff0MvpNobzq';*/
+		/*$username = 'root';
+		$password = '';*/
         $hostname = 'localhost';
         $database = 'codeshows';
         $db = mysqli_connect($hostname, $username, $password, $database);

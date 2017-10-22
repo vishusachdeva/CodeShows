@@ -22,41 +22,71 @@
         "X" => "10"
         ];
 ?>
+<div class="container-fluid w3-light-grey">
+	<form action='<?php echo(generate_link('user', 'register')); ?>' method='post' onsubmit="return validate('all')" class="container w3-margin-top">
+		
+		<h2>Signup Form</h2><br/>
+		
+		<div id="er_fname" style="display:none"></div>
+		<p><label>First Name</label>
+		<input class="w3-input w3-border w3-round" type='text' name='fname' placeholder='First Name' onchange="validate('fname')" required></p><br/>
+		
+		<div id="er_lname" style="display:none"></div>
+		<p><label>Last Name</label>
+		<input class="w3-input w3-border w3-round" type='text' name='lname' placeholder='Last Name' onchange="validate('lname')" required></p><br/>
+		
+		<div id="er_username" style="display:none"></div>
+		<p><label>Userame</label>
+		<input class="w3-input w3-border w3-round" type='text' name='username' placeholder='Username' onchange="validate('username')" required></p><br/>
+		
+		<div id="er_institute_id" style="display:none"></div>
+		<p><label>Institute ID</label>
+		<input class="w3-input w3-border w3-round" type='text' name='institute_id' placeholder='Institute Id' onchange="validate('institute_id')" required></p><br/>
+		
+		<div id="er_email" style="display:none"></div>
+		<p><label>Email</label>
+		<input class="w3-input w3-border w3-round" type='email' name='email' placeholder='Email Id' onchange="validate('email')" required></p><br/>
+		
+		<div id="er_password" style="display:none"></div>
+		<p><label>Password</label>
+		<input class="w3-input w3-border w3-round" type='password' name='password' placeholder='Password' onchange="validate('password')" required></p><br/>
+		
+		<div id="er_confirm" style="display:none"></div>
+		<p><label>Confirm Password</label>
+		<input class="w3-input w3-border w3-round" type='password' name='confirm' placeholder='Confirm Password' onchange="validate('confirm')" required></p><br/>
+		
+		<div id="er_sems" style="display:none"></div>
+		<p><label for='sems'>Semester</label>
+		<select class="w3-input w3-border w3-round" id="sems" name = 'sem' onchange="validate('sems')" required>
+			<option value="0" disabled selected>Select Semester</option>
+			<?php foreach($sems as $key => $value) { ?>
+			<option value = <?php echo($value); ?> > <?php echo($key); ?> </option>
+			<?php } ?>
+		</select></p><br/>
+		
+		<div id="er_cg" style="display:none"></div>
+		<p><label>Confirm Password</label>
+		<input class="w3-input w3-border w3-round" type='number' name='cg' placeholder='CGPA' onchange="validate('cg')" min="0" max="10" step="0.01" required></p><br/>
+		
+		<div id="er_branch" style="display:none"></div>
+		<p><label for='branch'>Branch</label>
+		<select class="w3-input w3-border w3-round" id="branch" name = 'branch' onchange="validate('branch')" required>
+			<option value="0" disabled selected>Select Branch</option>
+			<?php foreach($branch as $key => $value) { ?>
+			<option value = <?php echo($value); ?> > <?php echo($key); ?> </option>
+			<?php } ?>
+		</select></p><br/>
+		
+		<p><label for='dob'>Date of Birth</label>
+		<input class="w3-input w3-border w3-round" type='date' name='dob' onchange="validate('dob')" required></p><br/>
+		
+		<p><label for='dob'>Batch</label>
+		<input class="w3-input w3-border w3-round" type='text' name='batch' placeholder='Batch' onchange="validate('batch')" required></p><br/>
 
-<form action='<?php echo(generate_link('user', 'register')); ?>' method='post' onsubmit="return validate('all')">
-    <div id="er_fname" style="display:none"></div>
-    <input type='text' name='fname' placeholder='First Name' onchange="validate('fname')" required autofocus><br>
-    <div id="er_lname" style="display:none"></div>
-    <input type='text' name='lname' placeholder='Last Name' onchange="validate('lname')" required><br>
-    <div id="er_username" style="display:none"></div>
-    <input type='text' name='username' placeholder='Username' onchange="validate('username')" required><br>
-    <div id="er_institute_id" style="display:none"></div>
-    <input type='text' name='institute_id' placeholder='Institute Id' onchange="validate('institute_id')" required><br>
-    <div id="er_email" style="display:none"></div>
-    <input type='email' name='email' placeholder='Email Id' onchange="validate('email')" required><br>
-    <div id="er_password" style="display:none"></div>
-    <input type='password' name='password' placeholder='Password' onchange="validate('password')" required><br>
-    <div id="er_confirm" style="display:none"></div>
-    <input type='password' name='confirm' placeholder='Confirm Password' onchange="validate('confirm')" required><br>
-    <div id="er_sems" style="display:none"></div>
-    <label for='sems'>Semester &nbsp</label><select id="sems" name = 'sem' onchange="validate('sems')" required>
-        <option value="0" disabled selected>Select Semester</option>
-        <?php foreach($sems as $key => $value) { ?>
-        <option value = <?php echo($value); ?> > <?php echo($key); ?> </option>
-        <?php } ?>
-      </select><br/>
-    <div id="er_cg" style="display:none"></div>
-    <input type='number' name='cg' placeholder='CGPA' onchange="validate('cg')" min="0" max="10" step="0.01" required><br>
-    <div id="er_branch" style="display:none"></div>
-    <label for='branch'>Branch &nbsp</label><select id="branch" name = 'branch' onchange="validate('branch')" required>
-        <option value="0" disabled selected>Select Branch</option>
-        <?php foreach($branch as $key => $value) { ?>
-        <option value = <?php echo($value); ?> > <?php echo($key); ?> </option>
-        <?php } ?>
-      </select><br/>
-    <label for='dob'>Date of Birth &nbsp</label><input type='date' name='dob' onchange="validate('dob')" required><br>
-    <input type='text' name='batch' placeholder='Batch' onchange="validate('batch')" required><br>
-    <textarea name='about_me' placeholder='About Me' rows = "10" cols = "30" ></textarea><br>
-    <input type='submit' name='signup' value='SignUp'>
-    <input type='reset' name='reset' value='Reset'>
-</form>
+		<p><label for='dob'>Info</label>
+		<textarea class="w3-input w3-border w3-round" name='about_me' placeholder='About Me' rows = "10" cols = "30" ></textarea></p>
+
+		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" type='submit' name='signup' value='Sign Up'>
+		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" type='reset' name='reset' value='Reset'>
+	</form>
+</div>

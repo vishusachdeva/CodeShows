@@ -36,10 +36,9 @@
             print('Error Message (stderr) :<br>');
             print('Terminated due to timeout<br>');
             exit();
-
         }
-        $out_file = file_open(SUBMIT_TESTCASE_PATH.$p_id.'o.txt', 'Output File doesn\'t exist');
-        if ($out_file == json_decode($result)->result->stdout[0] || $out_file == json_decode($result)->result->stdout[0]."\n") print("Accept ".json_decode($result)->result->time[0].'<br>');
+        $out_file = str_replace("\r", '', file_open(SUBMIT_TESTCASE_PATH.$p_id.'o.txt', 'Output File doesn\'t exist'));
+        if ($out_file == json_decode($result)->result->stdout[0] || $out_file == json_decode($result)->result->stdout[0]."\n") print("Accept ".json_decode($result)->result->time[0].'s<br>');
         else print('WA<br/>');
     } else {
         print('Error!! Please Try Later');

@@ -22,9 +22,11 @@
         }
 
         function fetch_contest($arguments) {
-            $data = loadModel("contest", "fetch_contest", $arguments);
+            $data = loadModel("problem", "fetch", $arguments);
+			$len = count($data);
+			$data = array_merge($data, loadModel('contest', 'fetch', ['c_id' => $arguments['c_id']])[0]);
             loadView("header", array_merge($this->data, ['title' => $data['contest_name']." - CodeShows"]));
-            loadView("contest_problems", array_merge($data, ['len' => count($data)]));
+            loadView("contest_problems", array_merge($data, ['len' => $len]));
             loadView("footer");
         }
 

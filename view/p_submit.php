@@ -20,22 +20,21 @@
         "Go" => 21
         ];
 ?>
-<div id="file_block" style='display:none'>
-        <label for = 'language_file'>Select Language</label>
-        <select id = 'language_file' name = 'language_file'>
+<div id="file_block" class="container" style='display:none'>
+    <form>
+        <label for = 'language_file' class="w3-margin-top">Select Language</label>
+        <select id = 'language_file' name = 'language_file' class="w3-select w3-border">
             <?php foreach($map as $key => $value) { ?>
                 <option value = '<?php echo($value);?>'><?php echo($key); ?></option>
             <?php } ?>
         </select>
-        <br/><br/>
-        <input type= 'file' id = 'solution'>
-        <br/><br/>
+        <input type= 'file' id = 'solution' class="w3-input w3-border w3-margin-top">
         <?php if ($auth) { ?>
-            <button type='button' id = 'submit_solution' onclick="submit('<?php echo(API_PATH.'eval.php'); ?>',
+            <button class="w3-button w3-ripple w3-red w3-hover-cyan w3-margin-top" type='button' id = 'submit_solution' onclick="p_submit('<?php echo(API_PATH.'eval.php'); ?>',
             document.getElementById('language_file').value,
             <?php echo($p_id); ?>, document.getElementById('solution'),<?php echo($time_limit); ?>)">Submit Solution</button>
         <?php } else { ?>
-            <span>Please Login to Submit</span>
+            <br/><code class="w3-codespan">Please Login to Submit Code</code>
         <?php } ?>
-        <br/><br/>
+    </form>
 </div>

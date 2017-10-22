@@ -10,11 +10,11 @@
 
         function fetch($data) {
             $sql = "SELECT * FROM problem WHERE ";
-            if ($data['by'] == 'all') {
+            if (isset($data) && isset($data['by']) && $data['by'] == 'all') {
                 $sql .= "`status`=0 AND 1";
             }
-            else {
-               // $sql .= "`c_id`=".$data['c_id'];
+            else if (isset($data) && isset($data['c_id'])) {
+				$sql .= "`status`=".$data['c_id'];
             }
             $sql .= " ORDER BY difficulty ASC";
             return query($this->db, $sql);

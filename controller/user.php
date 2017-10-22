@@ -11,7 +11,10 @@
                 $this->data = $_SESSION;
                 $this->auth = 1;
             }
-            else $this->auth = 0;
+            else {
+				session_destroy();
+				$this->auth = 0;
+			}
         }
 
         function logout() {
@@ -20,9 +23,8 @@
                 redirect_sleep('main', 'home', 5);
                 exit();
             }
-            session_start();
             session_destroy();
-            print("Log out successfull");
+            print("Log out Success");
             redirect_sleep('main','home', 3);
         }
 
@@ -39,13 +41,13 @@
             $result = loadModel('user', 'login', $arguments);
             if ($result === false) {
                 print("Login Error");
-                redirect_sleep('main','home',5);
+                redirect_sleep('main','home', 5);
                 exit();
             }
             print("Login Success");
             session_start();
             $_SESSION = $result;
-            redirect_sleep('main','home',5);
+            redirect_sleep('main','home', 5);
         }
 
         function signup($arguments) {

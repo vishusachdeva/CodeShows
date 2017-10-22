@@ -45,10 +45,11 @@
             print("Input (stdin) <br/>".nl2br($testcase)."<br/>");
             print("Your Output (stdout) <br/>".nl2br(json_decode($result)->result->stdout[0])."<br/>");
             print("Expected Output<br/>".nl2br($out_file)."<br/>");
+			$out_file = str_replace("\r", '', $out_file);
             if ($out_file == json_decode($result)->result->stdout[0] || $out_file == json_decode($result)->result->stdout[0]."\n") print("SAMPLE TESTCASES PASSED<br/>");
             else print("WA<br/>");
         } else if (!$flag) {
-            print("Input (stdin) <br/>".nl2br($testcase)."<br/>");
+            print("Your Input (stdin) <br/>".nl2br($testcase)."<br/>");
             print("Your Output (stdout) <br/>".nl2br(json_decode($result)->result->stdout[0])."<br/>");
         }
     } else {

@@ -1,5 +1,4 @@
-function p_tab_switch(dif)
-{
+function p_tab_switch(evt, dif) {
     var easy = document.getElementById('easy_block');
     var med = document.getElementById('med_block');
     var hard = document.getElementById('hard_block');
@@ -21,9 +20,14 @@ function p_tab_switch(dif)
         med.style.display = 'none';
         hard.style.display = 'block';
     }
+	tablinks = document.getElementsByClassName("tablink");
+	for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+	}
+	evt.currentTarget.className += " w3-red";
 }
 
-function c_tab_switch(time)
+function c_tab_switch(evt, time)
 {
     var present = document.getElementById('present_block');
     var past = document.getElementById('past_block');
@@ -46,9 +50,14 @@ function c_tab_switch(time)
         past.style.display = 'block';
         future.style.display = 'none';
     }
+	tablinks = document.getElementsByClassName("tablink");
+	for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+	}
+	evt.currentTarget.className += " w3-red";
 }
 
-function submit_mode_switch(mode) {
+function submit_mode_switch(evt, mode) {
     var editor = document.getElementById('editor_block');
     var file = document.getElementById('file_block');
     if(mode == 1) {
@@ -59,4 +68,9 @@ function submit_mode_switch(mode) {
         editor.style.display = 'none';
         file.style.display = 'block';
     }
+	tablinks = document.getElementsByClassName("tablink");
+	for (i = 0; i < tablinks.length; i++) {
+		tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+	}
+	evt.currentTarget.className += " w3-red";
 }

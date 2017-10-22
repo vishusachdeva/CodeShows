@@ -11,8 +11,9 @@
         }
 
         function home() {
+			$data = loadModel('contest', 'banner');
             loadView('header', array_merge($this->data, ['title' => 'Home - CodeShows']));
-            loadView('home');
+            loadView('home', array_merge($data, ['len' => count($data)]));
             loadView('footer');
         }
 
