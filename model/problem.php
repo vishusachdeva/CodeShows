@@ -20,8 +20,8 @@
 				$sql .= "`status`= 1 AND `c_id` = ".$data['c_id'];
             }
             $sql .= " ORDER BY difficulty ASC";
-            var_dump( $sql);die()
-;            return query($this->db, $sql);
+            //var_dump( $sql);die()
+            return query($this->db, $sql);
         }
 
         function fetch_problem($data) {

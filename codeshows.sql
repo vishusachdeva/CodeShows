@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
+-- version 4.0.10deb1
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 21, 2017 at 12:44 PM
--- Server version: 10.1.9-MariaDB
--- PHP Version: 5.6.15
+-- Generation Time: Oct 26, 2017 at 02:17 PM
+-- Server version: 5.5.57-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `codeshows`
@@ -23,10 +23,43 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `asg`
+--
+
+CREATE TABLE IF NOT EXISTS `asg` (
+  `asg_id` int(11) NOT NULL,
+  `asg_name` varchar(100) NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime NOT NULL,
+  `total_marks` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  `batch_id` int(11) NOT NULL,
+  PRIMARY KEY (`asg_id`),
+  KEY `t_idb` (`batch_id`),
+  KEY `u_asg` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `asg_prob`
+--
+
+CREATE TABLE IF NOT EXISTS `asg_prob` (
+  `asg_id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
+  `marks` int(11) NOT NULL,
+  PRIMARY KEY (`asg_id`,`p_id`),
+  KEY `b` (`p_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `banner`
 --
 
-CREATE TABLE `banner` (
+CREATE TABLE IF NOT EXISTS `banner` (
   `c_id` int(11) NOT NULL,
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -42,17 +75,32 @@ INSERT INTO `banner` (`c_id`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `batch`
+--
+
+CREATE TABLE IF NOT EXISTS `batch` (
+  `batch_name` varchar(15) NOT NULL,
+  `sem` int(11) NOT NULL,
+  `branch` varchar(35) NOT NULL,
+  `batch_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`batch_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `contest`
 --
 
-CREATE TABLE `contest` (
+CREATE TABLE IF NOT EXISTS `contest` (
   `c_id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
   `contest_name` varchar(100) NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   `no_of_problems` int(11) NOT NULL,
-  `about_contest` text NOT NULL
+  `about_contest` text NOT NULL,
+  PRIMARY KEY (`c_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -61,7 +109,30 @@ CREATE TABLE `contest` (
 
 INSERT INTO `contest` (`c_id`, `admin_id`, `contest_name`, `start_time`, `end_time`, `no_of_problems`, `about_contest`) VALUES
 (1, 1, 'vinayak', '2017-10-04 20:00:00', '2017-10-04 23:00:00', 5, 'hey you'),
-(2, 2, 'shivi', '2017-10-25 21:30:00', '2017-10-26 00:00:00', 3, 'nothing');
+(2, 2, 'shivi', '2017-10-25 21:30:00', '2017-10-31 00:00:00', 3, 'nothing'),
+(3, 738927, 'lav kush', '2018-02-24 17:00:00', '2018-03-30 00:00:00', 2, 'Aabra ka dabra');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contest_prob`
+--
+
+CREATE TABLE IF NOT EXISTS `contest_prob` (
+  `c_id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
+  `score` int(11) NOT NULL,
+  PRIMARY KEY (`c_id`,`p_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contest_prob`
+--
+
+INSERT INTO `contest_prob` (`c_id`, `p_id`, `score`) VALUES
+(1, 4, 100),
+(2, 5, 100),
+(3, 6, 100);
 
 -- --------------------------------------------------------
 
@@ -69,9 +140,10 @@ INSERT INTO `contest` (`c_id`, `admin_id`, `contest_name`, `start_time`, `end_ti
 -- Table structure for table `language`
 --
 
-CREATE TABLE `language` (
+CREATE TABLE IF NOT EXISTS `language` (
   `language_id` int(11) NOT NULL,
-  `language_name` varchar(10) NOT NULL
+  `language_name` varchar(10) NOT NULL,
+  PRIMARY KEY (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -80,9 +152,10 @@ CREATE TABLE `language` (
 -- Table structure for table `languages_allowed`
 --
 
-CREATE TABLE `languages_allowed` (
+CREATE TABLE IF NOT EXISTS `languages_allowed` (
   `p_id` int(11) NOT NULL,
-  `language_id` int(11) NOT NULL
+  `language_id` int(11) NOT NULL,
+  PRIMARY KEY (`p_id`,`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -91,10 +164,12 @@ CREATE TABLE `languages_allowed` (
 -- Table structure for table `participation`
 --
 
-CREATE TABLE `participation` (
+CREATE TABLE IF NOT EXISTS `participation` (
   `user_id` int(11) NOT NULL,
   `c_id` int(11) NOT NULL,
-  `score` int(11) NOT NULL
+  `score` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`c_id`),
+  KEY `c_id` (`c_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -103,8 +178,8 @@ CREATE TABLE `participation` (
 -- Table structure for table `problem`
 --
 
-CREATE TABLE `problem` (
-  `p_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `problem` (
+  `p_id` int(11) NOT NULL AUTO_INCREMENT,
   `p_name` varchar(50) NOT NULL,
   `p_code` varchar(10) NOT NULL,
   `p_setter` varchar(20) NOT NULL,
@@ -117,18 +192,23 @@ CREATE TABLE `problem` (
   `time_limit` float(15,2) NOT NULL,
   `source_limit` int(11) NOT NULL,
   `difficulty` int(11) NOT NULL,
-  `status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`p_id`),
+  UNIQUE KEY `p_code` (`p_code`,`p_filename`),
+  KEY `difficulty` (`difficulty`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `problem`
 --
 
 INSERT INTO `problem` (`p_id`, `p_name`, `p_code`, `p_setter`, `date_added`, `p_filename`, `u_attempt`, `u_solve`, `accepted`, `submitted`, `time_limit`, `source_limit`, `difficulty`, `status`) VALUES
-(1, 'easy', 'rt', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 1, 0),
-(2, 'med', 'rte', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 10.00, 2879, 2, 1),
+(1, 'easy', 'rt', 'cdcedc', '2017-09-02', '0_practise', 3, 34, 23, 23, 2.02, 2879, 1, 0),
+(2, 'med', 'rte', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 10.00, 2879, 2, 0),
 (3, 'hard', 'rtet', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 3, 0),
-(4, 'hard', 'rtetsf', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 3, 1);
+(4, 'hard', 'rtetsf', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 3, 1),
+(5, 'easy_c', 'rtyrt', 'yws', '2017-10-06', '1', 21, 123, 132, 123, 12.00, 30000, 1, 1),
+(6, 'MED_C', 'askodh', 'asjkdh', '2017-10-03', '1', 1, 1, 1, 1, 1.00, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -136,15 +216,44 @@ INSERT INTO `problem` (`p_id`, `p_name`, `p_code`, `p_setter`, `date_added`, `p_
 -- Table structure for table `solves`
 --
 
-CREATE TABLE `solves` (
+CREATE TABLE IF NOT EXISTS `solves` (
   `p_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `time` float(15,2) NOT NULL,
   `memory` int(11) NOT NULL,
-  `date` date NOT NULL,
+  `submit_time` datetime NOT NULL,
   `language_id` int(11) NOT NULL,
-  `penalty` int(11) NOT NULL
+  `penalty` int(11) NOT NULL,
+  PRIMARY KEY (`p_id`,`user_id`),
+  KEY `user_id` (`user_id`),
+  KEY `language_id` (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `student`
+--
+
+CREATE TABLE IF NOT EXISTS `student` (
+  `user_id` int(11) NOT NULL,
+  `sem` int(11) NOT NULL,
+  `cg` decimal(10,2) NOT NULL,
+  `batch_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher`
+--
+
+CREATE TABLE IF NOT EXISTS `teacher` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `status` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -152,30 +261,35 @@ CREATE TABLE `solves` (
 -- Table structure for table `user`
 --
 
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `fname` varchar(20) NOT NULL,
   `lname` varchar(20) NOT NULL,
   `username` varchar(20) NOT NULL,
-  `institute_id` char(15) NOT NULL,
+  `institute_id` char(30) NOT NULL,
   `email` varchar(40) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `sem` int(11) NOT NULL,
-  `cg` decimal(10,0) NOT NULL,
   `branch` char(20) NOT NULL,
   `dob` date NOT NULL,
-  `batch` varchar(5) NOT NULL,
-  `about_me` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `type` int(11) NOT NULL,
+  `about_me` text NOT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`username`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `institute_id` (`institute_id`),
+  UNIQUE KEY `user_id` (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=385450 ;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `email`, `password`, `sem`, `cg`, `branch`, `dob`, `batch`, `about_me`) VALUES
-(1, 'Shivanjal', 'Arora', 'shivi6011', '2015UCP5454', 'shivanjal9@gmail.com', '$2y$10$wd79a0v0ZxQub8nTDH5h8eL23cBbyQ43FrIRClSaLUWJYyVd3gMim', 5, '8', 'CSE', '0000-00-00', 'A1A2', 'aksndoanbso'),
-(385446, 'a', 'a', 'a', '2015UCP1225', 'v@g32.ds', '$2y$10$XJ.aHo8IvpaFfVTemU/TJeGv5jz8r2lTuFcN3teZS9SScXE.v4CJq', 1, '10', 'AP', '2017-12-31', 'A', ''),
-(385447, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015UCP1057', 'vishusachdeva228@gmail.com', '$2y$10$uf0uksYSLfUfJeZhhPxXxe20tWzLvoJVfHBI2UmSEERfWuQXnR82m', 5, '10', 'CSE', '1998-02-06', 'A', 'nothing!!');
+INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `email`, `password`, `branch`, `dob`, `type`, `about_me`) VALUES
+(1, 'Shivanjal', 'Arora', 'shivi6011', '2015UCP5454', 'shivanjal9@gmail.com', '$2y$10$j6Vea7UtQkEW8UjpnkfVROxV6GDf4qpTmBsF1MTNfgWR3snSZWkWi', 'CSE', '0000-00-00', 0, 'aksndoanbso'),
+(385446, 'a', 'a', 'a', '2015UCP1225', 'v@g32.ds', '$2y$10$XJ.aHo8IvpaFfVTemU/TJeGv5jz8r2lTuFcN3teZS9SScXE.v4CJq', 'AP', '2017-12-31', 0, ''),
+(385447, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015UCP1057', 'vishusachdeva228@gmail.com', '$2y$10$uf0uksYSLfUfJeZhhPxXxe20tWzLvoJVfHBI2UmSEERfWuQXnR82m', 'CSE', '1998-02-06', 0, 'nothing!!'),
+(385448, 'aa', 'aa', 'aa', '2015UCP5677', 'aa@gmail.com', '$2y$10$VvkB.33aWoSPL5ZSDJ0djurwLCy922feT6rcw/xJ/PZqPjvVKQJQe', 'CE', '1990-12-03', 0, 'aa'),
+(385449, 'as', 'as', 'as', '2015UCP1111', 'sdfs@gmail.com', '$2y$10$dlc0vgqn/PyjyTHGw18fbuqwaLBH6FarLFiH7wvkaY5JRl6MmwiXm', 'CSE', '2017-10-05', 0, 'wswdc');
 
 -- --------------------------------------------------------
 
@@ -183,90 +297,31 @@ INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `em
 -- Table structure for table `winner`
 --
 
-CREATE TABLE `winner` (
+CREATE TABLE IF NOT EXISTS `winner` (
   `c_id` int(11) NOT NULL,
   `winner_id` int(11) NOT NULL,
-  `prize` varchar(100) NOT NULL
+  `prize` varchar(100) NOT NULL,
+  PRIMARY KEY (`c_id`,`winner_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Indexes for dumped tables
---
-
---
--- Indexes for table `contest`
---
-ALTER TABLE `contest`
-  ADD PRIMARY KEY (`c_id`);
-
---
--- Indexes for table `language`
---
-ALTER TABLE `language`
-  ADD PRIMARY KEY (`language_id`);
-
---
--- Indexes for table `languages_allowed`
---
-ALTER TABLE `languages_allowed`
-  ADD PRIMARY KEY (`p_id`,`language_id`);
-
---
--- Indexes for table `participation`
---
-ALTER TABLE `participation`
-  ADD PRIMARY KEY (`user_id`,`c_id`),
-  ADD KEY `c_id` (`c_id`);
-
---
--- Indexes for table `problem`
---
-ALTER TABLE `problem`
-  ADD PRIMARY KEY (`p_id`),
-  ADD UNIQUE KEY `p_code` (`p_code`,`p_filename`),
-  ADD KEY `difficulty` (`difficulty`);
-
---
--- Indexes for table `solves`
---
-ALTER TABLE `solves`
-  ADD PRIMARY KEY (`p_id`,`user_id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `language_id` (`language_id`);
-
---
--- Indexes for table `user`
---
-ALTER TABLE `user`
-  ADD PRIMARY KEY (`user_id`),
-  ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`),
-  ADD UNIQUE KEY `institute_id` (`institute_id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
-
---
--- Indexes for table `winner`
---
-ALTER TABLE `winner`
-  ADD PRIMARY KEY (`c_id`,`winner_id`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `problem`
---
-ALTER TABLE `problem`
-  MODIFY `p_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `user`
---
-ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=385448;
---
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `asg`
+--
+ALTER TABLE `asg`
+  ADD CONSTRAINT `u_asg` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `t_idb` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`);
+
+--
+-- Constraints for table `asg_prob`
+--
+ALTER TABLE `asg_prob`
+  ADD CONSTRAINT `a` FOREIGN KEY (`asg_id`) REFERENCES `asg` (`asg_id`),
+  ADD CONSTRAINT `b` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`),
+  ADD CONSTRAINT `c` FOREIGN KEY (`asg_id`) REFERENCES `asg` (`asg_id`);
 
 --
 -- Constraints for table `participation`
