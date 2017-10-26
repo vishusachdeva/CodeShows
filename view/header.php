@@ -60,14 +60,13 @@
 										<li class="active"><a href="<?php echo(generate_link('main', 'home')); ?>"><span data-hover="Home">Home</span></a></li>
 										<li><a href="<?php echo(generate_link('problem','all'));?>"><span data-hover="Practice">Practice</span></a></li>
 										<li><a href="<?php echo(generate_link('contest','all'));?>"><span data-hover="Compete">Compete</span></a></li>
-										<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span data-hover="Drop Down">Drop Down</span> <b class="caret"></b></a>
-											<ul class="dropdown-menu agile_short_dropdown">
-												<li><a href="#team" class="scroll">Team</a></li>
-												<li><a href="#gallery" class="scroll">Gallery</a></li>
-												<li><a href="#clients" class="scroll">Clients</a></li>
-											</ul>
-										</li>
+										<?php if (isset($type)) { ?><li><a href="
+										<?php
+											if (isset($type) && $type==1) echo(generate_link('asg','all'));
+											else echo(generate_link('asg','builder'));
+										?>
+										"><span data-hover="Assignment">Assignment</span></a></li>
+										<?php } ?>
 										<li><a href="#contact" class="scroll"><span data-hover="Contact">Contact</span></a></li>
 									</ul>
 								</nav>

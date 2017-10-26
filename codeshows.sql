@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2017 at 02:17 PM
--- Server version: 5.5.57-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.22
+-- Generation Time: Oct 26, 2017 at 09:34 PM
+-- Server version: 5.5.46-0ubuntu0.14.04.2
+-- PHP Version: 5.5.9-1ubuntu4.20
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -29,15 +29,23 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `asg` (
   `asg_id` int(11) NOT NULL,
   `asg_name` varchar(100) NOT NULL,
-  `start_date` datetime NOT NULL,
-  `end_date` datetime NOT NULL,
+  `start_time` datetime NOT NULL,
+  `end_time` datetime NOT NULL,
   `total_marks` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `batch_id` int(11) NOT NULL,
+  `date_of_addition` datetime NOT NULL,
   PRIMARY KEY (`asg_id`),
   KEY `t_idb` (`batch_id`),
   KEY `u_asg` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `asg`
+--
+
+INSERT INTO `asg` (`asg_id`, `asg_name`, `start_time`, `end_time`, `total_marks`, `user_id`, `batch_id`, `date_of_addition`) VALUES
+(1, 'first', '2017-10-27 00:00:00', '2018-02-08 00:00:00', 100, 385450, 1, '2017-10-27 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -52,6 +60,13 @@ CREATE TABLE IF NOT EXISTS `asg_prob` (
   PRIMARY KEY (`asg_id`,`p_id`),
   KEY `b` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `asg_prob`
+--
+
+INSERT INTO `asg_prob` (`asg_id`, `p_id`, `marks`) VALUES
+(1, 2, 100);
 
 -- --------------------------------------------------------
 
@@ -70,6 +85,8 @@ CREATE TABLE IF NOT EXISTS `banner` (
 
 INSERT INTO `banner` (`c_id`, `image`) VALUES
 (1, 'banner2.jpg'),
+(2, 'banner3.jpg'),
+(1, 'banner2.jpg'),
 (2, 'banner3.jpg');
 
 -- --------------------------------------------------------
@@ -84,7 +101,14 @@ CREATE TABLE IF NOT EXISTS `batch` (
   `branch` varchar(35) NOT NULL,
   `batch_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`batch_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `batch`
+--
+
+INSERT INTO `batch` (`batch_name`, `sem`, `branch`, `batch_id`) VALUES
+('A1A2', 5, 'CSE', 1);
 
 -- --------------------------------------------------------
 
@@ -204,7 +228,7 @@ CREATE TABLE IF NOT EXISTS `problem` (
 
 INSERT INTO `problem` (`p_id`, `p_name`, `p_code`, `p_setter`, `date_added`, `p_filename`, `u_attempt`, `u_solve`, `accepted`, `submitted`, `time_limit`, `source_limit`, `difficulty`, `status`) VALUES
 (1, 'easy', 'rt', 'cdcedc', '2017-09-02', '0_practise', 3, 34, 23, 23, 2.02, 2879, 1, 0),
-(2, 'med', 'rte', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 10.00, 2879, 2, 0),
+(2, 'med', 'rte', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 10.00, 2879, 2, 2),
 (3, 'hard', 'rtet', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 3, 0),
 (4, 'hard', 'rtetsf', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 3, 1),
 (5, 'easy_c', 'rtyrt', 'yws', '2017-10-06', '1', 21, 123, 132, 123, 12.00, 30000, 1, 1),
@@ -243,6 +267,13 @@ CREATE TABLE IF NOT EXISTS `student` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`user_id`, `sem`, `cg`, `batch_id`) VALUES
+(385447, 5, '9.63', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -253,7 +284,15 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=385453 ;
+
+--
+-- Dumping data for table `teacher`
+--
+
+INSERT INTO `teacher` (`user_id`, `status`) VALUES
+(385450, 0),
+(385452, 0);
 
 -- --------------------------------------------------------
 
@@ -278,18 +317,20 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `institute_id` (`institute_id`),
   UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=385450 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=385453 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `email`, `password`, `branch`, `dob`, `type`, `about_me`) VALUES
-(1, 'Shivanjal', 'Arora', 'shivi6011', '2015UCP5454', 'shivanjal9@gmail.com', '$2y$10$j6Vea7UtQkEW8UjpnkfVROxV6GDf4qpTmBsF1MTNfgWR3snSZWkWi', 'CSE', '0000-00-00', 0, 'aksndoanbso'),
-(385446, 'a', 'a', 'a', '2015UCP1225', 'v@g32.ds', '$2y$10$XJ.aHo8IvpaFfVTemU/TJeGv5jz8r2lTuFcN3teZS9SScXE.v4CJq', 'AP', '2017-12-31', 0, ''),
-(385447, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015UCP1057', 'vishusachdeva228@gmail.com', '$2y$10$uf0uksYSLfUfJeZhhPxXxe20tWzLvoJVfHBI2UmSEERfWuQXnR82m', 'CSE', '1998-02-06', 0, 'nothing!!'),
-(385448, 'aa', 'aa', 'aa', '2015UCP5677', 'aa@gmail.com', '$2y$10$VvkB.33aWoSPL5ZSDJ0djurwLCy922feT6rcw/xJ/PZqPjvVKQJQe', 'CE', '1990-12-03', 0, 'aa'),
-(385449, 'as', 'as', 'as', '2015UCP1111', 'sdfs@gmail.com', '$2y$10$dlc0vgqn/PyjyTHGw18fbuqwaLBH6FarLFiH7wvkaY5JRl6MmwiXm', 'CSE', '2017-10-05', 0, 'wswdc');
+(1, 'Shivanjal', 'Arora', 'shivi6011', '2015UCP5454', 'shivanjal9@gmail.com', '$2y$10$j6Vea7UtQkEW8UjpnkfVROxV6GDf4qpTmBsF1MTNfgWR3snSZWkWi', 'CSE', '0000-00-00', 1, 'aksndoanbso'),
+(385446, 'a', 'a', 'a', '2015UCP1225', 'v@g32.ds', '$2y$10$XJ.aHo8IvpaFfVTemU/TJeGv5jz8r2lTuFcN3teZS9SScXE.v4CJq', 'AP', '2017-12-31', 1, ''),
+(385447, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015UCP1057', 'vishusachdeva228@gmail.com', '$2y$10$uf0uksYSLfUfJeZhhPxXxe20tWzLvoJVfHBI2UmSEERfWuQXnR82m', 'CSE', '1998-02-06', 1, 'nothing!!'),
+(385448, 'aa', 'aa', 'aa', '2015UCP5677', 'aa@gmail.com', '$2y$10$VvkB.33aWoSPL5ZSDJ0djurwLCy922feT6rcw/xJ/PZqPjvVKQJQe', 'CE', '1990-12-03', 1, 'aa'),
+(385449, 'as', 'as', 'as', '2015UCP1111', 'sdfs@gmail.com', '$2y$10$dlc0vgqn/PyjyTHGw18fbuqwaLBH6FarLFiH7wvkaY5JRl6MmwiXm', 'CSE', '2017-10-05', 1, 'wswdc'),
+(385450, 'Vinayakt', 'Sachdevat', 'vishusachdevat', 'wdqj', 'adjg@shd.asd', '$2y$10$qkXdNN1rkL5vo1flBZGkX.mKe29AgmNaIt9gigZcQEo.TasET0izS', 'CSE', '2015-12-31', 2, 'efdjgew'),
+(385452, 'Vinayaktt', 'Sachdevatt', 'vishusachdevatt', 'qwerty', 'vishusachdeva228@gmail.comt', '$2y$10$mJ2jBOpBsqwUmDqUQkJr4eQiXrFfl60LggQAxvfBoReVC/cHlWcKm', 'CSE', '2006-11-30', 2, 'efke');
 
 -- --------------------------------------------------------
 
@@ -312,8 +353,8 @@ CREATE TABLE IF NOT EXISTS `winner` (
 -- Constraints for table `asg`
 --
 ALTER TABLE `asg`
-  ADD CONSTRAINT `u_asg` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `t_idb` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`);
+  ADD CONSTRAINT `t_idb` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`),
+  ADD CONSTRAINT `u_asg` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `asg_prob`

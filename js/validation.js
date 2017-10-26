@@ -34,6 +34,7 @@ function isNumeric(str) {
   }
   return true;
 };
+
 function validate(str) {
     var fname=document.getElementsByName('fname')[0];
     var lname=document.getElementsByName('lname')[0];
@@ -215,6 +216,148 @@ function validate(str) {
         else {
             branch.removeAttribute('style');
             er_branch.style.display = 'none';
+        }
+        if (str == 'branch') return;
+    }
+
+    if (str == 'all') return error;
+}
+
+function validate_t(str) {
+    var fname=document.getElementsByName('fname')[1];
+    var lname=document.getElementsByName('lname')[1];
+    var username=document.getElementsByName('username')[1];
+    var email=document.getElementsByName('email')[2];
+    var password=document.getElementsByName('password')[2];
+    var confirm=document.getElementsByName('confirm')[1];
+    var branch=document.getElementsByName('branch')[1];
+    var dob=document.getElementsByName('dob')[1];
+    var institute_id=document.getElementsByName('institute_id')[1];
+
+    var error = true;
+
+    if (str == 'fname' || str == 'all') {
+        if (!isAlpha(fname.value)) {
+            t_er_fname.style.display = 'initial';
+            t_er_fname.innerHTML = 'Enter Only Alphabets<br/>';
+            fname.style.borderColor = 'red';
+            error = false;
+        }
+        else if (fname.value.length > 20) {
+            t_er_fname.style.display = 'initial';
+            t_er_fname.innerHTML = 'Length Limit Exceeded<br/>';
+            fname.style.borderColor = 'red';
+            error = false;
+        }
+        else {
+            t_er_fname.style.display = 'none';
+            fname.style.borderColor = 'inherit';
+        }
+        if (str == 'fname') return;
+    }
+
+    if (str == 'lname' || str == 'all') {
+        if (!isAlpha(lname.value)) {
+            t_er_lname.style.display = 'initial';
+            t_er_lname.innerHTML = 'Enter Only Alphabets<br/>';
+            lname.style.borderColor = 'red';
+            error = false;
+        }
+        else if (lname.value.length > 20) {
+            t_er_lname.style.display = 'initial';
+            t_er_lname.innerHTML = 'Length Limit Exceeded<br/>';
+            lname.style.borderColor = 'red';
+            error = false;
+        }
+        else {
+            t_er_lname.style.display = 'none';
+            lname.style.borderColor = 'inherit';
+        }
+        if (str == 'lname') return;
+    }
+
+    if (str == 'username' || str == 'all') {
+        if (!isAlphaNumeric(username.value)) {
+            t_er_username.style.display = 'initial';
+            t_er_username.innerHTML = 'Enter Only Alphabets and Numbers<br/>';
+            username.style.borderColor = 'red';
+            error = false;
+        }
+        else if (username.value.length > 20) {
+            t_er_username.style.display = 'initial';
+            t_er_username.innerHTML = 'Length Limit Exceeded<br/>';
+            username.style.borderColor = 'red';
+            error = false;
+        }
+        else {
+            t_er_username.style.display = 'none';
+            username.style.borderColor = 'inherit';
+        }
+        if (str == 'username') return;
+    }
+
+    if (str == 'password' || str == 'all') {
+        if (password.value.length < 3) {
+            t_er_password.style.display = 'initial';
+            t_er_password.innerHTML = 'Very Weak Password<br/>';
+            password.style.borderColor = 'red';
+            error = false;
+        }
+        else if (password.value.length < 5) {
+            t_er_password.style.display = 'initial';
+            t_er_password.innerHTML = 'Weak Password<br/>';
+            password.style.borderColor = 'orange';
+            error = false;
+        }
+        else if (password.value.length < 8) {
+            t_er_password.style.display = 'initial';
+            t_er_password.innerHTML = 'Moderate Password<br/>';
+            password.style.borderColor = 'yellow';
+            error = false;
+        }
+        else {
+            t_er_password.style.display = 'none';
+            password.style.borderColor = 'inherit';
+        }
+
+        if (confirm.value !== password.value) {
+            t_er_confirm.style.display = 'initial';
+            t_er_confirm.innerHTML = 'Passwords do not match<br/>';
+            confirm.style.borderColor = 'red';
+            error = false;
+        }
+        else {
+            t_er_confirm.style.display = 'none';
+            confirm.style.borderColor = 'inherit';
+        }
+
+        if (str == 'password') return;
+    }
+
+    if (str == 'confirm' || str == 'all') {
+        if (confirm.value !== password.value) {
+            t_er_confirm.style.display = 'initial';
+            t_er_confirm.innerHTML = 'Passwords do not match<br/>';
+            confirm.style.borderColor = 'red';
+            error = false;
+        }
+        else {
+            t_er_confirm.style.display = 'none';
+            confirm.style.borderColor = 'inherit';
+        }
+        if (str == 'confirm') return;
+    }
+
+    if (str == 'branch' || str == 'all') {
+        if (branch.value == "0") {
+            t_er_branch.style.display = 'initial';
+            t_er_branch.innerHTML = 'Select Branch<br/>';
+            branch.style.borderColor = 'red';
+            error = false;
+        }
+        else {
+            branch.removeAttribute('style');
+            t_er_branch.style.display = 'none';
         }
         if (str == 'branch') return;
     }

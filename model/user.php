@@ -19,36 +19,47 @@
             $result2 = query($this->db, $sql);
             $sql = "SELECT * FROM `user` WHERE email='$email'";
             $result3 = query($this->db, $sql);
+            if (isset($batch) && !empty($batch)) {
+                $sql = "SELECT * FROM `batch` WHERE batch_id='$batch'";
+                $result4 = query($this->db, $sql);
+                if (!count($result4)) {
+                    $msg = "Invalid Batch<br/>";
+                }
+            }
             if (count($result1)) {
                 $msg = "Username Already exist";
             } else if (count($result2)) {
                 $msg = "Institute ID Already exist";
             } else if (count($result3)) {
                 $msg = "Email-ID Already exist";
-            } else if (!ctype_alpha($fname) || strlen($fname) > 20) {
+            } else if (count($result4)) {
+                $msg = "Email-ID Already exist";
+            } else if (!isset($fname) || empty($fname) || !ctype_alpha($fname) || strlen($fname) > 20) {
                 $msg = "Invalid First Name";
-            } else if (!ctype_alpha($lname) || strlen($lname) > 20) {
+            } else if (!isset($lname) || empty($lname) || !ctype_alpha($lname) || strlen($lname) > 20) {
                 $msg = "Invalid Last Name";
-            } else if (!ctype_alpha($username) || strlen($username) > 20) {
+            } else if (!isset($username) || empty($username) || !ctype_alpha($username) || strlen($username) > 20) {
                 $msg = "Invalid User Name";
-            } else if (!preg_match($i_patt, $institute_id)) {
+            } else if ((!isset($institute_id) || empty($institute_id) || !preg_match($i_patt, $institute_id)) && $type == 1) {
                 $msg = "Invalid Institute Id";
-            } else if (!preg_match($e_patt, $email)) {
+            } else if (!isset($email) || empty($email) || !preg_match($e_patt, $email)) {
                 $msg = "Invalid Email";
-            } else if (strlen($password) < 8) {
+            } else if (!isset($password) || empty($password) || strlen($password) < 8) {
                 $msg = "Invalid Password";
-            } else if ($password !== $confirm) {
+            } else if (!isset($confirm) || empty($confirm) || $password !== $confirm) {
                 $msg = "Passwords do not match";
-            } else if (!is_numeric($sem)) {
+            } else if ((!isset($sem) || empty($sem) || !is_numeric($sem)) && $type == 1) {
                 $msg = "Invalid Sem";
-            } else if (!is_numeric($cg)) {
+            } else if ((!isset($cg) || empty($cg) || !is_numeric($cg)) && $type == 1) {
                 $msg = "Invalid CGPA";
-            } else if (!ctype_alpha($branch)) {
+            } else if (!isset($branch) || empty($branch) || !ctype_alpha($branch)) {
                 $msg = "Invalid Branch";
-            } else if (!ctype_alnum($batch)) {
+            } else if ((!isset($batch) || empty($batch) || !ctype_alnum($batch)) && $type == 1) {
                 $msg = "Invalid Batch";
-            } else if ($dob >= date("Y-m-d")) {
+            } else if (!isset($dob) || empty($dob) || $dob >= date("Y-m-d")) {
                 $msg = "Invalid Date of Birth";
+            } else if (!isset($type) || empty($type) || ($type != 1 && $type != 2)) {
+                $msg = "Invalid Data";
             }
             return $msg;
         }
@@ -65,8 +76,15 @@
             $res = password_verify($password, $hash);
             if ($res !== false) $result = $result[0];
             else $result = false;
+            if ($result && $result['type'] == 1) {
+                $sql = "SELECT * FROM `student` NATURAL JOIN `user` WHERE `user_id`=".$result['user_id'];
+                $result = query($this->db, $sql);
+            } else if ($result && $result['type'] == 2) {
+                $sql = "SELECT * FROM `teacher` NATURAL JOIN `user` WHERE `user_id`=".$result['user_id'];
+                $result = query($this->db, $sql);
+            }
             db_close($this->db);
-            return $result;
+            return $result[0];
         }
 
         function register($data = []) {
@@ -77,12 +95,29 @@
                 exit();
             }
             extract($data);
-            $sql = "INSERT INTO `user` (`fname`, `lname`, `username`, `institute_id`, `email`, `password`, `sem`, `cg`, `branch`,
-            `dob`, `batch`, `about_me`) VALUES('$fname', '$lname', '$username', '$institute_id', '$email',
-            '".password_hash($password, PASSWORD_BCRYPT)."', $sem, $cg, '$branch', '$dob', '$batch', '$about_me')";
+            $sql = "INSERT INTO `user` (`fname`, `lname`, `username`, `institute_id`, `email`, `password`, `branch`,
+            `dob`, `about_me`, `type`) VALUES('$fname', '$lname', '$username', '$institute_id', '$email',
+            '".password_hash($password, PASSWORD_BCRYPT)."', '$branch', '$dob', '$about_me', '$type')";
             $result = query($this->db, $sql);
             if ($result === true) {
                 $result = db_last_id($this->db, 'user', 'user_id');
+                if ($type == 1) {
+                    $sql = "INSERT INTO `student` VALUES('".$result['user_id']."', '$sem', '$cg', '$brach')";
+                    $result2 = query($this->db, $sql);
+                    if ($result2 === true) {
+                        $result = array_merge($result, db_last_id($this->db, 'student', 'user_id'));
+                    } else {
+                        $result = false;
+                    }
+                } else {
+                    $sql = "INSERT INTO `teacher` VALUES('".$result['user_id']."', 0)";
+                    $result2 = query($this->db, $sql);
+                    if ($result2 === true) {
+                        $result = array_merge($result, db_last_id($this->db, 'teacher', 'user_id'));
+                    } else {
+                        $result = false;
+                    }
+                }
             }
             db_close($this->db);
             return $result;
