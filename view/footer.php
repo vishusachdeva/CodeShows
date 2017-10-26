@@ -5,9 +5,8 @@
 					<div class="footer-grids">
 						<div class="col-md-5 footer-grid_wthree_info">
 							<h3>About us</h3>
-							<p>Lorem ipsum dolor sit consectetur elit. Nam eget egestas erat. In hachabi tasse platea dictumst. hachabi tasse platea
-								dictumst</p>
-							<p>Lorem ipsum dolor sit consectetur elit. Nam eget egestas erat. In hachabi tasse platea dictumst.</p>
+							<p>Online Coding Platform for MNIT.</p>
+							<p></p>
 							<ul class="footer_list_icons">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
 								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
@@ -53,13 +52,13 @@
 		<script type="text/javascript" src="<?php echo JS_PATH.'jquery.easing.min.js'; ?>"></script>
 		<script type="text/javascript">
 			jQuery(document).ready(function($) {
-				$(".scroll").click(function(event){		
+				$(".scroll").click(function(event){
 					event.preventDefault();
 					$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
 				});
 			});
 		</script>
-		<!-- //end-smooth-scrolling -->	
+		<!-- //end-smooth-scrolling -->
 		<!-- smooth-scrolling-of-move-up -->
 		<script type="text/javascript">
 			$(document).ready(function() {
@@ -68,15 +67,15 @@
 					containerID: 'toTop', // fading element id
 					containerHoverID: 'toTopHover', // fading element hover id
 					scrollSpeed: 1200,
-					easingType: 'linear' 
+					easingType: 'linear'
 				};
 				*/
-				
+
 				$().UItoTop({ easingType: 'easeOutQuart' });
-				
+
 			});
 		</script>
-		<!-- //smooth-scrolling-of-move-up -->  
+		<!-- //smooth-scrolling-of-move-up -->
 		<script type="text/javascript" src="<?php echo JS_PATH.'darkbox.js'; ?>"></script>
 		<script src="<?php echo JS_PATH.'wimmViewer.js'; ?>"></script>
 		<script>

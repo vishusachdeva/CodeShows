@@ -94,7 +94,7 @@
 														</form>
 														<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
 															<button onclick="document.getElementById('login_form').style.display='none'" type="button" class="w3-left w3-button w3-red">Cancel</button>
-															<span class="w3-right w3-padding w3-hide-small"><a href="#">Forgot password?</a></span>
+															<span class="w3-right w3-padding w3-hide-small"><a href="<?php echo(generate_link('user','load_forgot_password_page'))?>">Forgot password?</a></span>
 														</div>
 												</div>
 											</div>

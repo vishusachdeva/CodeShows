@@ -1,4 +1,4 @@
-<div class="w3-bar w3-black w3-border-top w3-border-bottom">
+<div class="w3-bar w3-black w3-border-top w3-border-bottom" style="width:100%">
     <button class="w3-bar-item w3-button w3-hover-cyan tablink w3-ripple w3-border-right w3-red" onclick="p_tab_switch(event, 1)" style="width:33.3%"><b>EASY</b></button>
     <button class="w3-bar-item w3-button w3-hover-cyan tablink w3-ripple" onclick="p_tab_switch(event, 2)" style="width:33.3%"><b>MEDIUM</b></button>
     <button class="w3-bar-item w3-button w3-hover-cyan tablink w3-ripple w3-border-left" onclick="p_tab_switch(event, 3)" style="width:33.3%"><b>HARD</b></button>

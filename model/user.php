@@ -88,6 +88,23 @@
             return $result;
         }
 
+        function forgot_password($data = [])
+        {
+            extract($data);
+            $sql = "SELECT * FROM user WHERE `username`= '$username' AND `email` = '$email' ";
+            $result = query($this->db,$sql);
+            if(empty($result))
+            {
+                db_close($this->db);
+                return false;
+            }
+            $password = bin2hex(openssl_random_pseudo_bytes(10));
+            $sql = "UPDATE user SET `password` = '".password_hash($password, PASSWORD_BCRYPT)."' WHERE username = '$username'";
+            $result = query($this->db,$sql);
+            db_close($this->db);
+            if($result === false)
+                return false;
+            return $password;
+        }
     }
-
 ?>
