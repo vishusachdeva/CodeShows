@@ -9,6 +9,7 @@
 <?php
     $i = 0;
     $x = "num_$i";
+
     while($i < $len) {
 		if (strtotime(${$x}['start_time']) <= strtotime($curr_time) && strtotime(${$x}['end_time']) >= strtotime($curr_time)) {
 		?>

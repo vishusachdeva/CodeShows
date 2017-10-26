@@ -5,6 +5,7 @@
 </div>
 <div id='easy_block' class='w3-responsive w3-animate-right'>
 <table class="w3-table w3-bordered w3-hoverable">
+
 <tr><th>Problem Name</th><th>Problem Code</th><th>Accuracy</th></tr>
 <?php
     $i = 0;

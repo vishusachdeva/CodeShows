@@ -9,11 +9,9 @@
         }
 
         function fetch($data) {
-            $sql = "SELECT * FROM (problem p LEFT JOIN contest_prob c ON p.p_id = c.p_id) LEFT JOIN contest cb ON cb.c_id = c.c_id WHERE ";
+            $sql = "SELECT * FROM (problem NATURAL LEFT JOIN contest_prob) NATURAL LEFT JOIN contest cb WHERE ";
 
             if (isset($data) && isset($data['by']) && $data['by'] == 'all') {
-
-
                 $sql = $sql."`status`=0 OR status = 1 AND end_time < STR_TO_DATE('".date("Y-m-d G:i:s")."', '%Y-%m-%d %H:%i:%s')";
             }
             else if (isset($data) && isset($data['c_id'])) {
