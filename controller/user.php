@@ -154,7 +154,7 @@ if(!$mail->send()) {
             if ($result === false) {
                 print('Some error occured');
             } else {
-                print('Thanx you will get our latest updates');
+                print('Thanks, you will get our latest updates');
             }
             redirect_sleep('main', 'home', 3);
         }

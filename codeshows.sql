@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 26, 2017 at 09:34 PM
--- Server version: 5.5.46-0ubuntu0.14.04.2
--- PHP Version: 5.5.9-1ubuntu4.20
+-- Generation Time: Oct 27, 2017 at 09:36 PM
+-- Server version: 5.5.57-0ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.22
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -84,10 +84,9 @@ CREATE TABLE IF NOT EXISTS `banner` (
 --
 
 INSERT INTO `banner` (`c_id`, `image`) VALUES
-(1, 'banner2.jpg'),
-(2, 'banner3.jpg'),
-(1, 'banner2.jpg'),
-(2, 'banner3.jpg');
+(1, 'banner1.jpg'),
+(2, 'banner2.jpg'),
+(3, 'banner3.jpg');
 
 -- --------------------------------------------------------
 
@@ -273,6 +272,28 @@ CREATE TABLE IF NOT EXISTS `student` (
 
 INSERT INTO `student` (`user_id`, `sem`, `cg`, `batch_id`) VALUES
 (385447, 5, '9.63', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subscription`
+--
+
+CREATE TABLE IF NOT EXISTS `subscription` (
+  `s_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  PRIMARY KEY (`s_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `subscription`
+--
+
+INSERT INTO `subscription` (`s_id`, `name`, `email`) VALUES
+(1, 'Vinayak', 'vishusachdeva228@gmail.com'),
+(2, 'shivi', 'shivi@gmail.com'),
+(3, 'lav', 'lav@gmail.com');
 
 -- --------------------------------------------------------
 
