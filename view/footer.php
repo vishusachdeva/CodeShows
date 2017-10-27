@@ -3,7 +3,7 @@
 			<div class="footer-top_agile_w3l">
 				<div class="container">
 					<div class="footer-grids">
-						<div class="col-md-5 footer-grid_wthree_info">
+						<div class="col-md-6 footer-grid_wthree_info">
 							<h3>About us</h3>
 							<p>Online Coding Platform for MNIT.</p>
 							<p></p>
@@ -16,22 +16,11 @@
 								<li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a></li>
 							</ul>
 						</div>
-						<div class="col-md-2 footer-grid_wthree_info">
-							<h3>Links</h3>
-							<ul class="footer-list">
-								<li> <a href="#welcome" class="scroll">About</a> </li>
-								<li> <a href="#pricing" class="scroll">pricing</a> </li>
-								<li> <a href="#team" class="scroll">team</a> </li>
-								<li> <a href="#clients" class="scroll">testimonials</a> </li>
-								<li> <a href="#services" class="scroll">Services</a> </li>
-								<li> <a href="#contact" class="scroll">contact</a> </li>
-							</ul>
-						</div>
-						<div class="col-md-5 footer-grid_wthree_info">
+						<div class="col-md-6 footer-grid_wthree_info">
 							<h3>Newsletter</h3>
-							<form action="#" method="post">
-								<input type="text" name="text" placeholder="Name" required="">
-								<input type="email" name="Email" placeholder="Email" required="">
+							<form action="<?php echo(generate_link('user', 'subscribe')); ?>" method="post">
+								<input type="text" name="s_name" placeholder="Name" required="">
+								<input type="email" name="s_email" placeholder="Email" required="">
 								<input type="submit" value="subscribe now">
 							</form>
 						</div>

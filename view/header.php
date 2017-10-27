@@ -67,7 +67,7 @@
 										?>
 										"><span data-hover="Assignment">Assignment</span></a></li>
 										<?php } ?>
-										<li><a href="#contact" class="scroll"><span data-hover="Contact">Contact</span></a></li>
+										<li><a href="<?php echo(generate_link('main', 'contact')); ?>"><span data-hover="Contact">Contact</span></a></li>
 									</ul>
 								</nav>
 								<div class="w3_agile_phone">

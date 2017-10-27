@@ -17,6 +17,12 @@
             loadView('footer');
         }
 
+        function contact() {
+            loadView('header', array_merge($this->data, ['title' => 'Contact Us - CodeShows']));
+            loadView('contact');
+            loadView('footer');
+        }
+
     }
 
 ?>

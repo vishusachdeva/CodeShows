@@ -14,4 +14,6 @@ RewriteCond %{QUERY_STRING} ^p_id=(\d+)$
 RewriteRule ^problem\/?$ /index.php?controller=problem&function=fetch_problem&p_id=%1 [L]
 RewriteCond %{QUERY_STRING} ^c_id=(\d+)$
 RewriteRule ^contest\/?$ /index.php?controller=contest&function=fetch_contest&c_id=%1 [L]
+RewriteCond %{QUERY_STRING} ^asg_id=(\d+)$
+RewriteRule ^asg\/?$ /index.php?controller=asg&function=fetch_asg&asg_id=%1 [L]
 RewriteRule ^(.*)/(.*)$ /index.php?controller=$1&function=$2 [L]

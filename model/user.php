@@ -141,5 +141,15 @@
                 return false;
             return $password;
         }
+
+        function subscribe($arguments) {
+            $sql = "INSERT INTO `subscription`(`name`, `email`) VALUES('".$arguments['s_name']."', '".$arguments['s_email']."')";
+            $result = query($this->db,$sql);
+            db_close($this->db);
+            if($result === false)
+                return false;
+            return $result;
+        }
+
     }
 ?>

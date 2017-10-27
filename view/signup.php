@@ -1,6 +1,9 @@
-<div class="container w3-margin" id="switch">
-	<button class="w3-button w3-red w3-hover-cyan w3-ripple w3-round" onclick="document.getElementById('student').style.display='block';document.getElementById('switch').style.display='none';">Student</button>
-	<button class="w3-button w3-red w3-hover-cyan w3-ripple w3-round" onclick="document.getElementById('teacher').style.display='block';document.getElementById('switch').style.display='none';">Faculty</button>
+<div class="container-fluid w3-light-grey" id="switch">
+	<h2 class="w3-text-red"><b>Signup Form</b></h2><br/>
+	<div class="container w3-margin">
+		<button class="w3-button w3-red w3-hover-cyan w3-ripple w3-round" onclick="document.getElementById('student').style.display='block';document.getElementById('switch').style.display='none';">Student</button>
+		<button class="w3-button w3-red w3-hover-cyan w3-ripple w3-round" onclick="document.getElementById('teacher').style.display='block';document.getElementById('switch').style.display='none';">Faculty</button>
+	</div>
 </div>
 
 <?php
@@ -28,9 +31,9 @@
         ];
 ?>
 <div class="container-fluid w3-light-grey" id="student" style="display:none;">
-	<form action='<?php echo(generate_link('user', 'register')); ?>' method='post' onsubmit="return validate('all')" class="container w3-margin-top" style="width:70%;">
+	<form action='<?php echo(generate_link('user', 'register')); ?>' method='post' onsubmit="return validate('all')" class="container w3-margin-top" style="width:60%;">
 
-		<h2>Signup Form</h2><br/>
+		<h2 class="w3-text-red"><b>Signup Form</b></h2><br/>
 
 		<div id="er_fname" style="display:none"></div>
 		<p><label>First Name</label>
@@ -99,9 +102,9 @@
 </div>
 
 <div class="container-fluid w3-light-grey" id="teacher" style="display:none">
-	<form action='<?php echo(generate_link('user', 'register')); ?>' method='post' onsubmit="return validate_t('all')" class="container w3-margin-top" style="width:70%;">
+	<form action='<?php echo(generate_link('user', 'register')); ?>' method='post' onsubmit="return validate_t('all')" class="container w3-margin-top" style="width:60%;">
 
-		<h2>Signup Form</h2><br/>
+		<h2 class="w3-text-red"><b>Signup Form</b></h2><br/>
 
 		<div id="t_er_fname" style="display:none"></div>
 		<p><label>First Name</label>

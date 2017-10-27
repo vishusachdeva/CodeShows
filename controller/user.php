@@ -92,7 +92,7 @@
         {
             if(!isset($_POST)|| empty($_POST))
             {
-                redirect_sleep('main','home',3);
+                redirect_sleep('main','home', 3);
                 exit();
             }
             extract($_POST);
@@ -100,7 +100,7 @@
             if($result === false)
             {
                 echo("Invalid Username or Password");
-                redirect_sleep('main','home',3);
+                redirect_sleep('main','home', 3);
                 exit();
             }
             //require 'PHPMailerAutoload.php';
@@ -148,6 +148,17 @@ if(!$mail->send()) {
             echo("Password changed successfully.");
             */
         }
+
+        function subscribe($arguments) {
+            $result = loadModel('user', 'subscribe', $arguments);
+            if ($result === false) {
+                print('Some error occured');
+            } else {
+                print('Thanx you will get our latest updates');
+            }
+            redirect_sleep('main', 'home', 3);
+        }
+
     }
 
 ?>
