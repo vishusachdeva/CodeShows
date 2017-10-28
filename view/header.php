@@ -23,6 +23,8 @@
 		<link href="<?php echo CSS_PATH.'style.css'; ?>" rel="stylesheet" type="text/css" media="all" />
 		<link href="<?php echo CSS_PATH.'font-awesome.css'; ?>" rel="stylesheet">
 		<link href="<?php echo CSS_PATH.'w3.css'; ?>" rel="stylesheet">
+		<link href="<?php echo CSS_PATH.'style2.css'; ?>" rel="stylesheet">
+
 		<!-- //for bootstrap working -->
 		<link href="//fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700" rel="stylesheet">
 		<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
@@ -35,7 +37,6 @@
         <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
         <meta name="theme-color" content="#ffffff">
     </head>
-    <?php date_default_timezone_set('Asia/Kolkata'); ?>
     <body>
 		<div class="header" id="home">
 			<div class="banner_header_top_wthree">

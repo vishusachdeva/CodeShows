@@ -2,6 +2,7 @@
 
     include_once('lib/config.inc.php');
     include_once('lib/db_connect.php');
+    date_default_timezone_set('Asia/Kolkata');
 
     $controller = 'main';
     $function = 'home';
@@ -18,7 +19,7 @@
     }
 
     $controller_path = CONTROLLER_PATH.$controller.'.php';
-	
+
     if (file_exists($controller_path)) {
         require_once($controller_path);
         $controller_object = new $controller;

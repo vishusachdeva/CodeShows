@@ -1,10 +1,9 @@
-<link href="<?php echo CSS_PATH.'contact.css'; ?>" rel="stylesheet">
-<div class="jumbotron jumbotron-sm">
+<div class="jumbotron jumbotron-sm w3-border">
     <div class="container">
         <div class="row">
             <div class="col-sm-12 col-lg-12">
                 <h1 class="h1">
-                    Contact us <small>Feel free to contact us</small></h1>
+                    Contact Us <small>Feel free to contact us</small></h1>
             </div>
         </div>
     </div>

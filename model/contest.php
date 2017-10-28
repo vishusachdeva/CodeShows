@@ -62,7 +62,7 @@
                 $start_time = strtotime($result[0]['start_time']);
                 $end_time = strtotime($result[0]['end_time']);
                 $submit_time = strtotime($submit_time);
-                if($submit_time > $start_time && $submit_time < $end_time)
+                if($submit_time >= $start_time && $submit_time <= $end_time)
                 {
                     $sql = "SELECT * FROM participation WHERE c_id = $c_id AND user_id = $user_id";
                     $result = query($this->db,$sql);

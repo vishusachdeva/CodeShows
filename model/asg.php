@@ -15,5 +15,12 @@
             return query($this->db, $sql);
         }
 
+        function add_asg($data) {
+            $sql = "INSERT INTO `asg`(`asg_name`, `start_time`, `end_time`, `user_id`, `batch_id`, `time_of_addition`)
+            VALUES('".$data['asg_name']."', '".$data['start_time']."', '".$data['end_time']."',
+            ".$data['user_id'].", ".$data['batch'].", '".date("Y-m-d H:i:s")."')";
+            return query($this->db, $sql);
+        }
+
     }
 ?>

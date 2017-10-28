@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 27, 2017 at 09:36 PM
+-- Generation Time: Oct 28, 2017 at 08:19 AM
 -- Server version: 5.5.57-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.22
 
@@ -27,25 +27,28 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `asg` (
-  `asg_id` int(11) NOT NULL,
+  `asg_id` int(11) NOT NULL AUTO_INCREMENT,
   `asg_name` varchar(100) NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
   `total_marks` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL,
   `batch_id` int(11) NOT NULL,
-  `date_of_addition` datetime NOT NULL,
+  `time_of_addition` datetime NOT NULL,
   PRIMARY KEY (`asg_id`),
   KEY `t_idb` (`batch_id`),
   KEY `u_asg` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
 
 --
 -- Dumping data for table `asg`
 --
 
-INSERT INTO `asg` (`asg_id`, `asg_name`, `start_time`, `end_time`, `total_marks`, `user_id`, `batch_id`, `date_of_addition`) VALUES
-(1, 'first', '2017-10-27 00:00:00', '2018-02-08 00:00:00', 100, 385450, 1, '2017-10-27 00:00:00');
+INSERT INTO `asg` (`asg_id`, `asg_name`, `start_time`, `end_time`, `total_marks`, `user_id`, `batch_id`, `time_of_addition`) VALUES
+(1, 'first', '2017-10-27 00:00:00', '2018-02-08 00:00:00', 100, 385450, 1, '2017-10-27 00:00:00'),
+(19, 'fourth', '2017-10-01 01:00:00', '2017-10-18 01:00:00', NULL, 385452, 1, '2017-10-28 13:25:13'),
+(20, 'fourth', '2017-01-01 01:00:00', '2017-01-01 01:01:00', NULL, 385452, 1, '2017-10-28 13:41:23'),
+(21, 'fourth', '2017-01-01 01:00:00', '2017-01-01 01:01:00', NULL, 385452, 1, '2017-10-28 13:44:24');
 
 -- --------------------------------------------------------
 
@@ -100,14 +103,15 @@ CREATE TABLE IF NOT EXISTS `batch` (
   `branch` varchar(35) NOT NULL,
   `batch_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`batch_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `batch`
 --
 
 INSERT INTO `batch` (`batch_name`, `sem`, `branch`, `batch_id`) VALUES
-('A1A2', 5, 'CSE', 1);
+('A1A2', 5, 'CSE', 1),
+('A3A4', 5, 'CSE', 2);
 
 -- --------------------------------------------------------
 
@@ -382,8 +386,7 @@ ALTER TABLE `asg`
 --
 ALTER TABLE `asg_prob`
   ADD CONSTRAINT `a` FOREIGN KEY (`asg_id`) REFERENCES `asg` (`asg_id`),
-  ADD CONSTRAINT `b` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`),
-  ADD CONSTRAINT `c` FOREIGN KEY (`asg_id`) REFERENCES `asg` (`asg_id`);
+  ADD CONSTRAINT `b` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`);
 
 --
 -- Constraints for table `participation`

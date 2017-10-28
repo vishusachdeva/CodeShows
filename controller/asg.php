@@ -41,5 +41,42 @@
             loadView("footer");
         }
 
+        function builder() {
+            if ($this->auth == 0) {
+                print('You are not Logged In');
+                redirect_sleep('main', 'home', 5);
+                exit();
+            } else if ($this->data['type'] != 2) {
+                print('Please check link');
+                redirect_sleep('main', 'home', 5);
+                exit();
+            }
+            loadView("header", array_merge($this->data, ['title' => "Add Assignment - CodeShows"]));
+            loadView("add_asg", $this->data);
+            loadView("footer");
+        }
+
+        function add_asg($arguments) {
+            if ($this->auth == 0) {
+                print('You are not Logged In');
+                redirect_sleep('main', 'home', 3);
+                exit();
+            } else if ($this->data['type'] != 2 || !isset($_POST) || empty($_POST)) {
+                print('Please check link');
+                redirect_sleep('main', 'home', 3);
+                exit();
+            }
+            $result = loadModel('asg', 'add_asg', array_merge($arguments, $this->data));
+            if (empty($result)) {
+                print('Error adding assignment');
+                redirect_sleep('main', 'home', 3);
+                exit();
+            }
+            print("<script>alert('Assignment added successfully');</script>");
+            loadView("header", array_merge($this->data, ['title' => "Add Problem - CodeShows"]));
+            loadView('add_prob');
+            loadView("footer");
+        }
+
     }
 ?>

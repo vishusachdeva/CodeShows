@@ -1,0 +1,33 @@
+.jumbotron {
+background: light-grey;
+color: black;
+border-radius: 0px;
+}
+.jumbotron-sm { padding-top: 0px;
+padding-bottom: 2px; }
+.jumbotron small {
+color: grey;
+}
+.h1 small {
+font-size: 24px;
+}
+.w3-myfont {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+}
+.inp_form { width:45%; }
+@media only screen and (max-width: 768px) {
+    .inp_form { width:80%; }
+    .inp_form h1 { font-size:8vw; }
+}
+@media only screen and (max-width: 600px) {
+    .inp_form { width:100%; }
+}
+#switch {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    height: 100%;
+    width: 100%;
+}
