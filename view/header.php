@@ -41,7 +41,7 @@
 		<div class="header" id="home">
 			<div class="banner_header_top_wthree">
 				<div class="agileits-logo">
-					<h1><a href="<?php echo(generate_link('main', 'home')); ?>"><img src=""><i class="fa fa-linode" aria-hidden="true"></i> Codeshows</a></h1>
+					<h1><a href="<?php echo(generate_link('main', 'home')); ?>"><i class="fa fa-linode" aria-hidden="true"></i> Codeshows</a></h1>
 				</div>
 				<div class="header-top_agileits">
 					<div class="container">

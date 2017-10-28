@@ -51,9 +51,10 @@
                 redirect_sleep('main', 'home', 5);
                 exit();
             }
-            loadView("header", array_merge($this->data, ['title' => "Add Assignment - CodeShows"]));
-            loadView("add_asg", $this->data);
-            loadView("footer");
+            //loadView("header", array_merge($this->data, ['title' => "Assignment Builder - CodeShows"]));
+            $data = loadModel('asg', 'fetch', ['user_id' => $this->data['user_id']]);
+            loadView("show_all_asg", array_merge($data, ['len' => count($data)]));
+            //loadView("footer");
         }
 
         function add_asg($arguments) {
@@ -72,10 +73,8 @@
                 redirect_sleep('main', 'home', 3);
                 exit();
             }
-            print("<script>alert('Assignment added successfully');</script>");
-            loadView("header", array_merge($this->data, ['title' => "Add Problem - CodeShows"]));
-            loadView('add_prob');
-            loadView("footer");
+            print("<script>alert('Assignment added successfully');</script>redirecting to builder...");
+            redirect_sleep('asg', 'builder', 5);
         }
 
     }

@@ -30,12 +30,12 @@
 	var slideIndex = 1;
 	showDivs(slideIndex);
 	setTimeout(nextSlide, 5000);
-	
+
 	function nextSlide() {
 		plusDivs(1);
 		setTimeout(nextSlide, 5000);
 	}
-	
+
 	function plusDivs(n) {
 	  showDivs(slideIndex += n);
 	}
@@ -48,15 +48,16 @@
 	  var i;
 	  var x = document.getElementsByClassName("banner-slide");
 	  var dots = document.getElementsByClassName("demo");
-	  if (n > x.length) {slideIndex = 1}    
+	  if (n > x.length) {slideIndex = 1}
 	  if (n < 1) {slideIndex = x.length}
 	  for (i = 0; i < x.length; i++) {
-		 x[i].style.display = "none";  
+		 x[i].style.display = "none";
 	  }
 	  for (i = 0; i < dots.length; i++) {
 		 dots[i].className = dots[i].className.replace(" w3-white", "");
 	  }
-	  x[slideIndex-1].style.display = "block";  
+	  x[slideIndex-1].style.display = "block";
 	  dots[slideIndex-1].className += " w3-white";
 	}
 </script>
+<div><div class="w3-section circular-image"></div></div>

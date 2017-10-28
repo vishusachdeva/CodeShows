@@ -27,8 +27,7 @@ function p_tab_switch(evt, dif) {
 	evt.currentTarget.className += " w3-red";
 }
 
-function c_tab_switch(evt, time)
-{
+function c_tab_switch(evt, time) {
     var present = document.getElementById('present_block');
     var past = document.getElementById('past_block');
     var future = document.getElementById('future_block');
@@ -73,4 +72,18 @@ function submit_mode_switch(evt, mode) {
 		tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
 	}
 	evt.currentTarget.className += " w3-red";
+}
+
+function asg_switch(ele, id) {
+    var li_arr = document.getElementsByTagName('li');
+    var i = 0;
+    $.each(li_arr, function(index, li) {
+        if (i) li.className = li.className.replace(' w3-light-grey', '');
+        if (i) document.getElementById("num_"+(i - 1)).style.display = 'none';
+        if (i) document.getElementById("num_"+(i - 1)+"_").style.display = 'none';
+        i++;
+    });
+    ele.className += ' w3-light-grey';
+    document.getElementById(id).style.display = 'block';
+    document.getElementById(id+"_").style.display = 'block';
 }

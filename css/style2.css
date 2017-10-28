@@ -14,7 +14,7 @@ font-size: 24px;
 .w3-myfont {
   font-family: "Comic Sans MS", cursive, sans-serif;
 }
-.inp_form { width:45%; }
+.inp_form { width:70%; }
 @media only screen and (max-width: 768px) {
     .inp_form { width:80%; }
     .inp_form h1 { font-size:8vw; }
@@ -30,4 +30,60 @@ font-size: 24px;
     z-index: 5;
     height: 100%;
     width: 100%;
+}
+@media screen and (max-width: 480px) {
+
+		.circular-image{
+				height:50vw;
+				width:50vw;
+				background-size: contain;
+			}
+}
+
+.circular-image{
+	height:20vw;
+	width:20vw;
+	margin:0 auto;
+	border-radius: 50%;
+	position:relative;
+	background: #cecece url("../images/overlay.jpg");
+	background-attachment: fixed;
+	background-position: top center;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+@media screen and (max-width: 1280px) {
+
+	/* circular */
+
+		.circular-image{
+			height:20vw;
+			width:20vw;
+			margin:0 auto;
+			border-radius: 50%;
+			position:relative;
+			background-image: url("../images/overlay.jpg");
+			background-attachment: fixed;
+			background-position: top center;
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+}
+
+@media screen and (max-width: 840px) {
+
+			.circular-image{
+				height:30vw;
+				width:30vw;
+				background-size: contain;
+			}
+}
+
+@media screen and (max-width: 736px) {
+			.circular-image{
+				height:40vw;
+				width:40vw;
+				background-size: contain;
+			}
 }
