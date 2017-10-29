@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2017 at 10:09 AM
+-- Generation Time: Oct 29, 2017 at 06:54 PM
 -- Server version: 5.5.57-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.22
 
@@ -38,17 +38,18 @@ CREATE TABLE IF NOT EXISTS `asg` (
   PRIMARY KEY (`asg_id`),
   KEY `t_idb` (`batch_id`),
   KEY `u_asg` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `asg`
 --
 
 INSERT INTO `asg` (`asg_id`, `asg_name`, `start_time`, `end_time`, `total_marks`, `user_id`, `batch_id`, `time_of_addition`) VALUES
-(1, 'first', '2017-10-27 00:00:00', '2018-02-08 00:00:00', 100, 385450, 1, '2017-10-27 00:00:00'),
-(19, 'fourth', '2017-10-01 01:00:00', '2017-10-18 01:00:00', NULL, 385452, 1, '2017-10-28 13:25:13'),
-(20, 'fourth', '2017-01-01 01:00:00', '2017-01-01 01:01:00', NULL, 385452, 1, '2017-10-28 13:41:23'),
-(21, 'fourth', '2017-01-01 01:00:00', '2017-01-01 01:01:00', NULL, 385452, 1, '2017-10-28 13:44:24');
+(22, 'DSA 1', '2017-12-31 23:59:00', '2017-12-31 23:59:00', NULL, 385459, 1, '2017-10-29 23:41:46'),
+(23, 'DSA 2', '2017-12-30 23:59:00', '2017-12-31 23:59:00', NULL, 385459, 2, '2017-10-29 23:42:19'),
+(24, 'PM 1', '2017-12-31 23:59:00', '2016-12-31 23:59:00', NULL, 385457, 1, '2017-10-29 23:43:51'),
+(25, 'PM 2', '2017-12-31 22:59:00', '2017-12-31 23:59:00', NULL, 385457, 2, '2017-10-29 23:44:14'),
+(26, 'PM3', '2017-10-31 23:03:00', '2018-12-31 23:59:00', NULL, 385457, 2, '2017-10-29 23:45:28');
 
 -- --------------------------------------------------------
 
@@ -64,13 +65,6 @@ CREATE TABLE IF NOT EXISTS `asg_prob` (
   KEY `b` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `asg_prob`
---
-
-INSERT INTO `asg_prob` (`asg_id`, `p_id`, `marks`) VALUES
-(1, 2, 100);
-
 -- --------------------------------------------------------
 
 --
@@ -79,7 +73,8 @@ INSERT INTO `asg_prob` (`asg_id`, `p_id`, `marks`) VALUES
 
 CREATE TABLE IF NOT EXISTS `banner` (
   `c_id` int(11) NOT NULL,
-  `image` varchar(100) NOT NULL
+  `image` varchar(100) NOT NULL,
+  KEY `c_id` (`c_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -135,9 +130,11 @@ CREATE TABLE IF NOT EXISTS `contest` (
 --
 
 INSERT INTO `contest` (`c_id`, `admin_id`, `contest_name`, `start_time`, `end_time`, `no_of_problems`, `about_contest`) VALUES
-(1, 1, 'vinayak', '2017-10-04 20:00:00', '2017-10-04 23:00:00', 5, 'hey you'),
-(2, 2, 'shivi', '2017-10-25 21:30:00', '2017-10-31 00:00:00', 3, 'nothing'),
-(3, 738927, 'lav kush', '2018-02-24 17:00:00', '2018-03-30 00:00:00', 2, 'Aabra ka dabra');
+(1, 1, 'Aug-Sep Challenge', '2017-09-01 00:00:00', '2017-09-30 23:59:59', 5, 'KA BOOM!'),
+(2, 2, 'Oct-Nov Challenge', '2017-10-01 21:30:00', '2017-11-30 23:59:59', 5, 'YIPEE!'),
+(3, 2, 'Dec Challenge', '2017-12-01 17:00:00', '2018-03-31 23:59:59', 5, 'OOOOPS!'),
+(4, 3, 'Jan Challenge', '2018-01-01 17:00:00', '2018-01-11 23:59:59', 10, 'HURRAY!'),
+(5, 4, 'Feb Challenge', '2018-02-03 00:00:00', '2018-02-13 23:59:59', 10, 'GREAT!');
 
 -- --------------------------------------------------------
 
@@ -149,7 +146,8 @@ CREATE TABLE IF NOT EXISTS `contest_prob` (
   `c_id` int(11) NOT NULL,
   `p_id` int(11) NOT NULL,
   `score` int(11) NOT NULL,
-  PRIMARY KEY (`c_id`,`p_id`)
+  PRIMARY KEY (`c_id`,`p_id`),
+  KEY `p_id` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -157,10 +155,16 @@ CREATE TABLE IF NOT EXISTS `contest_prob` (
 --
 
 INSERT INTO `contest_prob` (`c_id`, `p_id`, `score`) VALUES
-(1, 4, 100),
-(2, 1, 100),
-(2, 5, 100),
-(3, 6, 100);
+(1, 2, 100),
+(1, 3, 100),
+(1, 7, 100),
+(1, 12, 100),
+(1, 13, 100),
+(2, 4, 100),
+(2, 8, 100),
+(2, 9, 100),
+(2, 14, 100),
+(2, 15, 100);
 
 -- --------------------------------------------------------
 
@@ -207,7 +211,8 @@ INSERT INTO `language` (`language_id`, `language_name`) VALUES
 CREATE TABLE IF NOT EXISTS `languages_allowed` (
   `p_id` int(11) NOT NULL,
   `language_id` int(11) NOT NULL,
-  PRIMARY KEY (`p_id`,`language_id`)
+  PRIMARY KEY (`p_id`,`language_id`),
+  KEY `language_id` (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -231,8 +236,21 @@ CREATE TABLE IF NOT EXISTS `participation` (
 --
 
 INSERT INTO `participation` (`user_id`, `c_id`, `p_id`, `score`) VALUES
-(385447, 2, 1, 100),
-(385452, 2, 1, 100);
+(385454, 2, 4, 100),
+(385454, 2, 8, 100),
+(385454, 2, 9, 100),
+(385455, 2, 4, 100),
+(385455, 2, 8, 100),
+(385455, 2, 9, 100),
+(385455, 2, 14, 100),
+(385455, 2, 15, 100),
+(385456, 2, 4, 100),
+(385456, 2, 8, 100),
+(385456, 2, 9, 100),
+(385456, 2, 14, 100),
+(385457, 2, 4, 100),
+(385459, 2, 9, 100),
+(385459, 2, 15, 100);
 
 -- --------------------------------------------------------
 
@@ -258,19 +276,28 @@ CREATE TABLE IF NOT EXISTS `problem` (
   PRIMARY KEY (`p_id`),
   UNIQUE KEY `p_code` (`p_code`,`p_filename`),
   KEY `difficulty` (`difficulty`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
 
 --
 -- Dumping data for table `problem`
 --
 
 INSERT INTO `problem` (`p_id`, `p_name`, `p_code`, `p_setter`, `date_added`, `p_filename`, `u_attempt`, `u_solve`, `accepted`, `submitted`, `time_limit`, `source_limit`, `difficulty`, `status`) VALUES
-(1, 'easy', 'rt', 'cdcedc', '2017-09-02', '0_practise', 3, 34, 23, 23, 2.02, 2879, 1, 1),
-(2, 'med', 'rte', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 10.00, 2879, 2, 2),
-(3, 'hard', 'rtet', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 3, 0),
-(4, 'hard', 'rtetsf', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 3, 1),
-(5, 'easy_c', 'rtyrt', 'yws', '2017-10-06', '1', 21, 123, 132, 123, 12.00, 30000, 1, 1),
-(6, 'MED_C', 'askodh', 'asjkdh', '2017-10-03', '1', 1, 1, 1, 1, 1.00, 1, 2, 1);
+(1, 'Buggy Calculator', 'BUGCAL', 'Vinayak', '2017-07-01', 'p1', 15, 7, 7, 7, 2.00, 50000, 1, 0),
+(2, 'A Balanced Contest', 'PERFCONT', 'Shivanjal', '2017-08-01', 'p2', 0, 0, 0, 0, 2.00, 50000, 1, 1),
+(3, 'Chef and Employment Test', 'CK87MEDI', 'Lav Kush', '2017-08-03', 'p3', 0, 0, 0, 0, 2.00, 50000, 1, 1),
+(4, 'Rupsa And The Game', 'RGAME', 'Lav Kush', '2017-08-03', 'p4', 0, 0, 0, 0, 2.00, 50000, 1, 1),
+(5, 'Chef and Way', 'CHRL4', 'Vinayak', '2017-08-03', 'p5', 0, 0, 0, 0, 2.00, 50000, 1, 0),
+(6, 'Weird Competition', 'WEICOM', 'Shivanjal', '2017-08-03', 'p6', 0, 0, 0, 0, 2.00, 50000, 2, 0),
+(7, 'Hull Sum', 'HULLSUM', 'Vinayak', '2017-08-03', 'p7', 0, 0, 0, 0, 2.00, 50000, 2, 1),
+(8, 'Year 3017', 'UNIVERSE', 'Lav Kush', '2017-08-03', 'p8', 0, 0, 0, 0, 2.00, 50000, 2, 1),
+(9, 'Minimax', 'MINIMAX	', 'Shivanjal', '2017-08-03', 'p9', 0, 0, 0, 0, 2.00, 50000, 2, 1),
+(10, 'Animesh practices some programming contests', 'CHN03', 'Shivanjal', '2017-08-03', 'p10', 0, 0, 0, 0, 2.00, 50000, 2, 0),
+(11, 'Animesh has a war with tribal leader Malvika', 'CHN11', 'Vinayak', '2017-08-03', 'p11', 0, 0, 0, 0, 2.00, 50000, 3, 0),
+(12, 'TreeLand Journey', 'JRNTREE', 'Lav Kush', '2017-08-03', 'p12', 0, 0, 0, 0, 2.00, 50000, 3, 1),
+(13, 'Optimal Subset', 'OPTSSET', 'Vinayak', '2017-08-03', 'p13', 0, 0, 0, 0, 2.00, 50000, 3, 1),
+(14, 'King Animesh decides to have a voyage to the sun', 'CHN06', 'Lav Kush', '2017-08-03', 'p14', 0, 0, 0, 0, 2.00, 50000, 3, 1),
+(15, 'Catch Spider-Chef', 'CATCHSM', 'Shivanjal', '2017-08-03', 'p15', 0, 0, 0, 0, 2.00, 50000, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -296,8 +323,21 @@ CREATE TABLE IF NOT EXISTS `solves` (
 --
 
 INSERT INTO `solves` (`p_id`, `user_id`, `time`, `memory`, `submit_time`, `language_id`, `penalty`) VALUES
-(1, 385447, 0.00, 6787072, '2017-10-29 15:10:59', 1, 0),
-(1, 385452, 0.00, 5320704, '2017-10-29 15:09:46', 1, 0);
+(4, 385454, 0.00, 5369856, '2017-10-30 00:16:32', 1, 0),
+(4, 385455, 0.00, 5599232, '2017-10-30 00:10:29', 1, 0),
+(4, 385456, 0.00, 6119424, '2017-10-30 00:12:44', 1, 0),
+(4, 385457, 0.00, 9990144, '2017-10-30 00:17:46', 1, 0),
+(8, 385454, 0.00, 6410240, '2017-10-30 00:16:44', 1, 0),
+(8, 385455, 0.00, 6684672, '2017-10-30 00:10:44', 1, 0),
+(8, 385456, 0.00, 9138176, '2017-10-30 00:13:27', 1, 0),
+(9, 385454, 0.00, 9678848, '2017-10-30 00:16:57', 1, 0),
+(9, 385455, 0.00, 6733824, '2017-10-30 00:10:58', 1, 0),
+(9, 385456, 0.00, 6733824, '2017-10-30 00:13:40', 1, 0),
+(9, 385459, 0.00, 6762496, '2017-10-30 00:19:15', 1, 0),
+(14, 385455, 0.00, 10022912, '2017-10-30 00:11:12', 1, 0),
+(14, 385456, 0.00, 5697536, '2017-10-30 00:13:52', 1, 0),
+(15, 385455, 0.00, 6836224, '2017-10-30 00:11:24', 1, 0),
+(15, 385459, 0.00, 10002432, '2017-10-30 00:19:04', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -310,7 +350,8 @@ CREATE TABLE IF NOT EXISTS `student` (
   `sem` int(11) NOT NULL,
   `cg` decimal(10,2) NOT NULL,
   `batch_id` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`)
+  PRIMARY KEY (`user_id`),
+  KEY `student_ibfk_2` (`batch_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -318,7 +359,9 @@ CREATE TABLE IF NOT EXISTS `student` (
 --
 
 INSERT INTO `student` (`user_id`, `sem`, `cg`, `batch_id`) VALUES
-(385447, 5, '9.63', 1);
+(385454, 5, '9.67', 1),
+(385455, 5, '8.00', 1),
+(385456, 5, '9.00', 1);
 
 -- --------------------------------------------------------
 
@@ -331,16 +374,14 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   PRIMARY KEY (`s_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `subscription`
 --
 
 INSERT INTO `subscription` (`s_id`, `name`, `email`) VALUES
-(1, 'Vinayak', 'vishusachdeva228@gmail.com'),
-(2, 'shivi', 'shivi@gmail.com'),
-(3, 'lav', 'lav@gmail.com');
+(1, 'Virender Sehwag', 'viru@rediff.com');
 
 -- --------------------------------------------------------
 
@@ -352,15 +393,16 @@ CREATE TABLE IF NOT EXISTS `teacher` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=385453 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=385460 ;
 
 --
 -- Dumping data for table `teacher`
 --
 
 INSERT INTO `teacher` (`user_id`, `status`) VALUES
-(385450, 0),
-(385452, 0);
+(385457, 1),
+(385458, 1),
+(385459, 1);
 
 -- --------------------------------------------------------
 
@@ -374,6 +416,16 @@ CREATE TABLE IF NOT EXISTS `teacher_batch` (
   PRIMARY KEY (`user_id`,`batch_id`),
   KEY `batch_id` (`batch_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `teacher_batch`
+--
+
+INSERT INTO `teacher_batch` (`user_id`, `batch_id`) VALUES
+(385457, 1),
+(385459, 1),
+(385457, 2),
+(385458, 2);
 
 -- --------------------------------------------------------
 
@@ -398,20 +450,19 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `institute_id` (`institute_id`),
   UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=385453 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=385460 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `email`, `password`, `branch`, `dob`, `type`, `about_me`) VALUES
-(1, 'Shivanjal', 'Arora', 'shivi6011', '2015UCP5454', 'shivanjal9@gmail.com', '$2y$10$j6Vea7UtQkEW8UjpnkfVROxV6GDf4qpTmBsF1MTNfgWR3snSZWkWi', 'CSE', '0000-00-00', 1, 'aksndoanbso'),
-(385446, 'a', 'a', 'a', '2015UCP1225', 'v@g32.ds', '$2y$10$XJ.aHo8IvpaFfVTemU/TJeGv5jz8r2lTuFcN3teZS9SScXE.v4CJq', 'AP', '2017-12-31', 1, ''),
-(385447, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015UCP1057', 'vishusachdeva228@gmail.com', '$2y$10$uf0uksYSLfUfJeZhhPxXxe20tWzLvoJVfHBI2UmSEERfWuQXnR82m', 'CSE', '1998-02-06', 1, 'nothing!!'),
-(385448, 'aa', 'aa', 'aa', '2015UCP5677', 'aa@gmail.com', '$2y$10$VvkB.33aWoSPL5ZSDJ0djurwLCy922feT6rcw/xJ/PZqPjvVKQJQe', 'CE', '1990-12-03', 1, 'aa'),
-(385449, 'as', 'as', 'as', '2015UCP1111', 'sdfs@gmail.com', '$2y$10$dlc0vgqn/PyjyTHGw18fbuqwaLBH6FarLFiH7wvkaY5JRl6MmwiXm', 'CSE', '2017-10-05', 1, 'wswdc'),
-(385450, 'Vinayakt', 'Sachdevat', 'vishusachdevat', 'wdqj', 'adjg@shd.asd', '$2y$10$qkXdNN1rkL5vo1flBZGkX.mKe29AgmNaIt9gigZcQEo.TasET0izS', 'CSE', '2015-12-31', 2, 'efdjgew'),
-(385452, 'Vinayaktt', 'Sachdevatt', 'vishusachdevatt', 'qwerty', 'vishusachdeva228@gmail.comt', '$2y$10$mJ2jBOpBsqwUmDqUQkJr4eQiXrFfl60LggQAxvfBoReVC/cHlWcKm', 'CSE', '2006-11-30', 2, 'efke');
+(385454, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015ucp1057', 'vishusachdeva228@gmail.com', '$2y$10$Pid9CsIoNyiEOs7OehqwW.4d8dDPLKfdlGVYBEvhkjx7fIyGaA4Dm', 'CSE', '1998-01-01', 1, ''),
+(385455, 'Shivanjal', 'Arora', 'shivi', '2015UCP1229', 'shivanjal9@gmail.com', '$2y$10$b853NQF9Yf0l6r6mkmHip.qPzkJoYx6Rz0bYZzH8pGEAOKfXEyL82', 'CSE', '1997-01-01', 1, ''),
+(385456, 'Lavkush', 'Kumar', 'lavkush', '2015UCP1463', '2015UCP1463@mnit.ac.in', '$2y$10$FBeBh7whGtCgAUmjViu1j.3WAxHnBNbUPFQq10PzAhWoI.j9dCwbS', 'CSE', '1997-12-31', 1, ''),
+(385457, 'Rahul', 'Gandhi', 'rahul', 'rgcse', 'rgcse@congress.com', '$2y$10$cVDMY1w0339hqfafDaLIu.VRRIzVf4lnqtYfYT55NtB/n0eZRM3sG', 'CSE', '1963-11-29', 2, ''),
+(385458, 'Arvind', 'Kejriwal', 'kejri', 'akcse', 'akcse@hotmail.com', '$2y$10$mpfdTXFa7j.zn2sn0pbjbuUrdC1sZqtn/krrcvh/GsEbv.W5qVQh.', 'CSE', '1930-02-02', 2, ''),
+(385459, 'Narendra', 'Modi', 'namo', 'nmcse', 'nmcse@yahoo.in', '$2y$10$9iiL0FqXHgsFoT.sP0ByIea/OeVvEkk3.7sTD0iVK4V51J5di/UzW', 'CSE', '1970-02-03', 2, '');
 
 -- --------------------------------------------------------
 
@@ -421,9 +472,11 @@ INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `em
 
 CREATE TABLE IF NOT EXISTS `winner` (
   `c_id` int(11) NOT NULL,
-  `winner_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `rank` int(11) NOT NULL,
   `prize` varchar(100) NOT NULL,
-  PRIMARY KEY (`c_id`,`winner_id`)
+  PRIMARY KEY (`c_id`,`user_id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -445,12 +498,32 @@ ALTER TABLE `asg_prob`
   ADD CONSTRAINT `b` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`);
 
 --
+-- Constraints for table `banner`
+--
+ALTER TABLE `banner`
+  ADD CONSTRAINT `banner_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `contest` (`c_id`);
+
+--
+-- Constraints for table `contest_prob`
+--
+ALTER TABLE `contest_prob`
+  ADD CONSTRAINT `contest_prob_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `contest` (`c_id`),
+  ADD CONSTRAINT `contest_prob_ibfk_2` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`);
+
+--
+-- Constraints for table `languages_allowed`
+--
+ALTER TABLE `languages_allowed`
+  ADD CONSTRAINT `languages_allowed_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`),
+  ADD CONSTRAINT `languages_allowed_ibfk_2` FOREIGN KEY (`language_id`) REFERENCES `language` (`language_id`);
+
+--
 -- Constraints for table `participation`
 --
 ALTER TABLE `participation`
-  ADD CONSTRAINT `participation_ibfk_3` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`),
   ADD CONSTRAINT `participation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
-  ADD CONSTRAINT `participation_ibfk_2` FOREIGN KEY (`c_id`) REFERENCES `contest` (`c_id`);
+  ADD CONSTRAINT `participation_ibfk_2` FOREIGN KEY (`c_id`) REFERENCES `contest` (`c_id`),
+  ADD CONSTRAINT `participation_ibfk_3` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`);
 
 --
 -- Constraints for table `solves`
@@ -461,11 +534,27 @@ ALTER TABLE `solves`
   ADD CONSTRAINT `solves_ibfk_3` FOREIGN KEY (`language_id`) REFERENCES `language` (`language_id`);
 
 --
+-- Constraints for table `student`
+--
+ALTER TABLE `student`
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+
+--
 -- Constraints for table `teacher_batch`
 --
 ALTER TABLE `teacher_batch`
-  ADD CONSTRAINT `teacher_batch_ibfk_2` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`),
-  ADD CONSTRAINT `teacher_batch_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `teacher` (`user_id`);
+  ADD CONSTRAINT `teacher_batch_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `teacher` (`user_id`),
+  ADD CONSTRAINT `teacher_batch_ibfk_2` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`);
+
+--
+-- Constraints for table `winner`
+--
+ALTER TABLE `winner`
+  ADD CONSTRAINT `winner_ibfk_1` FOREIGN KEY (`c_id`) REFERENCES `contest` (`c_id`),
+  ADD CONSTRAINT `winner_ibfk_2` FOREIGN KEY (`c_id`) REFERENCES `contest` (`c_id`),
+  ADD CONSTRAINT `winner_ibfk_3` FOREIGN KEY (`c_id`) REFERENCES `contest` (`c_id`),
+  ADD CONSTRAINT `winner_ibfk_4` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

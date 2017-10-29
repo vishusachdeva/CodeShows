@@ -101,7 +101,7 @@
                 $last_id = mysqli_insert_id($this->db);
                 $result = db_last_id($this->db, 'user', 'user_id');
                 if ($type == 1) {
-                    $sql = "INSERT INTO `student` VALUES('".$result['user_id']."', '$sem', '$cg', '$brach')";
+                    $sql = "INSERT INTO `student` VALUES('".$result['user_id']."', '$sem', '$cg', '$batch')";
                     $result2 = query($this->db, $sql);
                     if ($result2 === true) {
                         $result = array_merge($result, db_last_id($this->db, 'student', 'user_id', $last_id));

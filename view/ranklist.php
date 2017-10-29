@@ -1,3 +1,9 @@
+<?php
+        if (empty($ranklist)) { ?>
+            <h1> <?php echo('Ranklist '.$contest_name.'<br>End Time:'.$end_time); ?> </h1>
+            <h2>No submissions yet</h2>
+        <?php } else {
+?>
 <table class="w3-table w3-bordered w3-hoverable">
     <h1 > <?php echo('Ranklist '.$contest_name.'<br>End Time:'.$end_time); ?> </h1>
     <tr bgcolor = "#AAD3A8">
@@ -32,3 +38,4 @@
         }
     ?>
 </table>
+<?php } ?>

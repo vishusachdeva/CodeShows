@@ -84,12 +84,12 @@
             $n = $res[0]['no_of_problems'];
 
             // A query to get all contest problem names.
-            $sql = "SELECT p_id,p_name FROM contest_prob NATURAL JOIN problem WHERE c_id = $c_id ";
+            $sql = "SELECT p_id, p_code FROM contest_prob NATURAL JOIN problem WHERE c_id = $c_id ";
             $res = query($this->db,$sql);
             $p_mapping = []; // An array which maps p_id and p_name.
             foreach( $res As $key => $value)
             {
-                $p_mapping[ $value['p_id'] ] = $value['p_name'];
+                $p_mapping[ $value['p_id'] ] = $value['p_code'];
             }
             // A query to get all usernames who participated in the contest.
             $sql = "SELECT U.username,U.user_id FROM user U WHERE U.user_id IN( SELECT distinct(P.user_id) FROM participation P);";
@@ -128,7 +128,9 @@
                 $ranklist1[$i] = $value;
                 $i++;
             }
-            usort($ranklist1, 'sortByScore');
+            if (!empty($ranklist1))
+                usort($ranklist1, 'sortByScore');
+
             $final_result['ranklist'] = $ranklist1;
             $final_result['p_mapping'] = $p_mapping;
             $final_result['contest_name'] = $c_name;
