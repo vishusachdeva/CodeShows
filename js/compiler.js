@@ -8,7 +8,7 @@ function p_submit(path, language, p_id, solution, time_limit) {
     document.getElementById('result-panel').style.display = 'block';
         return;
     }
-	
+
     var submit_solution = document.getElementById('submit_solution');
     submit_solution.innerHTML = 'Submitting...';
     submit_solution.disabled = true;
@@ -29,7 +29,13 @@ function fire(path, language, p_id, solution, time_limit) {
                 var submit_solution = document.getElementById('submit_solution');
                 submit_solution.innerHTML = 'Submit Solution';
                 submit_solution.disabled = false;
-                document.getElementById("result").innerHTML = this.responseText;
+                if (this.responseText.startsWith('~~~~~')) {
+				    document.getElementById('result-panel').style.borderColor = '';
+                    document.getElementById("result").innerHTML = this.responseText.slice(5, );
+                } else {
+				    document.getElementById('result-panel').style.borderColor = 'red';
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
 				document.getElementById('result-panel').style.display = 'block';
         }
     };
@@ -59,7 +65,13 @@ function editor_submit(path, language, p_id, solution,time_limit) {
                 editor_submit_solution = document.getElementById('editor_submit_solution');
                 editor_submit_solution.innerHTML = 'Submit Solution';
                 editor_submit_solution.disabled = false;
-                document.getElementById("result").innerHTML = this.responseText;
+                if (this.responseText.startsWith('~~~~~')) {
+				    document.getElementById('result').style.borderColor = '';
+                    document.getElementById("result").innerHTML = this.responseText.slice(5, );
+                } else {
+				    document.getElementById('result').style.borderColor = 'red';
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
 				document.getElementById('result-panel').style.display = 'block';
         }
     };
@@ -71,11 +83,11 @@ function editor_submit(path, language, p_id, solution,time_limit) {
 function run_code(path, language, p_id, solution, testcase, time_limit) {
     if (!solution) {
         document.getElementById('result').innerHTML = 'Please Write Some Code';
-		document.getElementById('result-panel').style.display = 'block';
+		document.getElementById('result').style.display = 'block';
         return;
     } else if (!path || !language || !p_id || !time_limit) {
         document.getElementById('result').innerHTML = 'Error!! Please Try Later';
-		document.getElementById('result-panel').style.display = 'block';
+		document.getElementById('result').style.display = 'block';
         return;
     }
     var run = document.getElementById('run');
@@ -89,7 +101,13 @@ function run_code(path, language, p_id, solution, testcase, time_limit) {
                 var run = document.getElementById('run');
                 run.innerHTML = 'Run';
                 run.disabled = false;
-                document.getElementById("result").innerHTML = this.responseText;
+                if (this.responseText.startsWith('~~~~~')) {
+				    document.getElementById('result').style.borderColor = '';
+                    document.getElementById("result").innerHTML = this.responseText.slice(5, );
+                } else {
+				    document.getElementById('result').style.borderColor = 'red';
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
 				document.getElementById('result-panel').style.display = 'block';
         }
     };

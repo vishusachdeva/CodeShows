@@ -43,7 +43,7 @@
         $out_file = str_replace("\r", '', file_open(SUBMIT_TESTCASE_PATH.$p_id.'o.txt', 'Output File doesn\'t exist'));
         if ($out_file == json_decode($result)->result->stdout[0] || $out_file == json_decode($result)->result->stdout[0]."\n")
         {
-            print("Accept ".json_decode($result)->result->time[0].'s<br>');
+            print("~~~~~Accept ".json_decode($result)->result->time[0].'s<br>');
             $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
             loadModel('contest','solve_part_update',['p_id'=>$_POST['p_id'],'user_id'=>$_SESSION['user_id'],'run_time'=>$res->time[0],
                         'memory'=>$res->memory[0], 'submit_time'=> $date->format('Y-m-d H:i:s') , 'language_id'=>$_POST['language']]);

@@ -42,7 +42,7 @@
         }
         if ($flag) {
             $out_file = file_open(SAMPLE_TESTCASE_PATH.$p_id.'o.txt', 'Output File doesn\'t exist');
-            print("Input (stdin) <br/>".nl2br($testcase)."<br/>");
+            print("~~~~~Input (stdin) <br/>".nl2br($testcase)."<br/>");
             print("Your Output (stdout) <br/>".nl2br(json_decode($result)->result->stdout[0])."<br/>");
             print("Expected Output<br/>".nl2br($out_file)."<br/>");
 			$out_file = str_replace("\r", '', $out_file);

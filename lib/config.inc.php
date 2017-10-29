@@ -14,6 +14,7 @@
     define('SUBMIT_TESTCASE_PATH', ROOT.'testcase/submit/');
     define('API_PATH', SITE_ROOT.'api/');
     define('COMPILER_PATH', ROOT.'api/compiler/');
+    define('IDE_PATH', SITE_ROOT.'ide/');
 
     function generate_link($controller, $function) {
         return '/'.$controller.'/'.$function;
