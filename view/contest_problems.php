@@ -21,7 +21,7 @@
     <?php
     if($start_time < $cur_time)
     {?>
-        <tr><th>Problem Name</th><th>Problem Code</th><th>Accuracy</th></tr>
+        <tr bgcolor = "#AAD3A8"><th>Problem Name</th><th>Problem Code</th><th>Accuracy</th></tr>
         <?php
         while($i < $len) { ?>
             <tr style='cursor:pointer' onclick="location.href='<?php echo(generate_link('problem', '?p_id='.${$x}['p_id'])); ?>'">
@@ -36,7 +36,8 @@
     }
     else
     {
-        echo("Problems will be available after " .($num_0['start_time']));
+        $date=date_create($num_0['start_time']);
+        echo("Problems will be available after " .date_format($date,"d M y g:i A")." IST");
     }
 ?>
 </table>

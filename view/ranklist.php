@@ -1,6 +1,6 @@
 <table class="w3-table w3-bordered w3-hoverable">
-    <h1> <?php echo('Ranklist '.$contest_name.'<br>End Time:'.$end_time); ?> </h1>
-    <tr>
+    <h1 > <?php echo('Ranklist '.$contest_name.'<br>End Time:'.$end_time); ?> </h1>
+    <tr bgcolor = "#AAD3A8">
         <th>Rank</th>
         <th>User Name</th>
         <?php
@@ -16,7 +16,7 @@
         foreach($ranklist As $value)
         {
             ?>
-            <tr style = "cursor:pointer" onclick = '#'>
+            <tr style = "cursor:pointer" onclick = '#' <?php if($_SESSION['username'] == $value['username']){echo('bgcolor="#A6E0A4"');} ?>>
             <td><?php echo($i); ?></td>
             <td><?php echo($value['username']) ?></td>
             <?php

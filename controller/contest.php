@@ -31,6 +31,7 @@
         }
         function fetch_ranklist($arguments)
         {
+            session_start();
             $data = loadModel('contest','fetch_ranklist',$arguments);
             loadView("header", array_merge($this->data, ['title' => 'RankList - CodeShows']));
             loadView("ranklist",$data);
