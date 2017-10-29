@@ -27,7 +27,7 @@
 						<div class="clearfix"> </div>
 					</div>
 					<div class="wthree_copy_right">
-						<p>Footer</a></p>
+						<p>&copy; 2017</a></p>
 					</div>
 				</div>
 			</div>

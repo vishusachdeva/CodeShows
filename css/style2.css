@@ -53,6 +53,17 @@ font-size: 24px;
 	background-size: contain;
 }
 
+
+		.left-part{
+			height:20vw;
+			width:37vw;
+		}
+
+		.right-part{
+			height:20vw;
+			width:37vw;
+		}
+
 @media screen and (max-width: 1280px) {
 
 	/* circular */
@@ -69,21 +80,49 @@ font-size: 24px;
 			background-repeat: no-repeat;
 			background-size: contain;
 		}
+
+		.left-part{
+			height:20vw;
+			width:37vw;
+		}
+
+		.right-part{
+			height:20vw;
+			width:37vw;
+		}
 }
 
 @media screen and (max-width: 840px) {
 
-			.circular-image{
-				height:30vw;
-				width:30vw;
-				background-size: contain;
-			}
+		.circular-image{
+			height:30vw;
+			width:30vw;
+			background-size: contain;
+		}
+
+		.left-part{
+			height:30vw;
+			width:32vw;
+		}
+
+		.right-part{
+			height:30vw;
+			width:32vw;
+		}
 }
 
 @media screen and (max-width: 736px) {
-			.circular-image{
-				height:40vw;
-				width:40vw;
-				background-size: contain;
-			}
+		.circular-image{
+			height:40vw;
+			width:40vw;
+			background-size: contain;
+		}
+
+		.left-part{
+			display:none;
+		}
+
+		.right-part{
+		    display:none;
+		}
 }

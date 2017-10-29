@@ -60,4 +60,53 @@
 	  dots[slideIndex-1].className += " w3-white";
 	}
 </script>
-<div><div class="w3-section circular-image"></div></div>
+
+<link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
+<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
+<script>
+	AOS.init();
+</script>
+<div class="container-fluid clearfix" style="padding:0px;background-color:#191d20;">
+	<div style="margin:60px auto;width:100%;text-align:center;">
+		<h1 class="w3-text-cyan" style="font-size:5vw;font-family:monoton,cursive;">What You Can Do</h1>
+	</div>
+	<div onclick="location.href='<?php echo(generate_link('problem', 'all')); ?>'" data-aos-offset="250" data-aos="fade-right" data-aos-duration="800" class="container" style="height:50%;float:left;width:50%;padding:0px;cursor:pointer;">
+		<img src="<?php echo(IMAGE_PATH); ?>banner11.jpg" style="width:100%;height:100%;">
+	</div>
+	<div onclick="location.href='<?php echo(generate_link('problem', 'all')); ?>'" data-aos-offset="250" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300" class="container" style="height:50%;float:right;width:50%;padding:0px;cursor:pointer;">
+		<h1 class="w3-display-middle w3-text-white" style="text-align:center;font-size:4vw;"><b>Practice</b></h1>
+	</div>
+	<div onclick="location.href='<?php echo(generate_link('contest', 'all')); ?>'" data-aos-offset="250" data-aos="fade-right" data-aos-duration="800" data-aos-delay="300" class="container" style="height:50%;float:left;width:50%;padding:0px;cursor:pointer;">
+		<h1 class="w3-display-middle w3-text-white" style="text-align:center;font-size:4vw;"><b>Compete</b></h1>
+	</div>
+	<div onclick="location.href='<?php echo(generate_link('contest', 'all')); ?>'" data-aos-offset="250" data-aos="fade-left" data-aos-duration="800" class="container" style="height:50%;float:right;width:50%;padding:0px;cursor:pointer;">
+		<img src="<?php echo(IMAGE_PATH); ?>banner22.jpg" style="width:100%;height:100%;">
+	</div>
+	<?php if (isset($type)) { ?><div onclick="location.href='<?php if ($type == 1) echo(generate_link('asg', 'all')); else if ($type == 2) echo(generate_link('asg', 'builder')); ?>'" data-aos-offset="250" data-aos="fade-right" data-aos-duration="800" class="container" style="height:50%;float:left;width:50%;padding:0px;cursor:pointer;">
+		<img src="<?php echo(IMAGE_PATH); ?>banner33.jpg" style="width:100%;height:100%;">
+	</div>
+	<div onclick="location.href='<?php if ($type == 1) echo(generate_link('asg', 'all')); else if ($type == 2) echo(generate_link('asg', 'builder')); ?>'" data-aos-offset="250" data-aos="fade-left" data-aos-duration="800" data-aos-delay="300" class="container" style="height:50%;float:right;width:50%;padding:0px;cursor:pointer;">
+		<h1 class="w3-display-middle w3-text-white" style="text-align:center;font-size:4vw;"><b>Assignments</b></h1>
+	</div><?php } ?>
+</div>
+
+<div class="clearfix" style="background-color:#191d20;padding-top:64px;">
+	<div data-aos-offset="150" data-aos="fade-right" style="float:left;" class="left-part w3-text-white w3-border">
+		<h1 style="text-align:center;">Top Programmers</h1>
+		<ul class="w3-ul w3-center w3-border">
+			<li style="width:100%">Vinayak</li>
+			<li style="width:100%">Shivanjal</li>
+			<li style="width:100%">Lavkush</li>
+		</ul>
+	</div>
+	<div data-aos-offset="150" data-aos="fade-left" style="float:right;" class="right-part w3-text-white w3-border">
+		<h1 style="margin-bottom:0px;padding-bottom:1vw;text-align:center;overflow-y:auto;">Top Contributors</h1>
+		<ul class="w3-ul w3-center w3-border">
+			<li style="width:100%">Vinayak</li>
+			<li style="width:100%">Shivanjal</li>
+			<li style="width:100%">Lavkush</li>
+		</ul>
+	</div>
+	<div class="circular-image"></div>
+</div>

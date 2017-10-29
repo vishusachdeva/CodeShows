@@ -63,8 +63,8 @@
 										<li><a href="<?php echo(generate_link('contest','all'));?>"><span data-hover="Compete">Compete</span></a></li>
 										<?php if (isset($type)) { ?><li><a href="
 										<?php
-											if (isset($type) && $type==1) echo(generate_link('asg','all'));
-											else echo(generate_link('asg','builder'));
+											if (isset($type) && $type == 1) echo(generate_link('asg','all'));
+											else if (isset($type) && $type == 2) echo(generate_link('asg','builder'));
 										?>
 										"><span data-hover="Assignment">Assignment</span></a></li>
 										<?php } ?>
