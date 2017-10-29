@@ -77,8 +77,9 @@
         {
             // A query to get contest name
             extract($data);
-            $sql = "SELECT contest_name,no_of_problems FROM contest WHERE c_id = $c_id";
+            $sql = "SELECT contest_name,no_of_problems,end_time FROM contest WHERE c_id = $c_id";
             $res = query($this->db,$sql);
+            $end_time = $res[0]['end_time'];
             $c_name = $res[0]['contest_name'];
             $n = $res[0]['no_of_problems'];
 
@@ -131,6 +132,7 @@
             $final_result['ranklist'] = $ranklist1;
             $final_result['p_mapping'] = $p_mapping;
             $final_result['contest_name'] = $c_name;
+            $final_result['end_time'] = $end_time;
             return $final_result;
         }
     }

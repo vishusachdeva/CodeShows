@@ -2,6 +2,7 @@
 <?php
     $i = 0;
     $x = "num_$i";
+
     $time_now=mktime(date('h')+11,date('i')+58,date('s'));
     $cur_time = date('Y-m-d H:i:s', $time_now);
     $cur_time = strtotime($cur_time);
@@ -12,7 +13,11 @@
     }
     $start_time = strtotime($start_time);
     ?>
-    <br><a href = '<?php echo(generate_link('ranklist','?c_id='.$c_id)); ?>' >Rank List</a><br>
+    <div class="clearfix">
+        <h1 style="float:left"><?php echo($contest_name);?></h1>
+        <input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" style = 'float:right'onclick = "location.href='<?php echo(generate_link('ranklist','?c_id='.$c_id)); ?>'" value = 'RankList'>
+    </div>
+    <br>
     <?php
     if($start_time < $cur_time)
     {?>

@@ -1,5 +1,5 @@
 <table class="w3-table w3-bordered w3-hoverable">
-    <h1> <?php echo($contest_name)?> </h1>
+    <h1> <?php echo('Ranklist '.$contest_name.'<br>End Time:'.$end_time); ?> </h1>
     <tr>
         <th>Rank</th>
         <th>User Name</th>

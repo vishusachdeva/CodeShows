@@ -36,6 +36,7 @@
                                 <option value="service">General Customer Service</option>
                                 <option value="suggestions">Suggestions</option>
                                 <option value="product">Product Support</option>
+                                <option value="other">Other</option>
                             </select>
                         </div>
                     </div>
@@ -59,12 +60,13 @@
             <form>
             <legend><span class="glyphicon glyphicon-globe"></span> Our office</legend>
             <address>
-                <strong>Twitter, Inc.</strong><br>
-                795 Folsom Ave, Suite 600<br>
-                San Francisco, CA 94107<br>
-                <abbr title="Phone">
-                    P:</abbr>
-                (123) 456-7890
+                <strong>Codeshows,</strong><br>
+                Central Ave, Suite 600<br>
+                Jaipur , CA 302020<br>
+                <br>Phone:<br>
+                +91 - 9766 238370<br>
+                +91 - 7357 055390<br>
+                +91 - 7073 204524<br>
             </address>
             <address>
                 <strong>Full Name</strong><br>

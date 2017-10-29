@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2017 at 09:16 AM
+-- Generation Time: Oct 29, 2017 at 10:09 AM
 -- Server version: 5.5.57-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.22
 
@@ -158,6 +158,7 @@ CREATE TABLE IF NOT EXISTS `contest_prob` (
 
 INSERT INTO `contest_prob` (`c_id`, `p_id`, `score`) VALUES
 (1, 4, 100),
+(2, 1, 100),
 (2, 5, 100),
 (3, 6, 100);
 
@@ -178,6 +179,7 @@ CREATE TABLE IF NOT EXISTS `language` (
 --
 
 INSERT INTO `language` (`language_id`, `language_name`) VALUES
+(1, 'C'),
 (2, 'C++'),
 (3, 'Java'),
 (5, 'Python 2.0'),
@@ -217,10 +219,20 @@ CREATE TABLE IF NOT EXISTS `languages_allowed` (
 CREATE TABLE IF NOT EXISTS `participation` (
   `user_id` int(11) NOT NULL,
   `c_id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
   `score` int(11) NOT NULL,
-  PRIMARY KEY (`user_id`,`c_id`),
-  KEY `c_id` (`c_id`)
+  PRIMARY KEY (`user_id`,`c_id`,`p_id`),
+  KEY `c_id` (`c_id`),
+  KEY `p_id` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `participation`
+--
+
+INSERT INTO `participation` (`user_id`, `c_id`, `p_id`, `score`) VALUES
+(385447, 2, 1, 100),
+(385452, 2, 1, 100);
 
 -- --------------------------------------------------------
 
@@ -253,7 +265,7 @@ CREATE TABLE IF NOT EXISTS `problem` (
 --
 
 INSERT INTO `problem` (`p_id`, `p_name`, `p_code`, `p_setter`, `date_added`, `p_filename`, `u_attempt`, `u_solve`, `accepted`, `submitted`, `time_limit`, `source_limit`, `difficulty`, `status`) VALUES
-(1, 'easy', 'rt', 'cdcedc', '2017-09-02', '0_practise', 3, 34, 23, 23, 2.02, 2879, 1, 0),
+(1, 'easy', 'rt', 'cdcedc', '2017-09-02', '0_practise', 3, 34, 23, 23, 2.02, 2879, 1, 1),
 (2, 'med', 'rte', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 10.00, 2879, 2, 2),
 (3, 'hard', 'rtet', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 3, 0),
 (4, 'hard', 'rtetsf', 'cdcedc', '2017-09-02', 'edcdcedcedcedcecec', 3, 34, 23, 23, 2.02, 2879, 3, 1),
@@ -278,6 +290,14 @@ CREATE TABLE IF NOT EXISTS `solves` (
   KEY `user_id` (`user_id`),
   KEY `language_id` (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `solves`
+--
+
+INSERT INTO `solves` (`p_id`, `user_id`, `time`, `memory`, `submit_time`, `language_id`, `penalty`) VALUES
+(1, 385447, 0.00, 6787072, '2017-10-29 15:10:59', 1, 0),
+(1, 385452, 0.00, 5320704, '2017-10-29 15:09:46', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -341,6 +361,19 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 INSERT INTO `teacher` (`user_id`, `status`) VALUES
 (385450, 0),
 (385452, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `teacher_batch`
+--
+
+CREATE TABLE IF NOT EXISTS `teacher_batch` (
+  `user_id` int(11) NOT NULL,
+  `batch_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_id`,`batch_id`),
+  KEY `batch_id` (`batch_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -415,6 +448,7 @@ ALTER TABLE `asg_prob`
 -- Constraints for table `participation`
 --
 ALTER TABLE `participation`
+  ADD CONSTRAINT `participation_ibfk_3` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`),
   ADD CONSTRAINT `participation_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `participation_ibfk_2` FOREIGN KEY (`c_id`) REFERENCES `contest` (`c_id`);
 
@@ -425,6 +459,13 @@ ALTER TABLE `solves`
   ADD CONSTRAINT `solves_ibfk_1` FOREIGN KEY (`p_id`) REFERENCES `problem` (`p_id`),
   ADD CONSTRAINT `solves_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
   ADD CONSTRAINT `solves_ibfk_3` FOREIGN KEY (`language_id`) REFERENCES `language` (`language_id`);
+
+--
+-- Constraints for table `teacher_batch`
+--
+ALTER TABLE `teacher_batch`
+  ADD CONSTRAINT `teacher_batch_ibfk_2` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`),
+  ADD CONSTRAINT `teacher_batch_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `teacher` (`user_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

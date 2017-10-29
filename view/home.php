@@ -92,7 +92,7 @@
 </div>
 
 <div class="clearfix" style="background-color:#191d20;padding-top:64px;">
-	<div data-aos-offset="150" data-aos="fade-right" style="float:left;" class="left-part w3-text-white w3-border">
+	<div data-aos-offset="150" data-aos="fade-right" style="float:left;" class="left-part w3-text-white">
 		<h1 style="text-align:center;">Top Programmers</h1>
 		<ul class="w3-ul w3-center w3-border">
 			<li style="width:100%">Vinayak</li>
@@ -100,7 +100,7 @@
 			<li style="width:100%">Lavkush</li>
 		</ul>
 	</div>
-	<div data-aos-offset="150" data-aos="fade-left" style="float:right;" class="right-part w3-text-white w3-border">
+	<div data-aos-offset="150" data-aos="fade-left" style="float:right;" class="right-part w3-text-white">
 		<h1 style="margin-bottom:0px;padding-bottom:1vw;text-align:center;overflow-y:auto;">Top Contributors</h1>
 		<ul class="w3-ul w3-center w3-border">
 			<li style="width:100%">Vinayak</li>

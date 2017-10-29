@@ -27,7 +27,7 @@
 						<div class="clearfix"> </div>
 					</div>
 					<div class="wthree_copy_right">
-						<p>&copy; 2017</a></p>
+						<p>&copy; Codeshows</a></p>
 					</div>
 				</div>
 			</div>
