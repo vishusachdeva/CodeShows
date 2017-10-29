@@ -1,5 +1,7 @@
 <?php
-
+    function sortByScore($a, $b) {
+            return $b['total_score'] - $a['total_score'];
+    }
     class contest_model {
 
         private $db;
@@ -28,7 +30,6 @@
                 return;
             }
             extract($data);
-            //var_dump($data);
             $sql = "SELECT * FROM solves WHERE user_id = $user_id AND p_id = $p_id";
             $result = query($this->db,$sql);
             $already_exists = true;
@@ -62,25 +63,75 @@
                 $start_time = strtotime($result[0]['start_time']);
                 $end_time = strtotime($result[0]['end_time']);
                 $submit_time = strtotime($submit_time);
-                if($submit_time >= $start_time && $submit_time <= $end_time)
+                if($submit_time > $start_time && $submit_time < $end_time)
                 {
-                    $sql = "SELECT * FROM participation WHERE c_id = $c_id AND user_id = $user_id";
-                    $result = query($this->db,$sql);
-                    $participation = false;
-                    if(!empty($result[0]))
-                        $participation = true;
-                    if($participation)
-                    {
-                        $sql = "UPDATE participation SET score = score + 100 WHERE user_id = $user_id AND $c_id = c_id";
-                    }
-                    else
-                    {
-                        $sql = "INSERT INTO participation VALUES($user_id,$c_id,100)";
-                    }
+                    $sql = "DELETE FROM participation WHERE c_id = $c_id AND user_id = $user_id AND p_id = $p_id";
+                    query($this->db,$sql);
+                    $sql = "INSERT INTO participation VALUES($user_id,$c_id,$p_id,100)";
                     query($this->db,$sql);
                 }
             }
             return true;
+        }
+        function fetch_ranklist($data = [])
+        {
+            // A query to get contest name
+            extract($data);
+            $sql = "SELECT contest_name,no_of_problems FROM contest WHERE c_id = $c_id";
+            $res = query($this->db,$sql);
+            $c_name = $res[0]['contest_name'];
+            $n = $res[0]['no_of_problems'];
+
+            // A query to get all contest problem names.
+            $sql = "SELECT p_id,p_name FROM contest_prob NATURAL JOIN problem WHERE c_id = $c_id ";
+            $res = query($this->db,$sql);
+            $p_mapping = []; // An array which maps p_id and p_name.
+            foreach( $res As $key => $value)
+            {
+                $p_mapping[ $value['p_id'] ] = $value['p_name'];
+            }
+            // A query to get all usernames who participated in the contest.
+            $sql = "SELECT U.username,U.user_id FROM user U WHERE U.user_id IN( SELECT distinct(P.user_id) FROM participation P);";
+            $res = query($this->db,$sql);
+            $u_mapping = []; // An array which maps user_id and user name.
+            foreach( $res As $key => $value)
+            {
+                $u_mapping[ $value['user_id'] ] = $value['username'];
+            }
+            // A query to get user_problem_participation data.
+            $sql = "SELECT p_id,user_id,score  FROM participation WHERE c_id = $c_id ORDER BY user_id ";
+            $res = query($this->db,$sql);
+            // Now arrange the data user - wise
+            $ranklist = [];
+            $temp = [];
+            foreach($p_mapping As $id=>$name)
+            {
+                $temp[$id] = 0;
+            }
+            foreach($u_mapping As $id => $value)
+            {
+                $temp1 = $temp;
+                $temp1['username'] = $value;
+                $temp1['total_score'] = 0;
+                $ranklist[$id] = $temp1;
+            }
+            foreach($res As $key=>$value)
+            {
+                $old_pscore = $ranklist[$value['user_id']][$value['p_id']];
+                $ranklist[$value['user_id']][$value['p_id']] += $value['score'];
+                $ranklist[$value['user_id']]['total_score'] += $value['score'] - $old_pscore;
+            }
+            $i = 0;
+            foreach($ranklist As $key=>$value)
+            {
+                $ranklist1[$i] = $value;
+                $i++;
+            }
+            usort($ranklist1, 'sortByScore');
+            $final_result['ranklist'] = $ranklist1;
+            $final_result['p_mapping'] = $p_mapping;
+            $final_result['contest_name'] = $c_name;
+            return $final_result;
         }
     }
 ?>

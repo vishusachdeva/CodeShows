@@ -6,10 +6,10 @@
 
     function db_connect() {
 
-        $username = 'vishusachdeva';
-        $password = 'hIsIfff0MvpNobzq';
+        /*$username = 'vishusachdeva';
+        $password = 'hIsIfff0MvpNobzq';*/
 
-        /*$username = 'shivanjal_arora';
+        $username = 'shivanjal_arora';
         $password = 'hIsIfff0MvpNobzq';
 		/*$username = 'root';
 		$password = '';*/
@@ -47,8 +47,9 @@
         return $rows;
     }
 
-    function db_last_id($db, $table, $id) {
-        $sql = "SELECT * FROM $table WHERE $id=".mysqli_insert_id($db);
+    function db_last_id($db, $table, $id, $last_id = "") {
+        if (!isset($last_id) || empty($last_id)) $last_id=mysqli_insert_id($db);
+        $sql = "SELECT * FROM $table WHERE $id=".$last_id;
         $result = query($db, $sql);
         return $result[0];
     }

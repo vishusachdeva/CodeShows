@@ -39,7 +39,7 @@
                 exit();
             }
             $result = loadModel('user', 'login', $arguments);
-            if ($result === false) {
+            if ($result == false) {
                 print("Login Error");
                 redirect_sleep('main','home', 5);
                 exit();
@@ -72,7 +72,7 @@
                 exit();
             }
             $result = loadModel('user', 'register', $arguments);
-            if ($result === false) {
+            if ($result == false) {
                 print("Register Error");
                 redirect_sleep('main','home', 5);
                 exit();

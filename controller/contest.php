@@ -29,6 +29,12 @@
             loadView("contest_problems", array_merge($data, ['len' => $len, 'isfuture'=> 0]));
             loadView("footer");
         }
-
+        function fetch_ranklist($arguments)
+        {
+            $data = loadModel('contest','fetch_ranklist',$arguments);
+            loadView("header", array_merge($this->data, ['title' => 'RankList - CodeShows']));
+            loadView("ranklist",$data);
+            loadView("footer");
+        }
     }
 ?>

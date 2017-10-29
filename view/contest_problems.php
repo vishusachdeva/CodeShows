@@ -11,7 +11,9 @@
         exit();
     }
     $start_time = strtotime($start_time);
-
+    ?>
+    <br><a href = '<?php echo(generate_link('ranklist','?c_id='.$c_id)); ?>' >Rank List</a><br>
+    <?php
     if($start_time < $cur_time)
     {?>
         <tr><th>Problem Name</th><th>Problem Code</th><th>Accuracy</th></tr>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 28, 2017 at 08:19 AM
+-- Generation Time: Oct 29, 2017 at 09:16 AM
 -- Server version: 5.5.57-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.22
 
@@ -172,6 +172,29 @@ CREATE TABLE IF NOT EXISTS `language` (
   `language_name` varchar(10) NOT NULL,
   PRIMARY KEY (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `language`
+--
+
+INSERT INTO `language` (`language_id`, `language_name`) VALUES
+(2, 'C++'),
+(3, 'Java'),
+(5, 'Python 2.0'),
+(6, 'Perl'),
+(7, 'PHP'),
+(8, 'RUBY'),
+(9, 'C#'),
+(10, 'Mysql'),
+(11, 'Oracle'),
+(12, 'Haskell'),
+(13, 'Clojure'),
+(14, 'Bash'),
+(15, 'Scala'),
+(16, 'Erlang'),
+(17, 'CLISP'),
+(18, 'Lua'),
+(21, 'Go');
 
 -- --------------------------------------------------------
 

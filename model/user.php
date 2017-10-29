@@ -32,8 +32,6 @@
                 $msg = "Institute ID Already exist";
             } else if (count($result3)) {
                 $msg = "Email-ID Already exist";
-            } else if (count($result4)) {
-                $msg = "Email-ID Already exist";
             } else if (!isset($fname) || empty($fname) || !ctype_alpha($fname) || strlen($fname) > 20) {
                 $msg = "Invalid First Name";
             } else if (!isset($lname) || empty($lname) || !ctype_alpha($lname) || strlen($lname) > 20) {
@@ -68,13 +66,13 @@
             extract($data);
             $sql = "SELECT * FROM `user` WHERE `email`='$email'";
             $result = query($this->db, $sql);
-            if ($result === false) {
+            if ($result == false) {
                 db_close($this->db);
                 return $result;
             }
             $hash = $result[0]['password'];
             $res = password_verify($password, $hash);
-            if ($res !== false) $result = $result[0];
+            if ($res != false) $result = $result[0];
             else $result = false;
             if ($result && $result['type'] == 1) {
                 $sql = "SELECT * FROM `student` NATURAL JOIN `user` WHERE `user_id`=".$result['user_id'];
@@ -100,12 +98,13 @@
             '".password_hash($password, PASSWORD_BCRYPT)."', '$branch', '$dob', '$about_me', '$type')";
             $result = query($this->db, $sql);
             if ($result === true) {
+                $last_id = mysqli_insert_id($this->db);
                 $result = db_last_id($this->db, 'user', 'user_id');
                 if ($type == 1) {
                     $sql = "INSERT INTO `student` VALUES('".$result['user_id']."', '$sem', '$cg', '$brach')";
                     $result2 = query($this->db, $sql);
                     if ($result2 === true) {
-                        $result = array_merge($result, db_last_id($this->db, 'student', 'user_id'));
+                        $result = array_merge($result, db_last_id($this->db, 'student', 'user_id', $last_id));
                     } else {
                         $result = false;
                     }
@@ -113,7 +112,7 @@
                     $sql = "INSERT INTO `teacher` VALUES('".$result['user_id']."', 0)";
                     $result2 = query($this->db, $sql);
                     if ($result2 === true) {
-                        $result = array_merge($result, db_last_id($this->db, 'teacher', 'user_id'));
+                        $result = array_merge($result, db_last_id($this->db, 'teacher', 'user_id', $last_id));
                     } else {
                         $result = false;
                     }
