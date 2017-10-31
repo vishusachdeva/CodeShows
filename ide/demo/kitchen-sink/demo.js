@@ -65,6 +65,8 @@ require("../config").defineOptions(Editor.prototype, "editor", {
 });
 
 });
+var akash=730;
+var akash_width=1150;
 
 define("kitchen-sink/inline_editor",["require","exports","module","ace/line_widgets","ace/editor","ace/virtual_renderer","ace/lib/dom","ace/commands/default_commands"], function(require, exports, module) {
 "use strict";
@@ -106,6 +108,8 @@ require("ace/commands/default_commands").commands.push({
         }
 
         var h = rowCount*editor.renderer.layerConfig.lineHeight;
+        if(h>800)
+            {h=akash;}
         inlineEditor.container.style.height = h + "px";
 
         el.style.position = "absolute";
@@ -3413,13 +3417,23 @@ var Split = function(container, theme, splits) {
         var height = this.$container.clientHeight;
         var editor;
 
+console.log("2:     3429");
+        console.log(width);
+
         if (this.$orientation == this.BESIDE) {
             var editorWidth = width / this.$splits;
             for (var i = 0; i < this.$splits; i++) {
                 editor = this.$editors[i];
+
+console.log(editorWidth);
+
+
                 editor.container.style.width = editorWidth + "px";
                 editor.container.style.top = "0px";
+                editor.container.style.right =  (i+1) * editorWidth + "px";
                 editor.container.style.left = i * editorWidth + "px";
+                if(height>780)
+                    {height=akash;}
                 editor.container.style.height = height + "px";
                 editor.resize();
             }
@@ -11944,8 +11958,17 @@ var consoleHeight = 20;
 function onResize() {
     var left = env.split.$container.offsetLeft;
     var width = document.documentElement.clientWidth - left;
+
+   console.log("1:     11956");
+   console.log(width);
+   console.log(left);
+
     container.style.width = width + "px";
-    container.style.height = (document.documentElement.clientHeight - consoleHeight)-190 + "px";
+    var height=(document.documentElement.clientHeight - consoleHeight)-190;
+    if(height>800)
+    {height=akash;}
+
+    container.style.height = height + "px";
     env.split.resize();
 
     consoleEl.style.width = width + "px";
