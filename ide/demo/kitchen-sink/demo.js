@@ -108,9 +108,9 @@ require("ace/commands/default_commands").commands.push({
         }
 
         var h = rowCount*editor.renderer.layerConfig.lineHeight;
-        if(h>800)
-            {h=akash;}
-        inlineEditor.container.style.height = h + "px";
+        /*if(h>800)
+            {h=akash;}*/
+        inlineEditor.container.style.height = h*(0.8) + "px";
 
         el.style.position = "absolute";
         el.style.zIndex = "4";
@@ -1272,7 +1272,7 @@ Mode.prototype.supportsFile = function(filename) {
 };
 var supportedModes = {
 	C:			["c"],
-    Cpp:       ["cpp|c|cc|cxx|h|hh|hpp|ino"],
+    c_cpp:       ["cpp|c|cc|cxx|h|hh|hpp|ino"],
     Java:        ["java"],
     JavaScript:  ["js|jsm|jsx"],
     CSharp:      ["cs"],
@@ -1283,7 +1283,6 @@ var supportedModes = {
     Haskell:     ["hs"],
     Clojure:     ["clj|cljs"],
     Scala:       ["scala"],
-    SH:          ["sh|bash|^.bashrc"],
     MySQL:       ["mysql"],
     Erlang:      ["erl|hrl"],
     Lisp:        ["lisp"],
@@ -1292,12 +1291,13 @@ var supportedModes = {
 	plain_text: ["txt"],
    Lua:         ["lua"]
 };
-
+//   <= SH:          ["sh|bash|^.bashrc"],
+//SH:"Bash"=>
 var nameOverrides = {
     CSharp: "C#",
     golang: "Go",
-    Cpp: "CPP",
-	SH:"Bash"
+    c_cpp: "CPP",
+
 };
 var modesByName = {};
 for (var name in supportedModes) {
@@ -3416,25 +3416,16 @@ var Split = function(container, theme, splits) {
         var width = this.$container.clientWidth;
         var height = this.$container.clientHeight;
         var editor;
-
-console.log("2:     3429");
-        console.log(width);
-
         if (this.$orientation == this.BESIDE) {
             var editorWidth = width / this.$splits;
             for (var i = 0; i < this.$splits; i++) {
                 editor = this.$editors[i];
 
-console.log(editorWidth);
-
 
                 editor.container.style.width = editorWidth + "px";
                 editor.container.style.top = "0px";
-                editor.container.style.right =  (i+1) * editorWidth + "px";
-                editor.container.style.left = i * editorWidth + "px";
-                if(height>780)
-                    {height=akash;}
-                editor.container.style.height = height + "px";
+                editor.container.style.left = i * editorWidth + "px";               /*if(height>780){height=akash;}*/
+                editor.container.style.height = height+ "px";
                 editor.resize();
             }
         }
@@ -3508,7 +3499,7 @@ define("ace/keyboard/vim",["require","exports","module","ace/range","ace/lib/eve
       var f = format(p);
       d += f + "  ";
     }
-    console.log(d);
+//    console.log(d);
   }
   var Range = require("../range").Range;
   var EventEmitter = require("../lib/event_emitter").EventEmitter;
@@ -11954,21 +11945,13 @@ var keybindings = {
         "gotolineend":    "$"
     })
 };
-var consoleHeight = 20;
 function onResize() {
     var left = env.split.$container.offsetLeft;
+
     var width = document.documentElement.clientWidth - left;
 
-   console.log("1:     11956");
-   console.log(width);
-   console.log(left);
+    container.style.width = width*(0.9) + "px";
 
-    container.style.width = width + "px";
-    var height=(document.documentElement.clientHeight - consoleHeight)-190;
-    if(height>800)
-    {height=akash;}
-
-    container.style.height = height + "px";
     env.split.resize();
 
     consoleEl.style.width = width + "px";

@@ -96,7 +96,7 @@
   </table>
   </div>
   <br>
-  <div id="editor-container" style="margin:auto;width:70%;height:0.001%;"></div>
+  <div id="editor-container" style="margin:auto;;height:100%;"></div>
 <!-------=================================================================================-------->
 
   <script src="<?php echo(IDE_PATH); ?>src/ace.js" data-ace-base="src" type="text/javascript" charset="utf-8"></script>
