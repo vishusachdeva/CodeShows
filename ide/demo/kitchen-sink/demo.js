@@ -1067,7 +1067,7 @@ function def(o, key, get) {
             }
         });
     } catch(e) {
-        console.error(e);
+        console.error("Refresh page\n error in loadinig");
     }
 }
 def(window, "ace", function(){ warn(); return window.env.editor });
@@ -1080,7 +1080,9 @@ def(window, "devUtil", function(){ warn(); return exports });
 exports.showTextArea = function(argument) {
     dom.importCssString("\
       .ace_text-input {\
-        position: absolute;\
+        position: relative;\
+        display:none; \
+        visibility:hidden;\
         z-index: 10!important;\
         width: 4em!important;\
         height: 1em;\
@@ -1270,7 +1272,7 @@ var supportedModes = {
     Java:        ["java"],
     JavaScript:  ["js|jsm|jsx"],
     CSharp:      ["cs"],
-    PHP:         ["php|phtml|shtml|php3|php4|php5|phps|phpt|aw|ctp|module"],
+    PHP:         ["ppp|phtml|shtml|php3|php4|php5|phps|phpt|aw|ctp|module"],
     Python:      ["py"],
     Ruby:        ["rb|ru|gemspec|rake|^Guardfile|^Rakefile|^Gemfile"],
     Perl:        ["pl|pm"],
@@ -2163,7 +2165,7 @@ try {
         urlOptions[decodeURIComponent(parts[0])] = decodeURIComponent(parts[1]);
     });
 } catch(e) {
-    console.error(e);
+    console.error("Refresh page\n error in loadinig");
 }
 exports.createEditor = function(el) {
     return new Editor(new Renderer(el));
@@ -2479,7 +2481,7 @@ var ElasticTabstopsLite = function(editor) {
         for (var c = 0, l = columnInfo.length; c < l; c++) {
             var column = columnInfo[c];
             if (!column.push) {
-                console.error(column);
+               console.error("Refresh page\n error in loadinig");
                 continue;
             }
             column.push(NaN);
@@ -11779,8 +11781,9 @@ window.env = env;
 
 var consoleEl = dom.createElement("div");
 container.parentNode.appendChild(consoleEl);
-consoleEl.style.cssText = "position:fixed; bottom:20%; right:20%;\
-border:1px solid #baf; z-index:100";
+consoleEl.style.cssText = "position:relative;display:none; visibility:hidden;\
+ bottom:20%; right:20%;\
+border:0px solid inherit; z-index:0";
 
 var cmdLine = new layout.singleLineEditor(consoleEl);
 cmdLine.editor = env.editor;
@@ -11942,15 +11945,15 @@ function onResize() {
     var left = env.split.$container.offsetLeft;
     var width = document.documentElement.clientWidth - left;
     container.style.width = width + "px";
-    container.style.height = document.documentElement.clientHeight - consoleHeight + "px";
+    container.style.height = (document.documentElement.clientHeight - consoleHeight)-190 + "px";
     env.split.resize();
 
     consoleEl.style.width = width + "px";
     cmdLine.resize();
 }
-/*
+
 window.onresize = onResize;
-onResize();*/
+onResize();
 var docEl = document.getElementById("doc");
 var modeEl = document.getElementById("mode");
 var themeEl = document.getElementById("theme");
