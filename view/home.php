@@ -61,8 +61,6 @@
 	}
 </script>
 
-<link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
-<script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Monoton" rel="stylesheet">
 <script>
 	AOS.init();

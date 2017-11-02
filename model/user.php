@@ -122,23 +122,56 @@
             return $result;
         }
 
-        function forgot_password($data = [])
-        {
-            extract($data);
-            $sql = "SELECT * FROM user WHERE `username`= '$username' AND `email` = '$email' ";
+        function forgot_password($data = []) {
+            $sql = "SELECT * FROM `user` WHERE `email`='".$data['f_email']."'";
             $result = query($this->db,$sql);
-            if(empty($result))
-            {
+            if(empty($result)) {
                 db_close($this->db);
                 return false;
             }
-            $password = bin2hex(openssl_random_pseudo_bytes(10));
-            $sql = "UPDATE user SET `password` = '".password_hash($password, PASSWORD_BCRYPT)."' WHERE username = '$username'";
-            $result = query($this->db,$sql);
             db_close($this->db);
-            if($result === false)
+            return $result[0];
+        }
+
+        function forgot_verify($data = []) {
+            $sql = "SELECT * FROM `user` WHERE username='".$data['username']."' AND password='".$data['forgot_token']."'";
+            $result = query($this->db,$sql);
+            if(empty($result)) {
+                db_close($this->db);
                 return false;
-            return $password;
+            }
+            db_close($this->db);
+            return true;
+        }
+
+        function forgot_change($data = []) {
+            if (!isset($data) || empty($data)
+            || !isset($data['f_password']) || empty($data['f_password'])
+            || !isset($data['f_confirm_password']) || empty($data['f_confirm_password'])
+            || $data['f_password'] != $data['f_confirm_password'])
+                return false;
+            $sql = "UPDATE `user` SET `password`='".password_hash($data['f_password'], PASSWORD_BCRYPT)."' WHERE username='".$data['f_username']."'";
+            $result = query($this->db,$sql);
+            if(empty($result)) {
+                db_close($this->db);
+                return false;
+            }
+            $sql = "SELECT * FROM `user` WHERE username='".$data['f_username']."'";
+            $result = query($this->db,$sql);
+            if(empty($result)) {
+                db_close($this->db);
+                return false;
+            }
+            $result = $result[0];
+            if ($result['type'] == 1) {
+                $sql = "SELECT * FROM `student` NATURAL JOIN `user` WHERE `user_id`=".$result['user_id'];
+                $result = query($this->db, $sql);
+            } else if ($result[0]['type'] == 2) {
+                $sql = "SELECT * FROM `teacher` NATURAL JOIN `user` WHERE `user_id`=".$result['user_id'];
+                $result = query($this->db, $sql);
+            }
+            db_close($this->db);
+            return $result[0];
         }
 
         function subscribe($arguments) {

@@ -34,10 +34,10 @@
 </style>
 <script src="<?php echo JS_PATH.'compiler.js'; ?>" ></script>
 <div class="w3-bar w3-black w3-border-top w3-border-bottom">
-    <button class="w3-bar-item w3-button w3-hover-cyan tablink w3-ripple w3-border-right w3-red" onclick="submit_mode_switch(event, 1)" style="width:50%"><b>Write Code</b></button>
+    <button class="w3-bar-item w3-button w3-hover-cyan tablink w3-ripple w3-border-right" onclick="submit_mode_switch(event, 1)" style="width:50%"><b>Write Code</b></button>
     <button class="w3-bar-item w3-button w3-hover-cyan tablink w3-ripple" onclick="submit_mode_switch(event, 2)" style="width:50%"><b>Submit File</b></button>
 </div>
-<div id="editor_block" class="container">
+<div id="editor_block" class="container" style="display:none;">
     <form>
 
 <!--=================================================================================-->

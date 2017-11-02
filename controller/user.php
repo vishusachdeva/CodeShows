@@ -3,17 +3,23 @@
     class user {
 
         private $data = array();
-        private $auth = 0;
+        private $auth = false;
+        private $f_auth = false;
 
         function __construct() {
             session_start();
-            if(isset($_SESSION) && !empty($_SESSION)) {
+            if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                 $this->data = $_SESSION;
-                $this->auth = 1;
+                $this->auth = true;
+            }
+            else if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['f_verify']) && $_SESSION['f_verify']) {
+                $this->f_auth = true;
             }
             else {
 				session_destroy();
-				$this->auth = 0;
+				$this->auth = false;
+				$this->f_auth = false;
+				$this->data = array();
 			}
         }
 
@@ -41,19 +47,19 @@
             $result = loadModel('user', 'login', $arguments);
             if ($result == false) {
                 print("Login Error");
-                redirect_sleep('main','home', 5);
+                redirect_sleep('main','home', 3);
                 exit();
             }
             print("Login Success");
             session_start();
             $_SESSION = $result;
-            redirect_sleep('main','home', 5);
+            redirect_sleep('main','home', 3);
         }
 
         function signup($arguments) {
             if ($this->auth) {
                 print('You are already Logged In');
-                redirect_sleep('main', 'home', 5);
+                redirect_sleep('main', 'home', 3);
                 exit();
             }
             loadView('header', array_merge($this->data, ['title' => 'SignUp - CodeShows']));
@@ -82,81 +88,127 @@
             $_SESSION = $result;
             redirect_sleep('main', 'home', 5);
         }
-        function load_forgot_password_page()
-        {
-            loadView('header',['title' => 'Forgot Password - CodeShows']);
-            loadView('forgot_password');
+
+        function forgot_password($arguments) {
+            if ($this->auth) {
+                print('Invalid url<br/>Error 404');
+                redirect_sleep('main', 'home', 3);
+                exit();
+            }
+            if(!isset($_POST)|| empty($_POST) || !isset($_POST['f_email']) || empty($_POST['f_email'])) {
+                print('Invalid attempt');
+                redirect_sleep('main','home', 3);
+                exit();
+            }
+            $result = loadModel('user','forgot_password', $arguments);
+            if($result === false) {
+                echo("Invalid Email-ID");
+                redirect_sleep('main','home', 3);
+                exit();
+            }
+
+            // email verification
+            $mail = setMailer();
+            ob_start();
+            try {
+                $mail->SMTPDebug = 2;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com;';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'codeshows123@gmail.com';
+                $mail->Password = 'codeshows@123';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                $mail->setFrom('codeshows123@gmail.com', 'CodeShows MNIT');
+                $mail->addAddress($result['email'], $result['fname']." ".$result['lname']);
+                $mail->isHTML(true);
+                $mail->Subject = 'CodeShows - Password Reset Instructions '.$result['username'];
+                $url = 'http';
+                if ($_SERVER["HTTPS"] == "on") $url .= "s";
+                $url .= "://".$_SERVER["SERVER_NAME"];
+                if ($_SERVER["SERVER_PORT"] != "80") $url .= ":".$_SERVER["SERVER_PORT"];
+                $url .= "/user/?username=".$result['username']."&forgot_token=".$result['password'];
+                $mail->Body    = 'Hi '.$result['username'].',<br/>As you have requested to reset password,<br/>Please open the following url in your browser: <a href="'.$url.'">Reset Password</a>';
+                $mail->AltBody = 'Hi '.$result['username'].',<br/>As you have requested to reset password,<br/>Please open the following url in your browser: <a href="'.$url.'">Reset Password</a>';
+                $mail->send();
+                ob_end_clean();
+                echo("<script>alert('Verification instructions has been mailed to you');</script>");
+                echo('mail sent successfully');
+                echo('<br/>redirecting to home...');
+            } catch (Exception $e) {
+                ob_end_clean();
+                echo "<script>alert('Message could not be sent.');</script>";
+                echo 'Mailer Error: ' . $mail->ErrorInfo;
+                echo('<br/>redirecting to home...');
+            }
+            redirect_sleep('main', 'home', 3);
+            exit();
+        }
+
+        function forgot_verify($arguments) {
+            if ($this->auth) {
+                print('Invalid url<br/>Error 404');
+                redirect_sleep('main', 'home', 3);
+                exit();
+            }
+            if(!isset($_GET)|| empty($_GET) || !isset($_GET['username']) || empty($_GET['username']) || !isset($_GET['forgot_token']) || empty($_GET['forgot_token'])) {
+                print('Invalid attempt');
+                redirect_sleep('main','home', 3);
+                exit();
+            }
+            $result = loadModel('user', 'forgot_verify', $arguments);
+            if ($result == false) {
+                print('Please check url<br/>Error 404');
+                redirect_sleep('user', 'main', 3);
+                exit();
+            }
+            session_start();
+            $_SESSION['f_verify'] = true;
+            $_SESSION['f_username'] = $_GET['username'];
+            loadView('header', ['title' => 'CodeShows - Change Password']);
+            loadView('change_password');
             loadView('footer');
         }
-        function forgot_password($arguments)
-        {
-            if(!isset($_POST)|| empty($_POST))
-            {
+
+        function forgot_change($arguments) {
+            if ($this->auth) {
+                print('Invalid url<br/>Error 404');
+                redirect_sleep('main', 'home', 3);
+                exit();
+            }
+            if(!isset($_POST) || empty($_POST) || !isset($_POST['f_password']) || empty($_POST['f_password']) || !isset($_POST['f_confirm_password']) || empty($_POST['f_confirm_password'])) {
+                print('Invalid attempt');
                 redirect_sleep('main','home', 3);
                 exit();
             }
-            extract($_POST);
-            $result = loadModel('user','forgot_password',$_POST);
-            if($result === false)
-            {
-                echo("Invalid Username or Password");
+            if(!$this->f_auth) {
+                print('Invalid attempt');
                 redirect_sleep('main','home', 3);
                 exit();
             }
-            //require 'PHPMailerAutoload.php';
-             require("libphp-phpmailer/class.phpmailer.php");
-
-$mail = new PHPMailer;
-
-$mail->SMTPDebug = 3;                               // Enable verbose debug output
-
-$mail->isSMTP();                                    // Set mailer to use SMTP
-$mail->Host = 'smtp.gmail.com';                     // Specify main and backup SMTP servers
-$mail->SMTPAuth = true;                             // Enable SMTP authentication
-$mail->Username = 'allduc.vitale@gmail.com';        // SMTP username
-$mail->Password = 'audrey777';                      // SMTP password
-$mail->SMTPSecure = 'tls';                          // Enable TLS encryption, `ssl` also accepted
-$mail->Port = 587;                                  // TCP port to connect to
-
-$mail->setFrom('allduc.vitale@gmail.com');
-$mail->addAddress('allduc.vitale@gmail.com');       // Add a recipient (it's OK to use your email for the test)
-
-$mail->isHTML(true);                                // Set email format to HTML
-
-$mail->Subject = 'Here is the subject';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
-if(!$mail->send()) {
-    echo 'Message could not be sent.'."\n";
-    echo 'Mailer Error: ' . $mail->ErrorInfo;
-} else {
-    echo 'Message has been sent'."\n";
-}
-            /*
-            $headers = 'From: shivanjal9@gmail.com' . " " .
-            'Reply-To: 2015UCP1229@mnit.ac.in' . " " .
-            'X-Mailer: PHP/' . phpversion();
-            $msg = "Your new password is :'$result'";
-            $result = mail($email,"NEW PASSWORD - CodeShows",$msg,$headers);
-            if($result = false)
-            {
-                echo("Please try again later.");
-                redirect_sleep('main','home',3);
+            $result = loadModel('user', 'forgot_change', array_merge($arguments, ['f_username' => $_SESSION['f_username']]));
+            session_destroy();
+            if ($result == false) {
+                print('Some Error Occured<br/>Please Try Later');
+                redirect_sleep('user', 'main', 3);
                 exit();
             }
-            echo("Password changed successfully.");
-            */
+            print('Password updated successfully');
+            session_start();
+            $_SESSION = $result;
+            redirect_sleep('main', 'home', 3);
+            exit();
         }
 
         function subscribe($arguments) {
             $result = loadModel('user', 'subscribe', $arguments);
             if ($result === false) {
-                print('Some error occured');
+                print('Some Error Occured<br/>Please Try Again');
             } else {
                 print('Thanks, you will get our latest updates');
             }
             redirect_sleep('main', 'home', 3);
+            exit();
         }
 
     }

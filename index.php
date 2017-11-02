@@ -2,7 +2,6 @@
 
     include_once('lib/config.inc.php');
     include_once('lib/db_connect.php');
-    date_default_timezone_set('Asia/Kolkata');
 
     $controller = 'main';
     $function = 'home';

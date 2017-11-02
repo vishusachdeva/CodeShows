@@ -23,6 +23,7 @@
 		<link href="<?php echo CSS_PATH.'style.css'; ?>" rel="stylesheet" type="text/css" media="all" />
 		<link href="<?php echo CSS_PATH.'font-awesome.css'; ?>" rel="stylesheet">
 		<link href="<?php echo CSS_PATH.'w3.css'; ?>" rel="stylesheet">
+		<link href="<?php echo(CSS_PATH); ?>aos.css" rel="stylesheet">
 		<link href="<?php echo CSS_PATH.'style2.css'; ?>" rel="stylesheet">
 
 		<!-- //for bootstrap working -->
@@ -30,6 +31,7 @@
 		<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
         <script src="<?php echo JS_PATH.'validation.js'; ?>" ></script>
         <script src="<?php echo JS_PATH.'tab_switch.js'; ?>" ></script>
+		<script src="<?php echo(JS_PATH); ?>aos.js"></script>
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
@@ -71,13 +73,30 @@
 										<li><a href="<?php echo(generate_link('main', 'contact')); ?>"><span data-hover="Contact">Contact</span></a></li>
 									</ul>
 								</nav>
+
+								<script>
+									function change(type) {
+										if (type == 1) {
+											document.getElementById('login_section').style.display='none';
+											document.getElementById('forgot_section').style.display='block';
+										} else if (type == 2) {
+											document.getElementById('forgot_section').style.display='none';
+											document.getElementById('login_section').style.display='block';
+										}
+									}
+								</script>
+
 								<div class="w3_agile_phone">
 									<?php
 										if(!isset($user_id) and empty($user_id)) { ?>
-											<span class="w3-button w3-hover-red w3-text-white w3-round w3-small w3-ripple" style="margin-top:-1%" onclick="document.getElementById('login_form').style.display='block'" id='login_button'><b>LOGIN</b></span>
+											<span class="w3-button w3-hover-red w3-text-white w3-round w3-small w3-ripple" style="margin-top:-1%" onclick="change(2);document.getElementById('login_form').style.display='block';" id='login_button'><b>LOGIN</b></span>
 											<span class="w3-button w3-hover-red w3-text-white w3-round w3-small w3-ripple" style="margin-top:-1%" onclick="location.href='<?php echo(generate_link('user', 'signup')); ?>'"><b>SIGNUP</b></span>
 											<div class="w3-modal w3-animate-opacity" id='login_form'>
 												<div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:600px">
+
+
+
+													<div id="login_section">
 														<div class="w3-center"><br>
 															<span onclick="document.getElementById('login_form').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
 															<h1><b>WELCOME ABROAD</b></h1>
@@ -94,8 +113,30 @@
 														</form>
 														<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
 															<button onclick="document.getElementById('login_form').style.display='none'" type="button" class="w3-left w3-button w3-red">Cancel</button>
-															<span class="w3-right w3-padding w3-hide-small"><a href="<?php echo(generate_link('user','load_forgot_password_page'))?>">Forgot password?</a></span>
+															<span class="w3-right w3-padding w3-hide-small" style="cursor:pointer" onclick="change(1);">Forgot password?</span>
 														</div>
+													</div>
+
+
+													<div id="forgot_section" style="display:none;">
+														<div class="w3-center"><br>
+															<span onclick="document.getElementById('login_form').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+															<h1><b>Forgot Password</b></h1>
+														</div>
+														<form class="w3-container" method='post' action='<?php echo(generate_link('user', 'forgot_password')); ?>'>
+															<div class="w3-section">
+															  <label><b>Email ID</b></label>
+															  <input class="w3-input w3-border w3-margin-bottom" type="email" placeholder="Enter Email" name="f_email" required>
+															  <button class="w3-btn w3-block w3-green w3-section w3-padding w3-hover-red w3-ripple" type="f_submit"><i class="fa fa-arrow-right"></i> Send Password Reset Instructions</button>
+															</div>
+														</form>
+														<div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+															<button onclick="change(2);" type="button" class="w3-left w3-button w3-red">Back</button>
+														</div>
+													</div>
+
+
+
 												</div>
 											</div>
 											<script>

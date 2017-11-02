@@ -1,5 +1,4 @@
 <?php
-
     /*define('ROOT', $_SERVER['DOCUMENT_ROOT'].'/');*/
     define('ROOT', '/home/ubuntu/workspace/codeshows/');
     define('SITE_ROOT', '/');
@@ -16,10 +15,11 @@
     define('COMPILER_PATH', ROOT.'api/compiler/');
     define('IDE_PATH', SITE_ROOT.'ide/');
 
+    date_default_timezone_set('Asia/Kolkata');
+
     function generate_link($controller, $function) {
         return '/'.$controller.'/'.$function;
     }
-
     function loadView($view, $data = []) {
         extract($data, EXTR_PREFIX_INVALID, "num");
         $view_path = VIEW_PATH.$view.'.php';
@@ -31,7 +31,6 @@
             redirect_sleep('main','home',5);
         }
     }
-
     function loadModel($model, $function, $data =[]) {
         $model_class = $model.'_model';
         $model_path = MODEL_PATH.$model.'.php';
