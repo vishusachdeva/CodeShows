@@ -453,8 +453,8 @@ func term(ch chan float64, k float64) {
         <select id="doc" size="1" class="w3-border w3-select" onchange="document.getElementById(curr_lang).value=editor.getValue();editor.setValue(document.getElementById(this.value).value);editor.getSession().setMode('ace/mode/'+this.value);curr_lang=this.value;">
         <?php
             $lang = ['c', 'c_cpp', 'java', 'csharp', 'php', 'ruby', 'python', 'perl', 'haskell', 'clojure', 'scala', 'sql', 'erlang', 'lisp', 'lua', 'golang'];
-            foreach($lang as $val)
-              echo("<option value='".$val."'>".$val."</option>");
+            foreach($languages AS $key=>$value)
+              echo("<option value='".$value['language_id']."'>".$value['language_name']."</option>");
           ?>
         </select>
       </td>
@@ -546,8 +546,8 @@ int main() {
         <textarea name="input" id="input" class="w3-input w3-border"></textarea>
         <label for = 'language_editor' class="w3-margin-top">Select Language</label>
         <select id = 'language_editor' name='language_editor' class="w3-select w3-border">
-            <?php foreach($map as $key => $value) { ?>
-                <option value = '<?php echo($value);?>'><?php echo($key); ?></option>
+            <?php foreach($languages as $key => $value) { ?>
+                <option value = '<?php echo($value['language_id']);?>'><?php echo($value['language_name']); ?></option>
             <?php } ?>
         </select>
         <button class="w3-button w3-ripple w3-red w3-hover-cyan w3-margin-top" type="button" id = "run" onclick="transfer();run_code('<?php echo(API_PATH.'run.php'); ?>',

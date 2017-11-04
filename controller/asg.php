@@ -53,7 +53,8 @@
             }
             //loadView("header", array_merge($this->data, ['title' => "Assignment Builder - CodeShows"]));
             $data = loadModel('asg', 'fetch', ['user_id' => $this->data['user_id']]);
-            loadView("show_all_asg", array_merge($data, ['len' => count($data)]));
+            $batch = loadModel('asg', 'fetch_batch_data', ['user_id' => $this->data['user_id']]);
+            loadView("show_all_asg", array_merge($data, ['len' => count($data),'batch'=>$batch]));
             //loadView("footer");
         }
 

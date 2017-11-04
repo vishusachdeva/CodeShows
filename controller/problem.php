@@ -25,8 +25,8 @@
             $data = loadModel('problem', 'fetch_problem', $arguments);
             loadView("header", array_merge($this->data, ['title' => $data['p_name']." - CodeShows"]));
             loadView("p_statement", $data);
-            loadView('editor', ['auth' => $this->auth , 'p_id' => $arguments['p_id'],'time_limit'=>$data['time_limit']]);
-            loadView('p_submit', ['auth' => $this->auth , 'p_id' => $arguments['p_id'] ,'time_limit'=>$data['time_limit']]);
+            loadView('editor', ['auth' => $this->auth ,'languages'=>$data['languages_allowed'],'p_id' => $arguments['p_id'],'time_limit'=>$data['time_limit']]);
+            loadView('p_submit', ['auth' => $this->auth ,'languages'=>$data['languages_allowed'], 'p_id' => $arguments['p_id'] ,'time_limit'=>$data['time_limit']]);
             loadView('result');
             loadView("footer");
         }

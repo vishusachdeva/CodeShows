@@ -90,8 +90,23 @@
 		<p><label for='dob'>Date of Birth</label>
 		<input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='date' name='dob' onchange="validate('dob')" required></p><br/>
 
+		<div id="er_batch" style="display:none"></div>
 		<p><label for='batch'>Batch</label>
-		<input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" type='text' name='batch' placeholder='Batch' onchange="validate('batch')" required></p><br/>
+		<select class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" id="batch" name = 'batch'  required>
+			<option value="0" disabled selected>Select Batch</option>
+			<?php
+				$i = 0;
+				$x = "num_$i";
+				while($i<$len)
+				{
+			?>
+			<option value = <?php echo('"'.${$x}['batch_id'].'"'); ?> > <?php echo(${$x}['batch_name']); ?> </option>
+			<?php
+					$i++;
+					$x = "num_$i";
+				}
+			?>
+		</select></p><br/>
 
 		<p><label for='about_me'>Info</label>
 		<textarea class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" name='about_me' placeholder='About Me' rows = "10" cols = "30" ></textarea></p>

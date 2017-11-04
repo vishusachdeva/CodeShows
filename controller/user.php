@@ -62,8 +62,10 @@
                 redirect_sleep('main', 'home', 3);
                 exit();
             }
+            $data = loadModel('user','fetch_batch_data');
+            $len = count($data);
             loadView('header', array_merge($this->data, ['title' => 'SignUp - CodeShows']));
-            loadView('signup');
+            loadView('signup',array_merge($data,['len'=>$len]));
             loadView('footer');
         }
 

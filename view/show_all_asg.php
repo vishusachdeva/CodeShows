@@ -55,7 +55,17 @@
                             <label for="end_time">End Time</label>
                             <input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" name="end_time" type="datetime-local" required>
                             <label for="batch">Batch</label>
-                            <input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" placeholder="Batch" name="batch" type="text" required>
+                            <select class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" id="batch" name = 'batch'  required>
+                			<option value="0" disabled selected>Select Batch</option>
+                    			<?php
+                    				foreach($batch As $key =>$value)
+                    				{
+                    			?>
+                    			<option value = <?php echo('"'.$value['batch_id'].'"'); ?> > <?php echo($value['batch_name']); ?> </option>
+                    			<?php
+                    				}
+                    			?>
+                    		</select>
                             <input type="submit" value="Add Assignment" class="w3-button w3-red w3-hover-cyan w3-ripple w3-round-large w3-section w3-xlarge" style="width:100%">
                         </form>
                     </div>

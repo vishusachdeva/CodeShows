@@ -33,6 +33,12 @@
             ".$data['user_id'].", ".$data['batch'].", '".date("Y-m-d H:i:s")."')";
             return query($this->db, $sql);
         }
-
+        function fetch_batch_data($data)
+        {
+            $sql = "SELECT * FROM `batch` WHERE `batch_id` IN (SELECT `batch_id` FROM `teacher_batch` WHERE `user_id` = ".$data['user_id'].")";
+            $result = query($this->db,$sql);
+            db_close($this->db);
+            return $result;
+        }
     }
 ?>

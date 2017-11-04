@@ -219,7 +219,19 @@ function validate(str) {
         }
         if (str == 'branch') return;
     }
-
+    if (str == 'batch' || str == 'all') {
+        if (batch.value == "0") {
+            er_batch.style.display = 'initial';
+            er_batch.innerHTML = 'Select Batch<br/>';
+            batch.style.borderColor = 'red';
+            error = false;
+        }
+        else {
+            batch.removeAttribute('style');
+            er_batch.style.display = 'none';
+        }
+        if (str == 'batch') return;
+    }
     if (str == 'all') return error;
 }
 

@@ -182,6 +182,12 @@
                 return false;
             return $result;
         }
-
+        function fetch_batch_data()
+        {
+            $sql = "SELECT * FROM batch";
+            $result = query($this->db,$sql);
+            db_close($this->db);
+            return $result;
+        }
     }
 ?>

@@ -24,9 +24,14 @@
     <form>
         <label for = 'language_file' class="w3-margin-top">Select Language</label>
         <select id = 'language_file' name = 'language_file' class="w3-select w3-border">
-            <?php foreach($map as $key => $value) { ?>
-                <option value = '<?php echo($value);?>'><?php echo($key); ?></option>
-            <?php } ?>
+            <?php
+                foreach($languages As $key => $value)
+                {
+            ?>
+                <option value = '<?php echo($value['language_id']);?>'><?php echo($value['language_name']); ?></option>
+            <?php
+                }
+            ?>
         </select>
         <input type= 'file' id = 'solution' class="w3-input w3-border w3-margin-top">
         <?php if ($auth) { ?>
