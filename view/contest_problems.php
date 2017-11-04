@@ -7,10 +7,11 @@
     $cur_time = date('Y-m-d H:i:s', $time_now);
     $cur_time = strtotime($cur_time);
     if(!isset($num_0['start_time']) || empty($num_0['start_time'])) {
-        echo("Contest doesn't contain any problems.");
-        redirect_sleep('main','home',3);
+        loadView('wait',['msg'=>'Problems coming soon','heading'=>$contest_name]);
         exit();
     }
+    else
+    {
     $start_time = strtotime($start_time);
     ?>
     <div class="clearfix">
@@ -36,8 +37,11 @@
     }
     else
     {
-        $date=date_create($num_0['start_time']);
-        echo("Problems will be available after " .date_format($date,"d M y g:i A")." IST");
+        loadView('wait',['msg'=>'Problems coming soon','heading'=>$contest_name]);
+        exit();
+        //$date=date_create($num_0['start_time']);
+        //echo("Problems will be available after " .date_format($date,"d M y g:i A")." IST");
+    }
     }
 ?>
 </table>

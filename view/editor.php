@@ -41,7 +41,6 @@
     <form>
 
 <!--=================================================================================-->
-<link rel="stylesheet" href="<?php echo(IDE_PATH); ?>demo/kitchen-sink/styles.css" type="text/css" media="screen" charset="utf-8">
 <style>
     #editor {
         position: relative;
@@ -515,6 +514,8 @@ int main() {
 <script src="src/ace.js" type="text/javascript" charset="utf-8"></script>
 <script src="src/ext-language_tools.js"></script>
 <script src="src/ext-spellcheck.js"></script>
+<script src="src/keybinding-vim.js"></script>
+<script src="src/keybinding-emacs.js"></script>
 <script>
     var editor = ace.edit("editor");
     editor.setOptions({

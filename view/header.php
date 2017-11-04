@@ -152,7 +152,6 @@
 												<span class="w3-button w3-hover-black w3-black w3-text-white w3-small w3-ripple" style="margin-top:-7px"><b><i class="glyphicon glyphicon-user"></i> <?php echo($username); ?> <b class="caret"></b></b></span>
 												<div class="w3-dropdown-content w3-bar-block w3-border">
 													<a href="#" class="w3-bar-item w3-button w3-hover-blue">Profile</a>
-													<a href="#" class="w3-bar-item w3-button w3-hover-blue">Account</a>
 													<a href="<?php echo(generate_link('user', 'logout')); ?>" class="w3-bar-item w3-button w3-hover-blue fa fa-sign-out"> LogOut</a>
 												</div>
 										<?php }

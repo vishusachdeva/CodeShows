@@ -27,7 +27,7 @@
 						<div class="clearfix"> </div>
 					</div>
 					<div class="wthree_copy_right">
-						<p>&copy; Codeshows</a></p>
+						<p>&copy; Codeshows -- Beta Version</a></p>
 					</div>
 				</div>
 			</div>

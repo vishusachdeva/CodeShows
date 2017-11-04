@@ -70,7 +70,7 @@
             </address>
             <address>
                 <strong>Full Name</strong><br>
-                <a href="mailto:#">first.last@example.com</a>
+                <a href="mailto:#">codeshows123@gmail.com</a>
             </address>
             </form>
         </div>
