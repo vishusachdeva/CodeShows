@@ -31,27 +31,19 @@ font-size: 24px;
     height: 100%;
     width: 100%;
 }
-@media screen and (max-width: 480px) {
 
 		.circular-image{
-				height:50vw;
-				width:50vw;
-				background-size: contain;
-			}
-}
-
-.circular-image{
-	height:20vw;
-	width:20vw;
-	margin:0 auto;
-	border-radius: 50%;
-	position:relative;
-	background: #cecece url("../images/overlay.jpg");
-	background-attachment: fixed;
-	background-position: top center;
-	background-repeat: no-repeat;
-	background-size: contain;
-}
+			height:20vw;
+			width:20vw;
+			margin:0 auto;
+			border-radius: 50%;
+			position:relative;
+			background: #cecece url("../images/overlay.jpg");
+			background-attachment: fixed;
+			background-position: top center;
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
 
 
 		.left-part{
@@ -63,6 +55,15 @@ font-size: 24px;
 			height:20vw;
 			width:37vw;
 		}
+
+@media screen and (max-width: 480px) {
+
+		.circular-image{
+				height:50vw;
+				width:50vw;
+				background-size: contain;
+			}
+}
 
 @media screen and (max-width: 1280px) {
 

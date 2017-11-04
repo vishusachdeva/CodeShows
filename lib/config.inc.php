@@ -14,12 +14,14 @@
     define('API_PATH', SITE_ROOT.'api/');
     define('COMPILER_PATH', ROOT.'api/compiler/');
     define('IDE_PATH', SITE_ROOT.'ide/');
+    define('VENDOR_PATH', ROOT.'vendor/');
 
     date_default_timezone_set('Asia/Kolkata');
 
     function generate_link($controller, $function) {
         return '/'.$controller.'/'.$function;
     }
+
     function loadView($view, $data = []) {
         extract($data, EXTR_PREFIX_INVALID, "num");
         $view_path = VIEW_PATH.$view.'.php';
@@ -31,6 +33,7 @@
             redirect_sleep('main','home',5);
         }
     }
+
     function loadModel($model, $function, $data =[]) {
         $model_class = $model.'_model';
         $model_path = MODEL_PATH.$model.'.php';
@@ -49,23 +52,32 @@
             redirect_sleep('main','home',5);
         }
     }
-    function redirect_sleep($controller, $function,$time)
-    {
+
+    function redirect_sleep($controller, $function,$time) {
         header("refresh:$time;url=".generate_link($controller,$function) );
     }
+
     function redirect($controller, $function) {
         header('Location: '.generate_link($controller,$function));
     }
-    function file_open($file_path,$error_msg){
-            if(file_exists($file_path))
-            {
+
+    function file_open($file_path,$error_msg) {
+            if(file_exists($file_path)) {
                 return file_get_contents($file_path);
             }
-            else
-            {
+            else {
                 print($error_msg);
                 redirect_sleep('main','home',3);
                 exit();
             }
     }
+
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
+    require VENDOR_PATH.'autoload.php';
+
+    function setMailer() {
+        return new PHPMailer(true);
+    }
+
 ?>

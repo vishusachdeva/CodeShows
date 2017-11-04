@@ -6,7 +6,7 @@
 			?>
 			<div class="banner-slide w3-animate-right" onclick="location.href='<?php echo(generate_link('contest', '?c_id='.${$x}['c_id'])); ?>'">
 				<img src="<?php echo(IMAGE_PATH.${$x}['image']); ?>" style="width:100%;height:100%">
-				<div class="w3-display-bottomleft w3-padding-16 w3-container w3-black w3-xxlarge"><?php echo(${$x}['contest_name']); ?></div>
+				<div class="w3-display-bottomleft w3-padding-16 w3-container w3-black" style="max-width:30%;"><?php echo(${$x}['contest_name']); ?></div>
 			</div>
 			<?php
 			$i++;
