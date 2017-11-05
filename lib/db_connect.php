@@ -6,7 +6,7 @@
 
     function db_connect() {
 
-        $username = 'vishusachdeva';
+        $username = 'lav_kush';
         $password = 'hIsIfff0MvpNobzq';
         /*
         $username = 'shivanjal_arora';

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2017 at 06:54 PM
+-- Generation Time: Nov 05, 2017 at 05:59 PM
 -- Server version: 5.5.57-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.22
 
@@ -65,6 +65,22 @@ CREATE TABLE IF NOT EXISTS `asg_prob` (
   KEY `b` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `asg_prob`
+--
+
+INSERT INTO `asg_prob` (`asg_id`, `p_id`, `marks`) VALUES
+(22, 7, 100),
+(22, 8, 100),
+(23, 7, 100),
+(23, 8, 100),
+(24, 7, 100),
+(24, 8, 100),
+(25, 7, 100),
+(25, 8, 100),
+(26, 7, 50),
+(26, 8, 50);
+
 -- --------------------------------------------------------
 
 --
@@ -82,9 +98,13 @@ CREATE TABLE IF NOT EXISTS `banner` (
 --
 
 INSERT INTO `banner` (`c_id`, `image`) VALUES
-(1, 'banner1.jpg'),
-(2, 'banner2.jpg'),
-(3, 'banner3.jpg');
+(6, 'banner1.jpg'),
+(7, 'banner2.jpg'),
+(8, 'banner3.jpg'),
+(9, 'banner4.jpg'),
+(10, 'banner5.jpg'),
+(11, 'banner6.jpg'),
+(12, 'banner7.jpg');
 
 -- --------------------------------------------------------
 
@@ -130,11 +150,21 @@ CREATE TABLE IF NOT EXISTS `contest` (
 --
 
 INSERT INTO `contest` (`c_id`, `admin_id`, `contest_name`, `start_time`, `end_time`, `no_of_problems`, `about_contest`) VALUES
-(1, 1, 'Aug-Sep Challenge', '2017-09-01 00:00:00', '2017-09-30 23:59:59', 5, 'KA BOOM!'),
-(2, 2, 'Oct-Nov Challenge', '2017-10-01 21:30:00', '2017-11-30 23:59:59', 5, 'YIPEE!'),
-(3, 2, 'Dec Challenge', '2017-12-01 17:00:00', '2018-03-31 23:59:59', 5, 'OOOOPS!'),
-(4, 3, 'Jan Challenge', '2018-01-01 17:00:00', '2018-01-11 23:59:59', 10, 'HURRAY!'),
-(5, 4, 'Feb Challenge', '2018-02-03 00:00:00', '2018-02-13 23:59:59', 10, 'GREAT!');
+(1, 1, 'Aug Challenge', '2017-09-01 00:00:00', '2017-09-30 23:59:59', 5, 'KA BOOM!'),
+(2, 2, 'Oct Challenge', '2017-10-01 21:30:00', '2017-10-17 23:59:59', 5, 'YIPEE!'),
+(3, 1, 'October Lunchtime 2017', '2017-10-17 00:00:00', '2017-10-18 00:00:00', 5, 'About the Contest:\n\nOrganiser: The contest is hosted by Amalthea ''17, MNIT.\nPrizes: 10000\nRegistrations for prizes: NA\n'),
+(4, 2, 'ICO and ICPC 2018 Preparatory Series ', '2017-11-01 00:00:00', '2017-11-04 00:00:00', 5, 'About Contest:\n\nThe contest is hosted as a practice for the upcoming ZCO,\n INOI and ICPC for those who are aspiring to be a part of the ICO and ICPC.\nThis is unrated and is hosted just for the sake of problem solving practice. \nThe problems will be set by a group of students who have qualified for IOITC or have had the pain of not clearing it in INOI.\n\n\nRanking format: IOI type\nPrizes: We will reimburse the Indian Computing Olympiad registration fees for 5 random Indian school students'),
+(5, 3, 'CodePhase', '2017-11-03 00:00:00', '2017-11-04 00:00:00', 5, 'About the Contest:\n\nOrganiser: The contest is hosted by NIT Meghalaya.\nPrizes: Prizes worth 17k.\nRegistrations for prizes: NA\nContest Details:\n\nDuration: 24 hours\nStart time: 3rd November 2017, 0000 hrs IST\nEnd time: 4th November 2017, 0000 hrs IST'),
+(6, 4, 'November challenge', '2017-11-01 00:00:00', '2017-11-21 00:00:00', 5, 'About the Contest:\n\nOrganiser: The contest is hosted by MNIT.\nPrizes: Worth Rs 10,000 From siNUsoid.( Only for registered participants )\nContest Details:'),
+(7, 1, 'D''Code ', '2017-11-05 00:00:00', '2017-11-10 00:00:00', 5, 'About the Contest:\n\nOrganiser: The contest is hosted by GLA University.\nPrizes: Not declared\nRegistrations for prizes: NA\n\n\n'),
+(8, 3, 'Codenesia 2.0', '2017-11-02 00:00:00', '2017-11-30 00:00:00', 5, 'About the Contest:\r\nOrganiser: The contest is hosted by NIT Raipur\r\nPrizes: 5k & 3k'),
+(9, 1, 'LoC 2017', '2017-11-05 00:00:00', '2017-11-08 00:00:00', 5, 'Lord of the Code (LoC) is a series of competitive programming contests hosted every month, by Code@Amrita, the coding club at Amrita School of Engineering, Amritapuri campus. One of the aims of this monthly contest is to create awareness about the competitive programming and problem solving among the school students. While the focus is on the students in Kerala, anybody who is interested in coding can participate in the contest. The contest is conducted on CodeChef every month. Contest spans over three days – Friday through Sunday. The contest will focus on problem solving rather than direct implementation of the programming language syntax and built in functions.\r\nOrganizer: The contest is hosted by Amrita University in association with CodeChef.'),
+(10, 2, 'Code-In-History 1.0', '2017-11-01 00:00:00', '2017-11-15 00:00:00', 5, 'For Indians:\r\n\r\nTop 10 school students from ranklist will get CodeChef laddus\r\nFor Rest of World:\r\n\r\nTop 10 school students from ranklist will get CodeChef laddus'),
+(11, 3, 'ProCon Junior 2017', '2017-11-12 00:00:00', '2017-12-25 00:00:00', 5, 'About the Contest:\r\n\r\nOrganiser: The contest is hosted by Esya''17, IIIT Delhi''s techfest.\r\nPrizes: Bonus Marks for admission in IIITD will be given to the top 3 winners of the onsite finals. Moreover, 25k worth prizes are up for grab for the top 5 participants'),
+(12, 2, 'November Lunchtime', '2017-11-20 00:00:00', '2017-11-21 00:00:00', 5, 'November Lunchtime\r\nPrize: Rs 10000\r\nOrganised by : MNIT Jaipur'),
+(13, 2, 'Dec Challenge', '2017-12-01 17:00:00', '2018-03-31 23:59:59', 5, 'OOOOPS!'),
+(14, 3, 'Jan Challenge', '2018-01-01 17:00:00', '2018-01-11 23:59:59', 5, 'HURRAY!'),
+(15, 4, 'Feb Challenge', '2018-02-03 00:00:00', '2018-02-13 23:59:59', 5, 'GREAT!');
 
 -- --------------------------------------------------------
 
@@ -155,16 +185,48 @@ CREATE TABLE IF NOT EXISTS `contest_prob` (
 --
 
 INSERT INTO `contest_prob` (`c_id`, `p_id`, `score`) VALUES
-(1, 2, 100),
-(1, 3, 100),
-(1, 7, 100),
-(1, 12, 100),
 (1, 13, 100),
-(2, 4, 100),
-(2, 8, 100),
-(2, 9, 100),
-(2, 14, 100),
-(2, 15, 100);
+(1, 14, 100),
+(1, 15, 100),
+(1, 16, 100),
+(2, 17, 100),
+(2, 18, 100),
+(2, 19, 100),
+(2, 20, 100),
+(3, 21, 100),
+(3, 22, 100),
+(3, 23, 100),
+(3, 24, 100),
+(4, 25, 100),
+(4, 26, 100),
+(4, 27, 100),
+(4, 28, 100),
+(5, 29, 100),
+(5, 30, 100),
+(5, 31, 100),
+(5, 32, 100),
+(6, 30, 100),
+(6, 31, 100),
+(6, 35, 100),
+(6, 36, 100),
+(7, 37, 100),
+(7, 38, 100),
+(7, 39, 100),
+(7, 40, 100),
+(8, 40, 100),
+(8, 41, 100),
+(8, 42, 100),
+(8, 43, 100),
+(9, 45, 100),
+(9, 46, 100),
+(9, 47, 100),
+(9, 48, 100),
+(10, 45, 100),
+(10, 46, 100),
+(10, 47, 100),
+(10, 48, 100),
+(11, 49, 100),
+(11, 50, 100);
 
 -- --------------------------------------------------------
 
@@ -215,6 +277,210 @@ CREATE TABLE IF NOT EXISTS `languages_allowed` (
   KEY `language_id` (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `languages_allowed`
+--
+
+INSERT INTO `languages_allowed` (`p_id`, `language_id`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 1),
+(7, 1),
+(8, 1),
+(9, 1),
+(10, 1),
+(11, 1),
+(12, 1),
+(13, 1),
+(14, 1),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 1),
+(19, 1),
+(20, 1),
+(21, 1),
+(22, 1),
+(23, 1),
+(24, 1),
+(25, 1),
+(26, 1),
+(27, 1),
+(28, 1),
+(29, 1),
+(30, 1),
+(31, 1),
+(32, 1),
+(33, 1),
+(34, 1),
+(35, 1),
+(36, 1),
+(37, 1),
+(38, 1),
+(39, 1),
+(40, 1),
+(41, 1),
+(42, 1),
+(43, 1),
+(44, 1),
+(45, 1),
+(46, 1),
+(47, 1),
+(48, 1),
+(49, 1),
+(50, 1),
+(1, 2),
+(2, 2),
+(3, 2),
+(4, 2),
+(5, 2),
+(6, 2),
+(7, 2),
+(8, 2),
+(9, 2),
+(10, 2),
+(11, 2),
+(12, 2),
+(13, 2),
+(14, 2),
+(15, 2),
+(16, 2),
+(17, 2),
+(18, 2),
+(19, 2),
+(20, 2),
+(21, 2),
+(22, 2),
+(23, 2),
+(24, 2),
+(25, 2),
+(26, 2),
+(27, 2),
+(28, 2),
+(29, 2),
+(30, 2),
+(31, 2),
+(32, 2),
+(33, 2),
+(34, 2),
+(35, 2),
+(36, 2),
+(37, 2),
+(38, 2),
+(39, 2),
+(40, 2),
+(41, 2),
+(42, 2),
+(43, 2),
+(44, 2),
+(45, 2),
+(46, 2),
+(47, 2),
+(48, 2),
+(49, 2),
+(50, 2),
+(1, 3),
+(2, 3),
+(3, 3),
+(4, 3),
+(5, 3),
+(6, 3),
+(7, 3),
+(8, 3),
+(9, 3),
+(10, 3),
+(11, 3),
+(12, 3),
+(13, 3),
+(14, 3),
+(15, 3),
+(16, 3),
+(17, 3),
+(18, 3),
+(19, 3),
+(20, 3),
+(21, 3),
+(22, 3),
+(23, 3),
+(24, 3),
+(25, 3),
+(26, 3),
+(27, 3),
+(28, 3),
+(30, 3),
+(31, 3),
+(32, 3),
+(33, 3),
+(34, 3),
+(35, 3),
+(36, 3),
+(37, 3),
+(38, 3),
+(39, 3),
+(40, 3),
+(41, 3),
+(42, 3),
+(43, 3),
+(44, 3),
+(45, 3),
+(46, 3),
+(47, 3),
+(48, 3),
+(49, 3),
+(50, 3),
+(1, 5),
+(2, 5),
+(3, 5),
+(4, 5),
+(5, 5),
+(6, 5),
+(7, 5),
+(8, 5),
+(9, 5),
+(10, 5),
+(11, 5),
+(12, 5),
+(13, 5),
+(14, 5),
+(15, 5),
+(16, 5),
+(17, 5),
+(18, 5),
+(19, 5),
+(20, 5),
+(21, 5),
+(22, 5),
+(23, 5),
+(24, 5),
+(25, 5),
+(26, 5),
+(27, 5),
+(28, 5),
+(30, 5),
+(31, 5),
+(32, 5),
+(33, 5),
+(34, 5),
+(35, 5),
+(36, 5),
+(37, 5),
+(38, 5),
+(39, 5),
+(40, 5),
+(41, 5),
+(42, 5),
+(43, 5),
+(44, 5),
+(45, 5),
+(46, 5),
+(47, 5),
+(48, 5),
+(49, 5),
+(50, 5);
+
 -- --------------------------------------------------------
 
 --
@@ -231,27 +497,6 @@ CREATE TABLE IF NOT EXISTS `participation` (
   KEY `p_id` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `participation`
---
-
-INSERT INTO `participation` (`user_id`, `c_id`, `p_id`, `score`) VALUES
-(385454, 2, 4, 100),
-(385454, 2, 8, 100),
-(385454, 2, 9, 100),
-(385455, 2, 4, 100),
-(385455, 2, 8, 100),
-(385455, 2, 9, 100),
-(385455, 2, 14, 100),
-(385455, 2, 15, 100),
-(385456, 2, 4, 100),
-(385456, 2, 8, 100),
-(385456, 2, 9, 100),
-(385456, 2, 14, 100),
-(385457, 2, 4, 100),
-(385459, 2, 9, 100),
-(385459, 2, 15, 100);
-
 -- --------------------------------------------------------
 
 --
@@ -261,7 +506,7 @@ INSERT INTO `participation` (`user_id`, `c_id`, `p_id`, `score`) VALUES
 CREATE TABLE IF NOT EXISTS `problem` (
   `p_id` int(11) NOT NULL AUTO_INCREMENT,
   `p_name` varchar(50) NOT NULL,
-  `p_code` varchar(10) NOT NULL,
+  `p_code` varchar(20) NOT NULL,
   `p_setter` varchar(20) NOT NULL,
   `date_added` date NOT NULL,
   `p_filename` varchar(20) NOT NULL,
@@ -276,7 +521,7 @@ CREATE TABLE IF NOT EXISTS `problem` (
   PRIMARY KEY (`p_id`),
   UNIQUE KEY `p_code` (`p_code`,`p_filename`),
   KEY `difficulty` (`difficulty`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Dumping data for table `problem`
@@ -284,20 +529,55 @@ CREATE TABLE IF NOT EXISTS `problem` (
 
 INSERT INTO `problem` (`p_id`, `p_name`, `p_code`, `p_setter`, `date_added`, `p_filename`, `u_attempt`, `u_solve`, `accepted`, `submitted`, `time_limit`, `source_limit`, `difficulty`, `status`) VALUES
 (1, 'Buggy Calculator', 'BUGCAL', 'Vinayak', '2017-07-01', 'p1', 15, 7, 7, 7, 2.00, 50000, 1, 0),
-(2, 'A Balanced Contest', 'PERFCONT', 'Shivanjal', '2017-08-01', 'p2', 0, 0, 0, 0, 2.00, 50000, 1, 1),
-(3, 'Chef and Employment Test', 'CK87MEDI', 'Lav Kush', '2017-08-03', 'p3', 0, 0, 0, 0, 2.00, 50000, 1, 1),
-(4, 'Rupsa And The Game', 'RGAME', 'Lav Kush', '2017-08-03', 'p4', 0, 0, 0, 0, 2.00, 50000, 1, 1),
-(5, 'Chef and Way', 'CHRL4', 'Vinayak', '2017-08-03', 'p5', 0, 0, 0, 0, 2.00, 50000, 1, 0),
-(6, 'Weird Competition', 'WEICOM', 'Shivanjal', '2017-08-03', 'p6', 0, 0, 0, 0, 2.00, 50000, 2, 0),
-(7, 'Hull Sum', 'HULLSUM', 'Vinayak', '2017-08-03', 'p7', 0, 0, 0, 0, 2.00, 50000, 2, 1),
-(8, 'Year 3017', 'UNIVERSE', 'Lav Kush', '2017-08-03', 'p8', 0, 0, 0, 0, 2.00, 50000, 2, 1),
-(9, 'Minimax', 'MINIMAX	', 'Shivanjal', '2017-08-03', 'p9', 0, 0, 0, 0, 2.00, 50000, 2, 1),
-(10, 'Animesh practices some programming contests', 'CHN03', 'Shivanjal', '2017-08-03', 'p10', 0, 0, 0, 0, 2.00, 50000, 2, 0),
-(11, 'Animesh has a war with tribal leader Malvika', 'CHN11', 'Vinayak', '2017-08-03', 'p11', 0, 0, 0, 0, 2.00, 50000, 3, 0),
-(12, 'TreeLand Journey', 'JRNTREE', 'Lav Kush', '2017-08-03', 'p12', 0, 0, 0, 0, 2.00, 50000, 3, 1),
+(2, 'A Balanced Contest', 'PERFCONT', 'Shivanjal', '2017-08-01', 'p2', 0, 0, 0, 0, 2.00, 50000, 2, 0),
+(3, 'Chef and Employment Test', 'CK87MEDI', 'Lav Kush', '2017-08-03', 'p3', 0, 0, 0, 0, 2.00, 50000, 3, 0),
+(4, 'Rupsa And The Game', 'RGAME', 'Lav Kush', '2017-08-03', 'p4', 0, 0, 0, 0, 2.00, 50000, 1, 0),
+(5, 'Chef and Way', 'CHRL4', 'Vinayak', '2017-08-03', 'p5', 0, 0, 0, 0, 2.00, 50000, 2, 0),
+(6, 'Weird Competition', 'WEICOM', 'Shivanjal', '2017-08-03', 'p6', 0, 0, 0, 0, 2.00, 50000, 3, 0),
+(7, 'Hull Sum', 'HULLSUM', 'Vinayak', '2017-08-03', 'p7', 0, 0, 0, 0, 2.00, 50000, 2, 2),
+(8, 'Year 3017', 'UNIVERSE', 'Lav Kush', '2017-08-03', 'p8', 0, 0, 0, 0, 2.00, 50000, 2, 2),
+(9, 'Minimax', 'MINIMAX	', 'Shivanjal', '2017-08-03', 'p9', 0, 0, 0, 0, 2.00, 50000, 2, 2),
+(10, 'Animesh practices some programming contests', 'CHN03', 'Shivanjal', '2017-08-03', 'p10', 0, 0, 0, 0, 2.00, 50000, 3, 2),
+(11, 'Animesh has a war with tribal leader Malvika', 'CHN11', 'Vinayak', '2017-08-03', 'p11', 0, 0, 0, 0, 2.00, 50000, 3, 2),
+(12, 'TreeLand Journey', 'JRNTREE', 'Lav Kush', '2017-08-03', 'p12', 0, 0, 0, 0, 2.00, 50000, 3, 2),
 (13, 'Optimal Subset', 'OPTSSET', 'Vinayak', '2017-08-03', 'p13', 0, 0, 0, 0, 2.00, 50000, 3, 1),
 (14, 'King Animesh decides to have a voyage to the sun', 'CHN06', 'Lav Kush', '2017-08-03', 'p14', 0, 0, 0, 0, 2.00, 50000, 3, 1),
-(15, 'Catch Spider-Chef', 'CATCHSM', 'Shivanjal', '2017-08-03', 'p15', 0, 0, 0, 0, 2.00, 50000, 3, 1);
+(15, 'Catch Spider-Chef', 'CATCHSM', 'Shivanjal', '2017-08-03', 'p15', 0, 0, 0, 0, 2.00, 50000, 3, 1),
+(16, 'array sum', 'arr16', 'vinayak', '2017-11-01', 'p16', 0, 0, 0, 0, 2.02, 3000, 1, 1),
+(17, 'Kangaroo', 'Kangaroo', 'lavkush', '2017-11-02', 'p17', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(18, 'Maximum', 'maximum', 'shivanjal', '2017-11-02', 'p18', 0, 0, 0, 0, 2.00, 3000, 1, 1),
+(19, 'perfect', 'perfection', 'vinayak', '2017-11-02', 'p19', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(20, 'Compare the Triplets', 'Triplets', 'lavkush', '2017-11-02', 'p20', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(21, 'A Very Big Sum', 'Big Sum', 'shivanjal', '2017-11-01', 'p21', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(22, 'Diagonal Difference', 'Diagonal_Diff', 'lavkush', '2017-11-01', 'p22', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(23, 'Plus Minus', 'Plus_Minus', 'vinayak', '2017-10-18', 'p23', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(24, 'Staircase', 'Staircase', 'shivanjal', '2017-10-03', 'p24', 0, 0, 0, 0, 2.00, 3000, 1, 1),
+(25, 'Mini-Max Sum', 'Min_Max_Sum', 'lavkush', '2017-10-18', 'p25', 0, 0, 0, 0, 2.00, 3000, 1, 1),
+(26, 'Birthday Cake Candles', 'Cake_Candles', 'lavkush', '2017-10-18', 'p26', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(27, 'Time Conversion', 'Time_Convers', 'shivanjal', '2017-10-18', 'p27', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(28, 'Pangrams', 'Pangrams', 'lavkush', '2017-10-26', 'p28', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(29, 'Weird Competition', 'Weird_Competition', 'vinayak', '2017-10-19', 'p29', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(30, 'Hull Sum', 'Hull_Sum', 'shivanjal', '2017-10-18', 'p30', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(31, 'Minimax', 'Minimax', 'lavkush', '2017-10-04', 'p31', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(32, 'Black Nodes in Subgraphs', 'Noce_Subgraphs', 'vinayak', '2017-11-01', 'p32', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(33, 'Malvika conducts her own ACM-ICPC contest series', 'ACM-ICPC', 'lavkush', '2017-11-07', 'p33', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(34, 'Mathison and the teleportation game', 'game', 'shivanjal', '2017-11-08', 'p34', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(35, 'Chef and Cycled Cycles', 'Cycles', 'shivanjal', '2017-10-11', 'p35', 0, 0, 0, 0, 2.00, 3000, 1, 1),
+(36, 'Post Tree', 'Post Tree', 'shivanjal', '2017-11-01', 'p36', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(37, 'Chef and Yoda', 'Chef and Yoda', 'SHIVANJAL', '2017-10-19', 'p37', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(38, 'Interval Game', 'Interval Game', 'lavkush', '2017-10-10', 'p38', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(39, 'Short in Average', 'Short in Average', 'vinayak', '2017-11-01', 'p39', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(40, 'Sereja and Two Strings 2', 'SerejaStrings', 'lavkush', '2017-11-01', 'p40', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(41, 'Chef and Inflation', 'ChefInflation', 'lavkush', '2017-11-01', 'p41', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(42, 'Chef Shifu and Celebration', 'ChefCelebration', 'lavkush', '2017-10-04', 'p42', 0, 0, 0, 0, 2.00, 3000, 1, 1),
+(43, 'Sereja and Two Lines', 'SerejaLines', 'vinayak', '2017-10-03', 'p43', 0, 0, 0, 0, 2.00, 3000, 2, 1),
+(44, 'Chef and His Garden', 'ChefGarden', 'lavkush', '2017-10-10', 'p44', 0, 0, 0, 0, 2.00, 3000, 1, 1),
+(45, 'Maximum Disjoint Subarrays', 'MaximumSubarrays', 'vinayak', '2017-10-11', 'p45', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(46, 'Chef and Two String', 'ChefString', 'shivanjal', '2017-11-01', 'p46', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(47, 'Company and Club Hierarchies', 'CompanyHierarchies', 'lavkush', '2017-11-01', 'p47', 0, 0, 0, 0, 2.00, 3000, 1, 1),
+(48, 'Palindromic Queries', 'PalindromicQueries', 'shivanjal', '2017-11-01', 'p48', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(49, 'Big Queries', 'BigQueries', 'vinayak', '2017-11-01', 'p49', 0, 0, 0, 0, 2.00, 3000, 3, 1),
+(50, 'Chef and Triangles', 'ChefTriangles', 'lavkush', '2017-11-01', 'p50', 0, 0, 0, 0, 2.00, 3000, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -317,27 +597,6 @@ CREATE TABLE IF NOT EXISTS `solves` (
   KEY `user_id` (`user_id`),
   KEY `language_id` (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `solves`
---
-
-INSERT INTO `solves` (`p_id`, `user_id`, `time`, `memory`, `submit_time`, `language_id`, `penalty`) VALUES
-(4, 385454, 0.00, 5369856, '2017-10-30 00:16:32', 1, 0),
-(4, 385455, 0.00, 5599232, '2017-10-30 00:10:29', 1, 0),
-(4, 385456, 0.00, 6119424, '2017-10-30 00:12:44', 1, 0),
-(4, 385457, 0.00, 9990144, '2017-10-30 00:17:46', 1, 0),
-(8, 385454, 0.00, 6410240, '2017-10-30 00:16:44', 1, 0),
-(8, 385455, 0.00, 6684672, '2017-10-30 00:10:44', 1, 0),
-(8, 385456, 0.00, 9138176, '2017-10-30 00:13:27', 1, 0),
-(9, 385454, 0.00, 9678848, '2017-10-30 00:16:57', 1, 0),
-(9, 385455, 0.00, 6733824, '2017-10-30 00:10:58', 1, 0),
-(9, 385456, 0.00, 6733824, '2017-10-30 00:13:40', 1, 0),
-(9, 385459, 0.00, 6762496, '2017-10-30 00:19:15', 1, 0),
-(14, 385455, 0.00, 10022912, '2017-10-30 00:11:12', 1, 0),
-(14, 385456, 0.00, 5697536, '2017-10-30 00:13:52', 1, 0),
-(15, 385455, 0.00, 6836224, '2017-10-30 00:11:24', 1, 0),
-(15, 385459, 0.00, 10002432, '2017-10-30 00:19:04', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -360,7 +619,7 @@ CREATE TABLE IF NOT EXISTS `student` (
 
 INSERT INTO `student` (`user_id`, `sem`, `cg`, `batch_id`) VALUES
 (385454, 5, '9.67', 1),
-(385455, 5, '8.00', 1),
+(385455, 5, '8.00', 2),
 (385456, 5, '9.00', 1);
 
 -- --------------------------------------------------------
@@ -537,8 +796,14 @@ ALTER TABLE `solves`
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`),
+  ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`batch_id`) REFERENCES `batch` (`batch_id`) ON UPDATE CASCADE;
+
+--
+-- Constraints for table `teacher`
+--
+ALTER TABLE `teacher`
+  ADD CONSTRAINT `u_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`);
 
 --
 -- Constraints for table `teacher_batch`
