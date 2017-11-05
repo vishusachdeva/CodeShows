@@ -58,6 +58,8 @@
                 $msg = "Invalid Date of Birth";
             } else if (!isset($type) || empty($type) || ($type != 1 && $type != 2)) {
                 $msg = "Invalid Data";
+            } else if (!isset($otp) || empty($otp)) {
+                $msg = "Invalid OTP";
             }
             return $msg;
         }
@@ -182,12 +184,13 @@
                 return false;
             return $result;
         }
-        function fetch_batch_data()
-        {
+
+        function fetch_batch_data() {
             $sql = "SELECT * FROM batch";
             $result = query($this->db,$sql);
             db_close($this->db);
             return $result;
         }
+
     }
 ?>

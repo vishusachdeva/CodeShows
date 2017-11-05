@@ -5,12 +5,17 @@
         private $data = array();
         private $auth = false;
         private $f_auth = false;
+        private $otp_auth = false;
+        private $otp = "";
 
         function __construct() {
             session_start();
             if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                 $this->data = $_SESSION;
                 $this->auth = true;
+            } else if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['otp_verify']) && $_SESSION['otp_verify']) {
+                $this->otp_auth = true;
+                $this->otp = $_SESSION['otp'];
             }
             else if(isset($_SESSION) && !empty($_SESSION) && isset($_SESSION['f_verify']) && $_SESSION['f_verify']) {
                 $this->f_auth = true;
@@ -69,6 +74,46 @@
             loadView('footer');
         }
 
+        function send_otp($arguments) {
+            if ($this->otp_auth) {
+                session_destroy();
+            }
+            if (!isset($_POST) || empty($_POST) || !isset($_POST['username']) || empty($_POST['username']) || !isset($_POST['email']) || empty($_POST['email']) || !isset($_POST['fname']) || empty($_POST['fname']) || !isset($_POST['lname']) || empty($_POST['lname'])) {
+                print('error');
+                exit();
+            }
+            if ($this->auth) {
+                print('error');
+                exit();
+            }
+            $otp = str_shuffle(bin2hex(openssl_random_pseudo_bytes(3)));;
+            $body = "Hello ".$arguments['username']."<br/>Your otp is ".$otp;
+            $mail = setMailer();
+            try {
+                $mail->SMTPDebug = 2;
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com;';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'codeshows123@gmail.com';
+                $mail->Password = 'codeshows@123';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                $mail->setFrom('codeshows123@gmail.com', 'CodeShows MNIT');
+                $mail->addAddress($arguments['email'], $arguments['fname']." ".$arguments['lname']);
+                $mail->isHTML(true);
+                $mail->Subject = 'CodeShows - OTP Verification';
+                $mail->Body    = $body;
+                $mail->AltBody = $body;
+                $mail->send();
+            } catch (Exception $e) {
+                print('error');
+                exit();
+            }
+            session_start();
+            $_SESSION['otp_verify'] = true;
+            $_SESSION['otp'] = $otp;
+        }
+
         function register($arguments) {
             if (!isset($_POST) || empty($_POST)) {
                 redirect('main', 'home');
@@ -79,6 +124,12 @@
                 redirect_sleep('main', 'home', 5);
                 exit();
             }
+            if (!$this->otp_auth || $this->otp != $arguments['otp']) {
+                print('Please Enter Valid Otp');
+                redirect_sleep('main', 'home', 3);
+                exit();
+            }
+            session_destroy();
             $result = loadModel('user', 'register', $arguments);
             if ($result == false) {
                 print("Register Error");

@@ -1,3 +1,68 @@
+<script>
+function send_otp() {
+	var signup = document.getElementById('signup');
+	var reset = document.getElementById('reset');
+	signup.disabled = true;
+	signup.onclick="";
+	reset.disabled = true;
+	var path="<?php echo(SITE_ROOT.'user/send_otp'); ?>";
+	var email = document.getElementsByName('email')[1].value;
+	var username = document.getElementsByName('username')[0].value;
+	var fname = document.getElementsByName('fname')[0].value;
+	var lname = document.getElementsByName('lname')[0].value;
+	var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText == 'error') {
+	                signup.disabled = false;
+	                reset.disabled = false;
+                	return;
+                }
+                signup.disabled = false;
+                reset.disabled = false;
+                reset.style.display = "none";
+                signup.type="submit";
+                document.getElementById('otp').style.display = 'block';
+        }
+    };
+    xhttp.open("POST", path, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("username="+username+"&fname="+fname+"&lname="+lname+"&email="+email);
+}
+
+function t_send_otp() {
+	var signup = document.getElementById('signup_t');
+	var reset = document.getElementById('reset_t');
+	signup.disabled = true;
+	signup.onclick="";
+	reset.disabled = true;
+	var path="<?php echo(SITE_ROOT.'user/send_otp'); ?>";
+	var email = document.getElementsByName('email')[2].value;
+	var username = document.getElementsByName('username')[1].value;
+	var fname = document.getElementsByName('fname')[1].value;
+	var lname = document.getElementsByName('lname')[1].value;
+	var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        	console.log(this.responseText);
+                if (this.responseText == 'error') {
+	                signup.disabled = false;
+	                reset.disabled = false;
+                	return;
+                }
+                signup.disabled = false;
+                reset.disabled = false;
+                reset.style.display = "none";
+                signup.type="submit";
+                document.getElementById('otp_t').style.display = 'block';
+        }
+    };
+    xhttp.open("POST", path, true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("username="+username+"&fname="+fname+"&lname="+lname+"&email="+email);
+}
+</script>
+
 <div class="container-fluid" id="switch">
     <div style="width:80%" class="w3-display-middle">
 		<h1 class="w3-text-cyan w3-myfont" style="text-align:center;font-size:7vw"><b>Select Mode</b></h1><br/>
@@ -32,6 +97,7 @@
         "X" => "10"
         ];
 ?>
+
 <div class="container-fluid w3-light-grey" id="student" style="display:none;">
 	<form action='<?php echo(generate_link('user', 'register')); ?>' method='post' onsubmit="return validate('all')" class="container w3-margin-top" style="width:60%;">
 
@@ -113,8 +179,16 @@
 
 		<input type="hidden" name="type" value="1">
 
-		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" type='submit' name='signup' value='Sign Up'>
-		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" type='reset' name='reset' value='Reset'>
+		<div class="w3-container" id="otp" style="width:60%;margin:auto;display:none;">
+			<h4 style="width:100%;">An OTP has been sent to your email</h4>
+			<h2 style="width:100%;">Please Enter OTP</h2>
+			<div id="er_otp" style="display:none"></div>
+			<input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" name="otp" value="" onchange="validate('otp');" required>
+		</div>
+
+		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" id="signup" type='button' name='signup' value='Sign Up' onclick="if (validate('all')) send_otp();">
+		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" id="reset" type='reset' name='reset' value='Reset'>
+
 	</form>
 </div>
 
@@ -168,7 +242,14 @@
 
 		<input type="hidden" name="type" value="2">
 
-		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" type='submit' name='signup' value='Sign Up'>
-		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" type='reset' name='reset' value='Reset'>
+		<div class="w3-container" id="otp_t" style="width:60%;margin:auto;display:none;">
+			<h4 style="width:100%;">An OTP has been sent to your email</h4>
+			<h2 style="width:100%;">Please Enter OTP</h2>
+			<div id="t_er_otp" style="display:none"></div>
+			<input class="w3-input w3-border w3-xlarge w3-border-black w3-round-large" name="otp" value="" onchange="validate_t('otp');" required>
+		</div>
+
+		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" id="signup_t" type='button' name='signup' value='Sign Up' onclick="if (validate_t('all')) t_send_otp();">
+		<input class="w3-button w3-red w3-hover-cyan w3-ripple w3-round w3-margin-top" id="reset_t" type='reset' name='reset' value='Reset'>
 	</form>
 </div>

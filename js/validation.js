@@ -42,12 +42,22 @@ function validate(str) {
     var email=document.getElementsByName('email')[1];
     var password=document.getElementsByName('password')[1];
     var confirm=document.getElementsByName('confirm')[0];
-    var sem=document.getElementsByName('sem')[0];
+    var sems=document.getElementsByName('sem')[0];
     var cg=document.getElementsByName('cg')[0];
     var branch=document.getElementsByName('branch')[0];
     var dob=document.getElementsByName('dob')[0];
     var batch=document.getElementsByName('batch')[0];
     var institute_id=document.getElementsByName('institute_id')[0];
+    var er_fname = document.getElementById('er_fname');
+    var er_lname = document.getElementById('er_lname');
+    var er_username = document.getElementById('er_username');
+    var er_email = document.getElementById('er_email');
+    var er_password = document.getElementById('er_password');
+    var er_confirm = document.getElementById('er_confirm');
+    var er_cg = document.getElementById('er_cg');
+    var er_sems = document.getElementById('er_sems');
+    var er_branch = document.getElementById('er_branch');
+    var er_batch = document.getElementById('er_batch');
 
     var error = true;
 
@@ -68,7 +78,7 @@ function validate(str) {
             er_fname.style.display = 'none';
             fname.style.borderColor = 'inherit';
         }
-        if (str == 'fname') return;
+        if (str == 'fname') return error;
     }
 
     if (str == 'lname' || str == 'all') {
@@ -88,7 +98,7 @@ function validate(str) {
             er_lname.style.display = 'none';
             lname.style.borderColor = 'inherit';
         }
-        if (str == 'lname') return;
+        if (str == 'lname') return error;
     }
 
     if (str == 'username' || str == 'all') {
@@ -108,7 +118,7 @@ function validate(str) {
             er_username.style.display = 'none';
             username.style.borderColor = 'inherit';
         }
-        if (str == 'username') return;
+        if (str == 'username') return error;
     }
 
     if (str == 'institute_id' || str == 'all') {
@@ -123,7 +133,7 @@ function validate(str) {
             er_institute_id.style.display = 'none';
             institute_id.style.borderColor = 'inherit';
         }
-        if (str == 'institute_id') return;
+        if (str == 'institute_id') return error;
     }
 
     if (str == 'password' || str == 'all') {
@@ -161,7 +171,7 @@ function validate(str) {
             confirm.style.borderColor = 'inherit';
         }
 
-        if (str == 'password') return;
+        if (str == 'password') return error;
     }
 
     if (str == 'confirm' || str == 'all') {
@@ -175,7 +185,7 @@ function validate(str) {
             er_confirm.style.display = 'none';
             confirm.style.borderColor = 'inherit';
         }
-        if (str == 'confirm') return;
+        if (str == 'confirm') return error;
     }
 
     if (str == 'cg' || str == 'all') {
@@ -189,7 +199,7 @@ function validate(str) {
             er_cg.style.display = 'none';
             cg.style.borderColor = 'inherit';
         }
-        if (str == 'cg') return;
+        if (str == 'cg') return error;
     }
 
     if (str == 'sems' || str == 'all') {
@@ -203,7 +213,7 @@ function validate(str) {
             sems.removeAttribute('style');
             er_sems.style.display = 'none';
         }
-        if (str == 'sems') return;
+        if (str == 'sems') return error;
     }
 
     if (str == 'branch' || str == 'all') {
@@ -217,8 +227,9 @@ function validate(str) {
             branch.removeAttribute('style');
             er_branch.style.display = 'none';
         }
-        if (str == 'branch') return;
+        if (str == 'branch') return error;
     }
+
     if (str == 'batch' || str == 'all') {
         if (batch.value == "0") {
             er_batch.style.display = 'initial';
@@ -230,8 +241,9 @@ function validate(str) {
             batch.removeAttribute('style');
             er_batch.style.display = 'none';
         }
-        if (str == 'batch') return;
+        if (str == 'batch') return error;
     }
+
     if (str == 'all') return error;
 }
 
@@ -245,6 +257,13 @@ function validate_t(str) {
     var branch=document.getElementsByName('branch')[1];
     var dob=document.getElementsByName('dob')[1];
     var institute_id=document.getElementsByName('institute_id')[1];
+    var t_er_fname = document.getElementById('t_er_fname');
+    var t_er_lname = document.getElementById('t_er_lname');
+    var t_er_username = document.getElementById('t_er_username');
+    var t_er_email = document.getElementById('t_er_email');
+    var t_er_password = document.getElementById('t_er_password');
+    var t_er_confirm = document.getElementById('t_er_confirm');
+    var t_er_branch = document.getElementById('t_er_branch');
 
     var error = true;
 
@@ -265,7 +284,7 @@ function validate_t(str) {
             t_er_fname.style.display = 'none';
             fname.style.borderColor = 'inherit';
         }
-        if (str == 'fname') return;
+        if (str == 'fname') return error;
     }
 
     if (str == 'lname' || str == 'all') {
@@ -285,7 +304,7 @@ function validate_t(str) {
             t_er_lname.style.display = 'none';
             lname.style.borderColor = 'inherit';
         }
-        if (str == 'lname') return;
+        if (str == 'lname') return error;
     }
 
     if (str == 'username' || str == 'all') {
@@ -305,7 +324,7 @@ function validate_t(str) {
             t_er_username.style.display = 'none';
             username.style.borderColor = 'inherit';
         }
-        if (str == 'username') return;
+        if (str == 'username') return error;
     }
 
     if (str == 'password' || str == 'all') {
@@ -343,7 +362,7 @@ function validate_t(str) {
             confirm.style.borderColor = 'inherit';
         }
 
-        if (str == 'password') return;
+        if (str == 'password') return error;
     }
 
     if (str == 'confirm' || str == 'all') {
@@ -357,7 +376,7 @@ function validate_t(str) {
             t_er_confirm.style.display = 'none';
             confirm.style.borderColor = 'inherit';
         }
-        if (str == 'confirm') return;
+        if (str == 'confirm') return error;
     }
 
     if (str == 'branch' || str == 'all') {
@@ -371,7 +390,7 @@ function validate_t(str) {
             branch.removeAttribute('style');
             t_er_branch.style.display = 'none';
         }
-        if (str == 'branch') return;
+        if (str == 'branch') return error;
     }
 
     if (str == 'all') return error;
