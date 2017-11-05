@@ -1,6 +1,7 @@
 <?php
     session_start();
     include_once('../lib/config.inc.php');
+    include_once('../lib/db_connect.php');
      if (isset($_POST) && !empty($_POST) && isset($_POST['solution']) && !empty($_POST['solution'])
      && isset($_POST['p_id']) && !empty($_POST['p_id']) && isset($_POST['time_limit']) && !empty($_POST['time_limit'])){
         extract($_POST);

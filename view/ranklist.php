@@ -25,7 +25,7 @@
             if($prev_score !== $value['total_score'])
                 $i++;
             ?>
-            <tr style = "cursor:pointer" onclick = '#' <?php if($_SESSION['username'] == $value['username']){echo('bgcolor="#EBE8E4"');} ?>>
+            <tr style = "cursor:pointer" onclick = '#' <?php if($username == $value['username']){echo('bgcolor="#cae5bc"');} ?>>
             <td><?php echo($i); ?></td>
             <td><?php echo($value['username']); ?></td>
             <?php

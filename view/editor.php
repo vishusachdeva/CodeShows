@@ -452,9 +452,9 @@ func term(ch chan float64, k float64) {
       <td style="width:12.5%;">
         <select id="doc" size="1" class="w3-border w3-select" onchange="document.getElementById(curr_lang).value=editor.getValue();editor.setValue(document.getElementById(this.value).value);editor.getSession().setMode('ace/mode/'+this.value);curr_lang=this.value;">
         <?php
-            $lang = ['c', 'c_cpp', 'java', 'csharp', 'php', 'ruby', 'python', 'perl', 'haskell', 'clojure', 'scala', 'sql', 'erlang', 'lisp', 'lua', 'golang'];
-            foreach($languages AS $key=>$value)
-              echo("<option value='".$value['language_id']."'>".$value['language_name']."</option>");
+            $lang = ['C' => 'c', 'C++' => 'c_cpp', 'Java' => 'java', 'C#' => 'csharp', 'PHP' => 'php', 'Ruby' => 'ruby', 'Python 2.0' => 'python', 'Perl' => 'perl', 'Haskell' => 'haskell', 'Clojure' => 'clojure', 'Scala' => 'scala', 'Mysql' => 'sql', 'Erlang' => 'erlang', 'CLISP' => 'lisp', 'Lua' => 'lua', 'GO' => 'golang'];
+            foreach($languages AS $value)
+              echo("<option value='".$lang[$value['language_name']]."'>".$value['language_name']."</option>");
           ?>
         </select>
       </td>

@@ -16,12 +16,12 @@
 
         function all($arguments) {
             if (!$this->auth) {
-                print('You are not Logged In');
-                redirect_sleep('main', 'home', 5);
+                //print('You are not Logged In');
+                loadView('error');
                 exit();
             } else if ($this->data['type'] == 2) {
-                print('Only Students Allowed');
-                redirect_sleep('main', 'home', 5);
+                //print('Only Students Allowed');
+                loadView('error');
                 exit();
             }
             $data = loadModel("asg", "fetch", $this->data);
@@ -43,12 +43,12 @@
 
         function builder() {
             if ($this->auth == 0) {
-                print('You are not Logged In');
-                redirect_sleep('main', 'home', 5);
+                //print('You are not Logged In');
+                loadView('error');
                 exit();
             } else if ($this->data['type'] != 2) {
-                print('Please check link');
-                redirect_sleep('main', 'home', 5);
+                //print('Please check link');
+                loadView('error');
                 exit();
             }
             //loadView("header", array_merge($this->data, ['title' => "Assignment Builder - CodeShows"]));
@@ -60,22 +60,22 @@
 
         function add_asg($arguments) {
             if ($this->auth == 0) {
-                print('You are not Logged In');
-                redirect_sleep('main', 'home', 3);
+                //print('You are not Logged In');
+                loadView('error');
                 exit();
             } else if ($this->data['type'] != 2 || !isset($_POST) || empty($_POST)) {
-                print('Please check link');
-                redirect_sleep('main', 'home', 3);
+                //print('Please check link');
+                loadView('error');
                 exit();
             }
             $result = loadModel('asg', 'add_asg', array_merge($arguments, $this->data));
             if (empty($result)) {
-                print('Error adding assignment');
-                redirect_sleep('main', 'home', 3);
+                //print('Error adding assignment');
+                loadView('error');
                 exit();
             }
-            print("<script>alert('Assignment added successfully');</script>redirecting to builder...");
-            redirect_sleep('asg', 'builder', 5);
+            print("<script>alert('Assignment added successfully');</script>");
+            redirect_sleep('asg', 'builder',0);
         }
 
     }

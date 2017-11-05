@@ -52,7 +52,7 @@
     font-family: 'pirulen';">
 <p style="text-align: center;"></p>
 <h1 class="w3-text-cyan" style="text-align: center;font-size:5vw;font-family:monoton,cursive; color:black;"><?php echo($heading); ?></h1>
-<h2 style="text-align: center;"><?php echo($msg); ?></h2>
+<h2 style="text-align: center;color:white;"><?php echo($msg); ?></h2>
 </div>
 <script src="/cdn-cgi/scripts/78d64697/cloudflare-static/email-decode.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r70/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js"></script>

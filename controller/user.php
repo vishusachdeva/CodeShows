@@ -30,13 +30,13 @@
 
         function logout() {
             if (!$this->auth) {
-                print('You are not Logged In');
-                redirect_sleep('main', 'home', 5);
+                //print('You are not Logged In');
+                loadView('error');
                 exit();
             }
             session_destroy();
-            print("Log out Success");
-            redirect_sleep('main','home', 3);
+            //print("Log out Success");
+            redirect('main','home', 3);
         }
 
         function login($arguments) {
@@ -45,26 +45,26 @@
                 exit();
             }
             if ($this->auth) {
-                print('You are already Logged In');
-                redirect_sleep('main', 'home', 5);
+                //print('You are already Logged In');
+                loadView('error');
                 exit();
             }
             $result = loadModel('user', 'login', $arguments);
             if ($result == false) {
-                print("Login Error");
-                redirect_sleep('main','home', 3);
+                echo("Wrong Password.");
+                redirect_sleep('main','home', 1);
                 exit();
             }
-            print("Login Success");
+            //print("Login Success");
             session_start();
             $_SESSION = $result;
-            redirect_sleep('main','home', 3);
+            redirect_sleep('main','home', 0);
         }
 
         function signup($arguments) {
             if ($this->auth) {
-                print('You are already Logged In');
-                redirect_sleep('main', 'home', 3);
+                //print('You are already Logged In');
+                loadView('error');
                 exit();
             }
             $data = loadModel('user','fetch_batch_data');
@@ -120,43 +120,43 @@
                 exit();
             }
             if ($this->auth) {
-                print('You are already Logged In');
-                redirect_sleep('main', 'home', 5);
+                //print('You are already Logged In');
+                loadView('error');
                 exit();
             }
             if (!$this->otp_auth || $this->otp != $arguments['otp']) {
-                print('Please Enter Valid Otp');
-                redirect_sleep('main', 'home', 3);
+                //print('Please Enter Valid Otp');
+                loadView('error');
                 exit();
             }
             session_destroy();
             $result = loadModel('user', 'register', $arguments);
             if ($result == false) {
-                print("Register Error");
-                redirect_sleep('main','home', 5);
+                //print("Register Error");
+                loadView('error');
                 exit();
             }
-            print("register success");
+           // print("register success");
             session_start();
             $_SESSION = $result;
-            redirect_sleep('main', 'home', 5);
+            redirect_sleep('main', 'home', 0);
         }
 
         function forgot_password($arguments) {
             if ($this->auth) {
-                print('Invalid url<br/>Error 404');
-                redirect_sleep('main', 'home', 3);
+                //print('Invalid url<br/>Error 404');
+                loadView('error');
                 exit();
             }
             if(!isset($_POST)|| empty($_POST) || !isset($_POST['f_email']) || empty($_POST['f_email'])) {
-                print('Invalid attempt');
-                redirect_sleep('main','home', 3);
+                //print('Invalid attempt');
+                loadView('error');
                 exit();
             }
             $result = loadModel('user','forgot_password', $arguments);
             if($result === false) {
-                echo("Invalid Email-ID");
-                redirect_sleep('main','home', 3);
+                //echo("Invalid Email-ID");
+                loadView('error');
                 exit();
             }
 
@@ -194,25 +194,25 @@
                 echo 'Mailer Error: ' . $mail->ErrorInfo;
                 echo('<br/>redirecting to home...');
             }
-            redirect_sleep('main', 'home', 3);
+            redirect_sleep('main', 'home', 0);
             exit();
         }
 
         function forgot_verify($arguments) {
             if ($this->auth) {
-                print('Invalid url<br/>Error 404');
-                redirect_sleep('main', 'home', 3);
+                //print('Invalid url<br/>Error 404');
+                loadView('error');
                 exit();
             }
             if(!isset($_GET)|| empty($_GET) || !isset($_GET['username']) || empty($_GET['username']) || !isset($_GET['forgot_token']) || empty($_GET['forgot_token'])) {
-                print('Invalid attempt');
-                redirect_sleep('main','home', 3);
+                //print('Invalid attempt');
+                loadView('error');
                 exit();
             }
             $result = loadModel('user', 'forgot_verify', $arguments);
             if ($result == false) {
-                print('Please check url<br/>Error 404');
-                redirect_sleep('user', 'main', 3);
+                //print('Please check url<br/>Error 404');
+                loadView('error');
                 exit();
             }
             session_start();
@@ -225,42 +225,42 @@
 
         function forgot_change($arguments) {
             if ($this->auth) {
-                print('Invalid url<br/>Error 404');
-                redirect_sleep('main', 'home', 3);
+                //print('Invalid url<br/>Error 404');
+                loadView('error');
                 exit();
             }
             if(!isset($_POST) || empty($_POST) || !isset($_POST['f_password']) || empty($_POST['f_password']) || !isset($_POST['f_confirm_password']) || empty($_POST['f_confirm_password'])) {
-                print('Invalid attempt');
-                redirect_sleep('main','home', 3);
+                //print('Invalid attempt');
+                loadView('error');
                 exit();
             }
             if(!$this->f_auth) {
-                print('Invalid attempt');
-                redirect_sleep('main','home', 3);
+                //print('Invalid attempt');
+                loadView('error');
                 exit();
             }
             $result = loadModel('user', 'forgot_change', array_merge($arguments, ['f_username' => $_SESSION['f_username']]));
             session_destroy();
             if ($result == false) {
-                print('Some Error Occured<br/>Please Try Later');
-                redirect_sleep('user', 'main', 3);
+                //print('Some Error Occured<br/>Please Try Later');
+                loadView('error');
                 exit();
             }
-            print('Password updated successfully');
+            //print('Password updated successfully');
             session_start();
             $_SESSION = $result;
-            redirect_sleep('main', 'home', 3);
+            redirect_sleep('main', 'home', 0);
             exit();
         }
 
         function subscribe($arguments) {
             $result = loadModel('user', 'subscribe', $arguments);
             if ($result === false) {
-                print('Some Error Occured<br/>Please Try Again');
+                //print('Some Error Occured<br/>Please Try Again');
             } else {
-                print('Thanks, you will get our latest updates');
+                //print('Thanks, you will get our latest updates');
             }
-            redirect_sleep('main', 'home', 3);
+            redirect_sleep('main', 'home', 0);
             exit();
         }
 

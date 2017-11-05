@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2017 at 05:59 PM
+-- Generation Time: Nov 05, 2017 at 09:38 PM
 -- Server version: 5.5.57-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.22
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `asg` (
   PRIMARY KEY (`asg_id`),
   KEY `t_idb` (`batch_id`),
   KEY `u_asg` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
 
 --
 -- Dumping data for table `asg`
@@ -497,6 +497,18 @@ CREATE TABLE IF NOT EXISTS `participation` (
   KEY `p_id` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `participation`
+--
+
+INSERT INTO `participation` (`user_id`, `c_id`, `p_id`, `score`) VALUES
+(385454, 9, 47, 100),
+(385455, 9, 47, 100),
+(385455, 9, 48, 100),
+(385456, 9, 46, 100),
+(385456, 9, 47, 100),
+(385458, 9, 47, 100);
+
 -- --------------------------------------------------------
 
 --
@@ -598,6 +610,18 @@ CREATE TABLE IF NOT EXISTS `solves` (
   KEY `language_id` (`language_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `solves`
+--
+
+INSERT INTO `solves` (`p_id`, `user_id`, `time`, `memory`, `submit_time`, `language_id`, `penalty`) VALUES
+(46, 385456, 0.00, 7254016, '2017-11-06 03:03:07', 1, 0),
+(47, 385454, 0.00, 7311360, '2017-11-06 02:58:28', 1, 0),
+(47, 385455, 0.00, 7159808, '2017-11-06 01:37:18', 1, 0),
+(47, 385456, 0.00, 7307264, '2017-11-06 02:59:55', 1, 0),
+(47, 385458, 0.00, 7237632, '2017-11-06 02:55:16', 1, 0),
+(48, 385455, 0.00, 4501504, '2017-11-06 01:42:42', 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -633,14 +657,16 @@ CREATE TABLE IF NOT EXISTS `subscription` (
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   PRIMARY KEY (`s_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `subscription`
 --
 
 INSERT INTO `subscription` (`s_id`, `name`, `email`) VALUES
-(1, 'Virender Sehwag', 'viru@rediff.com');
+(1, 'Virender Sehwag', 'viru@rediff.com'),
+(2, 'OOPs', 'yippe@timepass.com'),
+(3, 'a', 'a@a.a');
 
 -- --------------------------------------------------------
 

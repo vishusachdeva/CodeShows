@@ -36,7 +36,7 @@
                 $msg = "Invalid First Name";
             } else if (!isset($lname) || empty($lname) || !ctype_alpha($lname) || strlen($lname) > 20) {
                 $msg = "Invalid Last Name";
-            } else if (!isset($username) || empty($username) || !ctype_alpha($username) || strlen($username) > 20) {
+            } else if (!isset($username) || empty($username) || !ctype_alnum($username) || strlen($username) > 20) {
                 $msg = "Invalid User Name";
             } else if ((!isset($institute_id) || empty($institute_id) || !preg_match($i_patt, $institute_id)) && $type == 1) {
                 $msg = "Invalid Institute Id";
@@ -90,8 +90,8 @@
         function register($data = []) {
             $msg = $this->validate($data);
             if ($msg) {
-                print($msg);
-                redirect_sleep('main', 'home', 5);
+                //print($msg);
+                loadView('error');
                 exit();
             }
             extract($data);
