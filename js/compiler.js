@@ -31,7 +31,7 @@ function fire(path, language, p_id, solution, time_limit) {
                 submit_solution.disabled = false;
                 if (this.responseText.startsWith('~~~~~')) {
 				    document.getElementById('result-panel').style.borderColor = '';
-                    document.getElementById("result").innerHTML = this.responseText.slice(5, );
+                    document.getElementById("result").innerHTML = this.responseText.slice(5, this.responseText.length);
                 } else {
 				    document.getElementById('result-panel').style.borderColor = 'red';
                     document.getElementById("result").innerHTML = this.responseText;
@@ -67,7 +67,7 @@ function editor_submit(path, language, p_id, solution,time_limit) {
                 editor_submit_solution.disabled = false;
                 if (this.responseText.startsWith('~~~~~')) {
 				    document.getElementById('result').style.borderColor = '';
-                    document.getElementById("result").innerHTML = this.responseText.slice(5, );
+                    document.getElementById("result").innerHTML = this.responseText.slice(5, this.responseText.length);
                 } else {
 				    document.getElementById('result').style.borderColor = 'red';
                     document.getElementById("result").innerHTML = this.responseText;
@@ -103,7 +103,7 @@ function run_code(path, language, p_id, solution, testcase, time_limit) {
                 run.disabled = false;
                 if (this.responseText.startsWith('~~~~~')) {
 				    document.getElementById('result').style.borderColor = '';
-                    document.getElementById("result").innerHTML = this.responseText.slice(5, );
+                    document.getElementById("result").innerHTML = this.responseText.slice(5, this.responseText.length);
                 } else {
 				    document.getElementById('result').style.borderColor = 'red';
                     document.getElementById("result").innerHTML = this.responseText;

@@ -49,7 +49,7 @@
             if ($out_file == json_decode($result)->result->stdout[0] || $out_file == json_decode($result)->result->stdout[0]."\n") print("SAMPLE TESTCASES PASSED<br/>");
             else print("WA<br/>");
         } else if (!$flag) {
-            print("Your Input (stdin) <br/>".nl2br($testcase)."<br/>");
+            print("~~~~~Your Input (stdin) <br/>".nl2br($testcase)."<br/>");
             print("Your Output (stdout) <br/>".nl2br(json_decode($result)->result->stdout[0])."<br/>");
         }
     } else {

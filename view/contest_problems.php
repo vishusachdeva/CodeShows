@@ -22,7 +22,7 @@
             <br>
         <?php
         while($i < $len) { ?>
-<div type = "button" class="container w3-border w3-light-grey" style="margin:1% auto;width:100%;border-radius:15px;">
+<div class="container w3-border w3-light-grey" style="margin:1% auto;width:100%;border-radius:15px;">
     <div class="clearfix"></div>
     <div style="float:left;width:85%;padding-bottom:1%;">
         <h3 style="font-size:150%;line-height:100%;"><b><?php echo(${$x}['p_name']." (".${$x}['p_code'].")"); ?></b></h3>
