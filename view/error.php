@@ -5,7 +5,7 @@
 <!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en-US"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en-US"> <!--<![endif]-->
 <head>
-<title>Error 404 | Codeshows</title>
+<title>Error 404 - Codeshows</title>
 <meta charset="UTF-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
@@ -24,7 +24,7 @@
     <div id="cf-error-details" class="cf-error-details-wrapper">
       <div class="cf-wrapper cf-header cf-error-overview">
         <h1>
-          <span class="cf-error-type" data-translate="error">Error</span>
+          <span class="cf-error-type" data-translate="error">CODESHOWS - Error</span>
           <span class="cf-error-code">404</span>
           <small class="heading-ray-id">
           <?php $date = new DateTime('now', new DateTimeZone('Asia/Kolkata'));
@@ -40,7 +40,7 @@
       <div class="cf-section cf-wrapper">
         <div class="cf-columns two">
           <div class="cf-column">
-            <p>PAGE NOT FOUND.</p>
+            <p><?php echo($msg); ?></p>
           </div>
 
 

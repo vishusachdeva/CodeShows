@@ -13,8 +13,8 @@
         //$controller = 'error';
         //$function = 'e404';
         // redirect
-        print("Please check url");
-        redirect_sleep('main', 'home', 5);
+        loadView('error', ['msg' => 'Please check url']);
+        exit();
     }
 
     $controller_path = CONTROLLER_PATH.$controller.'.php';
@@ -26,13 +26,13 @@
             $controller_object->$function(array_merge(array_merge($_GET, $_POST), array_merge($_FILES, $_SERVER)));
         } else {
             // redirect
-            print("Controller Function does not exist");
-			redirect_sleep('main', 'home', 5);
+            loadView('error', ['msg' => 'Controller Function does not exist']);
+            exit();
         }
     } else {
         // redirect
-        print("Controller does not exist");
-        redirect_sleep('main', 'home', 5);
+        loadView('error', ['msg' => 'Controller does not exist']);
+        exit();
     }
 
 ?>

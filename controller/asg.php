@@ -17,11 +17,11 @@
         function all($arguments) {
             if (!$this->auth) {
                 //print('You are not Logged In');
-                loadView('error');
+                loadView('error', ['msg' => 'You are not Logged In']);
                 exit();
             } else if ($this->data['type'] == 2) {
                 //print('Only Students Allowed');
-                loadView('error');
+                loadView('error', ['msg' => 'Only Students Allowed']);
                 exit();
             }
             $data = loadModel("asg", "fetch", $this->data);
@@ -44,11 +44,11 @@
         function builder() {
             if ($this->auth == 0) {
                 //print('You are not Logged In');
-                loadView('error');
+                loadView('error', ['msg' => 'You are not Logged In']);
                 exit();
             } else if ($this->data['type'] != 2) {
                 //print('Please check link');
-                loadView('error');
+                loadView('error', ['msg' => 'Please check link']);
                 exit();
             }
             //loadView("header", array_merge($this->data, ['title' => "Assignment Builder - CodeShows"]));
@@ -61,17 +61,17 @@
         function add_asg($arguments) {
             if ($this->auth == 0) {
                 //print('You are not Logged In');
-                loadView('error');
+                loadView('error', ['msg' => 'You are not Logged In']);
                 exit();
             } else if ($this->data['type'] != 2 || !isset($_POST) || empty($_POST)) {
                 //print('Please check link');
-                loadView('error');
+                loadView('error', ['msg' => 'Please check link']);
                 exit();
             }
             $result = loadModel('asg', 'add_asg', array_merge($arguments, $this->data));
             if (empty($result)) {
                 //print('Error adding assignment');
-                loadView('error');
+                loadView('error', ['msg' => 'Error adding assignment']);
                 exit();
             }
             print("<script>alert('Assignment added successfully');</script>");

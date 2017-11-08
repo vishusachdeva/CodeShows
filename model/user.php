@@ -91,7 +91,7 @@
             $msg = $this->validate($data);
             if ($msg) {
                 //print($msg);
-                loadView('error');
+                loadView('error', ['msg' => $msg]);
                 exit();
             }
             extract($data);
