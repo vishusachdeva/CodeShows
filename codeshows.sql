@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 05, 2017 at 09:38 PM
+-- Generation Time: Nov 09, 2017 at 07:38 AM
 -- Server version: 5.5.57-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.22
 
@@ -31,25 +31,28 @@ CREATE TABLE IF NOT EXISTS `asg` (
   `asg_name` varchar(100) NOT NULL,
   `start_time` datetime NOT NULL,
   `end_time` datetime NOT NULL,
-  `total_marks` int(11) DEFAULT NULL,
+  `total_marks` int(11) DEFAULT '0',
   `user_id` int(11) NOT NULL,
   `batch_id` int(11) NOT NULL,
   `time_of_addition` datetime NOT NULL,
   PRIMARY KEY (`asg_id`),
   KEY `t_idb` (`batch_id`),
-  KEY `u_asg` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=30 ;
+  KEY `u_asg` (`user_id`),
+  KEY `asg_id` (`asg_id`),
+  KEY `user_id` (`user_id`),
+  KEY `batch_id` (`batch_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `asg`
 --
 
 INSERT INTO `asg` (`asg_id`, `asg_name`, `start_time`, `end_time`, `total_marks`, `user_id`, `batch_id`, `time_of_addition`) VALUES
-(22, 'DSA 1', '2017-12-31 23:59:00', '2017-12-31 23:59:00', NULL, 385459, 1, '2017-10-29 23:41:46'),
-(23, 'DSA 2', '2017-12-30 23:59:00', '2017-12-31 23:59:00', NULL, 385459, 2, '2017-10-29 23:42:19'),
-(24, 'PM 1', '2017-12-31 23:59:00', '2016-12-31 23:59:00', NULL, 385457, 1, '2017-10-29 23:43:51'),
-(25, 'PM 2', '2017-12-31 22:59:00', '2017-12-31 23:59:00', NULL, 385457, 2, '2017-10-29 23:44:14'),
-(26, 'PM3', '2017-10-31 23:03:00', '2018-12-31 23:59:00', NULL, 385457, 2, '2017-10-29 23:45:28');
+(22, 'DSA 1', '2017-12-31 23:59:00', '2017-12-31 23:59:00', 110, 385459, 1, '2017-10-29 23:41:46'),
+(23, 'DSA 2', '2017-12-30 23:59:00', '2017-12-31 23:59:00', 0, 385459, 2, '2017-10-29 23:42:19'),
+(24, 'PM 1', '2017-12-31 23:59:00', '2016-12-31 23:59:00', 0, 385457, 1, '2017-10-29 23:43:51'),
+(25, 'PM 2', '2017-12-31 22:59:00', '2017-12-31 23:59:00', 0, 385457, 2, '2017-10-29 23:44:14'),
+(26, 'PM3', '2017-10-31 23:03:00', '2018-12-31 23:59:00', 0, 385457, 2, '2017-10-29 23:45:28');
 
 -- --------------------------------------------------------
 
@@ -60,7 +63,7 @@ INSERT INTO `asg` (`asg_id`, `asg_name`, `start_time`, `end_time`, `total_marks`
 CREATE TABLE IF NOT EXISTS `asg_prob` (
   `asg_id` int(11) NOT NULL,
   `p_id` int(11) NOT NULL,
-  `marks` int(11) NOT NULL,
+  `marks` int(11) NOT NULL DEFAULT '100',
   PRIMARY KEY (`asg_id`,`p_id`),
   KEY `b` (`p_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -80,6 +83,18 @@ INSERT INTO `asg_prob` (`asg_id`, `p_id`, `marks`) VALUES
 (25, 8, 100),
 (26, 7, 50),
 (26, 8, 50);
+
+--
+-- Triggers `asg_prob`
+--
+DROP TRIGGER IF EXISTS `total_marks`;
+DELIMITER //
+CREATE TRIGGER `total_marks` AFTER INSERT ON `asg_prob`
+ FOR EACH ROW BEGIN
+	UPDATE asg SET total_marks = total_marks + new.marks WHERE asg.asg_id = new.asg_id;
+END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -502,6 +517,7 @@ CREATE TABLE IF NOT EXISTS `participation` (
 --
 
 INSERT INTO `participation` (`user_id`, `c_id`, `p_id`, `score`) VALUES
+(385454, 7, 37, 100),
 (385454, 9, 47, 100),
 (385455, 9, 47, 100),
 (385455, 9, 48, 100),
@@ -540,56 +556,56 @@ CREATE TABLE IF NOT EXISTS `problem` (
 --
 
 INSERT INTO `problem` (`p_id`, `p_name`, `p_code`, `p_setter`, `date_added`, `p_filename`, `u_attempt`, `u_solve`, `accepted`, `submitted`, `time_limit`, `source_limit`, `difficulty`, `status`) VALUES
-(1, 'Buggy Calculator', 'BUGCAL', 'Vinayak', '2017-07-01', 'p1', 15, 7, 7, 7, 2.00, 50000, 1, 0),
-(2, 'A Balanced Contest', 'PERFCONT', 'Shivanjal', '2017-08-01', 'p2', 0, 0, 0, 0, 2.00, 50000, 2, 0),
-(3, 'Chef and Employment Test', 'CK87MEDI', 'Lav Kush', '2017-08-03', 'p3', 0, 0, 0, 0, 2.00, 50000, 3, 0),
-(4, 'Rupsa And The Game', 'RGAME', 'Lav Kush', '2017-08-03', 'p4', 0, 0, 0, 0, 2.00, 50000, 1, 0),
-(5, 'Chef and Way', 'CHRL4', 'Vinayak', '2017-08-03', 'p5', 0, 0, 0, 0, 2.00, 50000, 2, 0),
-(6, 'Weird Competition', 'WEICOM', 'Shivanjal', '2017-08-03', 'p6', 0, 0, 0, 0, 2.00, 50000, 3, 0),
-(7, 'Hull Sum', 'HULLSUM', 'Vinayak', '2017-08-03', 'p7', 0, 0, 0, 0, 2.00, 50000, 2, 2),
-(8, 'Year 3017', 'UNIVERSE', 'Lav Kush', '2017-08-03', 'p8', 0, 0, 0, 0, 2.00, 50000, 2, 2),
-(9, 'Minimax', 'MINIMAX	', 'Shivanjal', '2017-08-03', 'p9', 0, 0, 0, 0, 2.00, 50000, 2, 2),
-(10, 'Animesh practices some programming contests', 'CHN03', 'Shivanjal', '2017-08-03', 'p10', 0, 0, 0, 0, 2.00, 50000, 3, 2),
-(11, 'Animesh has a war with tribal leader Malvika', 'CHN11', 'Vinayak', '2017-08-03', 'p11', 0, 0, 0, 0, 2.00, 50000, 3, 2),
-(12, 'TreeLand Journey', 'JRNTREE', 'Lav Kush', '2017-08-03', 'p12', 0, 0, 0, 0, 2.00, 50000, 3, 2),
-(13, 'Optimal Subset', 'OPTSSET', 'Vinayak', '2017-08-03', 'p13', 0, 0, 0, 0, 2.00, 50000, 3, 1),
-(14, 'King Animesh decides to have a voyage to the sun', 'CHN06', 'Lav Kush', '2017-08-03', 'p14', 0, 0, 0, 0, 2.00, 50000, 3, 1),
-(15, 'Catch Spider-Chef', 'CATCHSM', 'Shivanjal', '2017-08-03', 'p15', 0, 0, 0, 0, 2.00, 50000, 3, 1),
-(16, 'array sum', 'arr16', 'vinayak', '2017-11-01', 'p16', 0, 0, 0, 0, 2.02, 3000, 1, 1),
-(17, 'Kangaroo', 'Kangaroo', 'lavkush', '2017-11-02', 'p17', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(18, 'Maximum', 'maximum', 'shivanjal', '2017-11-02', 'p18', 0, 0, 0, 0, 2.00, 3000, 1, 1),
-(19, 'perfect', 'perfection', 'vinayak', '2017-11-02', 'p19', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(20, 'Compare the Triplets', 'Triplets', 'lavkush', '2017-11-02', 'p20', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(21, 'A Very Big Sum', 'Big Sum', 'shivanjal', '2017-11-01', 'p21', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(22, 'Diagonal Difference', 'Diagonal_Diff', 'lavkush', '2017-11-01', 'p22', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(23, 'Plus Minus', 'Plus_Minus', 'vinayak', '2017-10-18', 'p23', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(24, 'Staircase', 'Staircase', 'shivanjal', '2017-10-03', 'p24', 0, 0, 0, 0, 2.00, 3000, 1, 1),
-(25, 'Mini-Max Sum', 'Min_Max_Sum', 'lavkush', '2017-10-18', 'p25', 0, 0, 0, 0, 2.00, 3000, 1, 1),
-(26, 'Birthday Cake Candles', 'Cake_Candles', 'lavkush', '2017-10-18', 'p26', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(27, 'Time Conversion', 'Time_Convers', 'shivanjal', '2017-10-18', 'p27', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(28, 'Pangrams', 'Pangrams', 'lavkush', '2017-10-26', 'p28', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(29, 'Weird Competition', 'Weird_Competition', 'vinayak', '2017-10-19', 'p29', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(30, 'Hull Sum', 'Hull_Sum', 'shivanjal', '2017-10-18', 'p30', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(31, 'Minimax', 'Minimax', 'lavkush', '2017-10-04', 'p31', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(32, 'Black Nodes in Subgraphs', 'Noce_Subgraphs', 'vinayak', '2017-11-01', 'p32', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(33, 'Malvika conducts her own ACM-ICPC contest series', 'ACM-ICPC', 'lavkush', '2017-11-07', 'p33', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(34, 'Mathison and the teleportation game', 'game', 'shivanjal', '2017-11-08', 'p34', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(35, 'Chef and Cycled Cycles', 'Cycles', 'shivanjal', '2017-10-11', 'p35', 0, 0, 0, 0, 2.00, 3000, 1, 1),
-(36, 'Post Tree', 'Post Tree', 'shivanjal', '2017-11-01', 'p36', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(37, 'Chef and Yoda', 'Chef and Yoda', 'SHIVANJAL', '2017-10-19', 'p37', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(38, 'Interval Game', 'Interval Game', 'lavkush', '2017-10-10', 'p38', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(39, 'Short in Average', 'Short in Average', 'vinayak', '2017-11-01', 'p39', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(40, 'Sereja and Two Strings 2', 'SerejaStrings', 'lavkush', '2017-11-01', 'p40', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(41, 'Chef and Inflation', 'ChefInflation', 'lavkush', '2017-11-01', 'p41', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(42, 'Chef Shifu and Celebration', 'ChefCelebration', 'lavkush', '2017-10-04', 'p42', 0, 0, 0, 0, 2.00, 3000, 1, 1),
-(43, 'Sereja and Two Lines', 'SerejaLines', 'vinayak', '2017-10-03', 'p43', 0, 0, 0, 0, 2.00, 3000, 2, 1),
-(44, 'Chef and His Garden', 'ChefGarden', 'lavkush', '2017-10-10', 'p44', 0, 0, 0, 0, 2.00, 3000, 1, 1),
-(45, 'Maximum Disjoint Subarrays', 'MaximumSubarrays', 'vinayak', '2017-10-11', 'p45', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(46, 'Chef and Two String', 'ChefString', 'shivanjal', '2017-11-01', 'p46', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(47, 'Company and Club Hierarchies', 'CompanyHierarchies', 'lavkush', '2017-11-01', 'p47', 0, 0, 0, 0, 2.00, 3000, 1, 1),
-(48, 'Palindromic Queries', 'PalindromicQueries', 'shivanjal', '2017-11-01', 'p48', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(49, 'Big Queries', 'BigQueries', 'vinayak', '2017-11-01', 'p49', 0, 0, 0, 0, 2.00, 3000, 3, 1),
-(50, 'Chef and Triangles', 'ChefTriangles', 'lavkush', '2017-11-01', 'p50', 0, 0, 0, 0, 2.00, 3000, 2, 1);
+(1, 'Buggy Calculator', 'BUGCAL', 'Vinayak', '2017-07-01', 'p1', 14, 14, 13, 13, 2.00, 50000, 1, 0),
+(2, 'A Balanced Contest', 'PERFCONT', 'Shivanjal', '2017-08-01', 'p2', 15, 15, 5, 5, 2.00, 50000, 2, 0),
+(3, 'Chef and Employment Test', 'CK87MEDI', 'Lav Kush', '2017-08-03', 'p3', 2, 2, 5, 5, 2.00, 50000, 3, 0),
+(4, 'Rupsa And The Game', 'RGAME', 'Lav Kush', '2017-08-03', 'p4', 0, 0, 4, 4, 2.00, 50000, 1, 0),
+(5, 'Chef and Way', 'CHRL4', 'Vinayak', '2017-08-03', 'p5', 0, 0, 4, 4, 2.00, 50000, 2, 0),
+(6, 'Weird Competition', 'WEICOM', 'Shivanjal', '2017-08-03', 'p6', 0, 0, 4, 4, 2.00, 50000, 3, 0),
+(7, 'Hull Sum', 'HULLSUM', 'Vinayak', '2017-08-03', 'p7', 0, 0, 4, 4, 2.00, 50000, 2, 2),
+(8, 'Year 3017', 'UNIVERSE', 'Lav Kush', '2017-08-03', 'p8', 0, 0, 4, 4, 2.00, 50000, 2, 2),
+(9, 'Minimax', 'MINIMAX	', 'Shivanjal', '2017-08-03', 'p9', 0, 0, 4, 4, 2.00, 50000, 2, 2),
+(10, 'Animesh practices some programming contests', 'CHN03', 'Shivanjal', '2017-08-03', 'p10', 0, 0, 4, 4, 2.00, 50000, 3, 2),
+(11, 'Animesh has a war with tribal leader Malvika', 'CHN11', 'Vinayak', '2017-08-03', 'p11', 0, 0, 4, 4, 2.00, 50000, 3, 2),
+(12, 'TreeLand Journey', 'JRNTREE', 'Lav Kush', '2017-08-03', 'p12', 0, 0, 4, 4, 2.00, 50000, 3, 2),
+(13, 'Optimal Subset', 'OPTSSET', 'Vinayak', '2017-08-03', 'p13', 0, 0, 4, 4, 2.00, 50000, 3, 1),
+(14, 'King Animesh decides to have a voyage to the sun', 'CHN06', 'Lav Kush', '2017-08-03', 'p14', 0, 0, 4, 4, 2.00, 50000, 3, 1),
+(15, 'Catch Spider-Chef', 'CATCHSM', 'Shivanjal', '2017-08-03', 'p15', 0, 0, 4, 4, 2.00, 50000, 3, 1),
+(16, 'array sum', 'arr16', 'vinayak', '2017-11-01', 'p16', 0, 0, 4, 4, 2.02, 3000, 1, 1),
+(17, 'Kangaroo', 'Kangaroo', 'lavkush', '2017-11-02', 'p17', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(18, 'Maximum', 'maximum', 'shivanjal', '2017-11-02', 'p18', 0, 0, 4, 4, 2.00, 3000, 1, 1),
+(19, 'perfect', 'perfection', 'vinayak', '2017-11-02', 'p19', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(20, 'Compare the Triplets', 'Triplets', 'lavkush', '2017-11-02', 'p20', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(21, 'A Very Big Sum', 'Big Sum', 'shivanjal', '2017-11-01', 'p21', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(22, 'Diagonal Difference', 'Diagonal_Diff', 'lavkush', '2017-11-01', 'p22', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(23, 'Plus Minus', 'Plus_Minus', 'vinayak', '2017-10-18', 'p23', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(24, 'Staircase', 'Staircase', 'shivanjal', '2017-10-03', 'p24', 0, 0, 4, 4, 2.00, 3000, 1, 1),
+(25, 'Mini-Max Sum', 'Min_Max_Sum', 'lavkush', '2017-10-18', 'p25', 0, 0, 4, 4, 2.00, 3000, 1, 1),
+(26, 'Birthday Cake Candles', 'Cake_Candles', 'lavkush', '2017-10-18', 'p26', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(27, 'Time Conversion', 'Time_Convers', 'shivanjal', '2017-10-18', 'p27', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(28, 'Pangrams', 'Pangrams', 'lavkush', '2017-10-26', 'p28', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(29, 'Weird Competition', 'Weird_Competition', 'vinayak', '2017-10-19', 'p29', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(30, 'Hull Sum', 'Hull_Sum', 'shivanjal', '2017-10-18', 'p30', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(31, 'Minimax', 'Minimax', 'lavkush', '2017-10-04', 'p31', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(32, 'Black Nodes in Subgraphs', 'Noce_Subgraphs', 'vinayak', '2017-11-01', 'p32', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(33, 'Malvika conducts her own ACM-ICPC contest series', 'ACM-ICPC', 'lavkush', '2017-11-07', 'p33', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(34, 'Mathison and the teleportation game', 'game', 'shivanjal', '2017-11-08', 'p34', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(35, 'Chef and Cycled Cycles', 'Cycles', 'shivanjal', '2017-10-11', 'p35', 0, 0, 4, 4, 2.00, 3000, 1, 1),
+(36, 'Post Tree', 'Post Tree', 'shivanjal', '2017-11-01', 'p36', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(37, 'Chef and Yoda', 'Chef and Yoda', 'SHIVANJAL', '2017-10-19', 'p37', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(38, 'Interval Game', 'Interval Game', 'lavkush', '2017-10-10', 'p38', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(39, 'Short in Average', 'Short in Average', 'vinayak', '2017-11-01', 'p39', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(40, 'Sereja and Two Strings 2', 'SerejaStrings', 'lavkush', '2017-11-01', 'p40', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(41, 'Chef and Inflation', 'ChefInflation', 'lavkush', '2017-11-01', 'p41', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(42, 'Chef Shifu and Celebration', 'ChefCelebration', 'lavkush', '2017-10-04', 'p42', 0, 0, 4, 4, 2.00, 3000, 1, 1),
+(43, 'Sereja and Two Lines', 'SerejaLines', 'vinayak', '2017-10-03', 'p43', 0, 0, 4, 4, 2.00, 3000, 2, 1),
+(44, 'Chef and His Garden', 'ChefGarden', 'lavkush', '2017-10-10', 'p44', 0, 0, 4, 4, 2.00, 3000, 1, 1),
+(45, 'Maximum Disjoint Subarrays', 'MaximumSubarrays', 'vinayak', '2017-10-11', 'p45', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(46, 'Chef and Two String', 'ChefString', 'shivanjal', '2017-11-01', 'p46', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(47, 'Company and Club Hierarchies', 'CompanyHierarchies', 'lavkush', '2017-11-01', 'p47', 0, 0, 4, 4, 2.00, 3000, 1, 1),
+(48, 'Palindromic Queries', 'PalindromicQueries', 'shivanjal', '2017-11-01', 'p48', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(49, 'Big Queries', 'BigQueries', 'vinayak', '2017-11-01', 'p49', 0, 0, 4, 4, 2.00, 3000, 3, 1),
+(50, 'Chef and Triangles', 'ChefTriangles', 'lavkush', '2017-11-01', 'p50', 0, 0, 4, 4, 2.00, 3000, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -615,12 +631,37 @@ CREATE TABLE IF NOT EXISTS `solves` (
 --
 
 INSERT INTO `solves` (`p_id`, `user_id`, `time`, `memory`, `submit_time`, `language_id`, `penalty`) VALUES
+(1, 385455, 0.45, 3452, '2017-11-09 10:18:17', 1, 0),
+(1, 385457, 0.45, 4353, '2017-11-09 11:21:15', 1, 0),
+(1, 385458, 0.54, 3432, '2017-11-09 11:37:45', 1, 0),
+(1, 385459, 0.45, 4353, '2017-11-09 07:18:17', 1, 0),
+(2, 385459, 0.43, 5643, '2017-11-09 09:20:14', 1, 0),
+(3, 385455, 1.00, 2500, '2017-11-09 18:38:20', 1, 0),
+(3, 385459, 0.56, 5674, '2017-11-09 19:37:32', 1, 0),
+(4, 385456, 0.47, 2423, '2017-11-09 12:23:19', 1, 0),
+(18, 385454, 0.00, 4481024, '2017-11-09 12:16:14', 5, 0),
+(37, 385454, 0.00, 7282688, '2017-11-09 12:17:10', 1, 0),
 (46, 385456, 0.00, 7254016, '2017-11-06 03:03:07', 1, 0),
 (47, 385454, 0.00, 7311360, '2017-11-06 02:58:28', 1, 0),
 (47, 385455, 0.00, 7159808, '2017-11-06 01:37:18', 1, 0),
 (47, 385456, 0.00, 7307264, '2017-11-06 02:59:55', 1, 0),
 (47, 385458, 0.00, 7237632, '2017-11-06 02:55:16', 1, 0),
 (48, 385455, 0.00, 4501504, '2017-11-06 01:42:42', 1, 0);
+
+--
+-- Triggers `solves`
+--
+DROP TRIGGER IF EXISTS `solve_update`;
+DELIMITER //
+CREATE TRIGGER `solve_update` AFTER INSERT ON `solves`
+ FOR EACH ROW BEGIN
+	UPDATE problem SET accepted = accepted + 1 WHERE new.p_id=problem.p_id;
+	UPDATE problem SET submitted = submitted + 1 WHERE new.p_id=problem.p_id;
+	UPDATE problem SET u_attempt = (SELECT count(*) FROM solves WHERE solves.p_id=problem.p_id) WHERE new.p_id=problem.p_id;
+	UPDATE problem SET u_solve = (SELECT count(*) FROM solves WHERE solves.p_id=problem.p_id) WHERE new.p_id=problem.p_id;
+END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -742,7 +783,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `email`, `password`, `branch`, `dob`, `type`, `about_me`) VALUES
-(385454, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015ucp1057', 'vishusachdeva228@gmail.com', '$2y$10$Pid9CsIoNyiEOs7OehqwW.4d8dDPLKfdlGVYBEvhkjx7fIyGaA4Dm', 'CSE', '1998-01-01', 1, ''),
+(385454, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015ucp1057', 'vishusachdeva228@gmail.com', '$2y$10$Pid9CsIoNyiEOs7OehqwW.4d8dDPLKfdlGVYBEvhkjx7fIyGaA4Dm', 'CSE', '1998-01-01', 1, 'vinayak'),
 (385455, 'Shivanjal', 'Arora', 'shivi', '2015UCP1229', 'shivanjal9@gmail.com', '$2y$10$b853NQF9Yf0l6r6mkmHip.qPzkJoYx6Rz0bYZzH8pGEAOKfXEyL82', 'CSE', '1997-01-01', 1, ''),
 (385456, 'Lavkush', 'Kumar', 'lavkush', '2015UCP1463', '2015UCP1463@mnit.ac.in', '$2y$10$FBeBh7whGtCgAUmjViu1j.3WAxHnBNbUPFQq10PzAhWoI.j9dCwbS', 'CSE', '1997-12-31', 1, ''),
 (385457, 'Rahul', 'Gandhi', 'rahul', 'rgcse', 'rgcse@congress.com', '$2y$10$cVDMY1w0339hqfafDaLIu.VRRIzVf4lnqtYfYT55NtB/n0eZRM3sG', 'CSE', '1963-11-29', 2, ''),

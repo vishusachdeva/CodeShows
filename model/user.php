@@ -66,9 +66,11 @@
 
         function login($data = []) {
             extract($data);
+            mysqli_autocommit($this->db, FALSE);
             $sql = "SELECT * FROM `user` WHERE `email`='$email'";
             $result = query($this->db, $sql);
             if ($result == false) {
+                mysqli_rollback($this->db);
                 db_close($this->db);
                 return $result;
             }
@@ -83,15 +85,20 @@
                 $sql = "SELECT * FROM `teacher` NATURAL JOIN `user` WHERE `user_id`=".$result['user_id'];
                 $result = query($this->db, $sql);
             }
+            if ($result) mysqli_commit($this->db);
+            else mysqli_rollback($this->db);
             db_close($this->db);
             return $result[0];
         }
 
         function register($data = []) {
+            mysqli_autocommit($this->db, FALSE);
             $msg = $this->validate($data);
             if ($msg) {
                 //print($msg);
                 loadView('error', ['msg' => $msg]);
+                mysqli_rollback($this->db);
+                db_close($this->db);
                 exit();
             }
             extract($data);
@@ -108,7 +115,9 @@
                     if ($result2 === true) {
                         $result = array_merge($result, db_last_id($this->db, 'student', 'user_id', $last_id));
                     } else {
-                        $result = false;
+                        mysqli_rollback($this->db);
+                        db_close($this->db);
+                        return false;
                     }
                 } else {
                     $sql = "INSERT INTO `teacher` VALUES('".$result['user_id']."', 0)";
@@ -116,32 +125,41 @@
                     if ($result2 === true) {
                         $result = array_merge($result, db_last_id($this->db, 'teacher', 'user_id', $last_id));
                     } else {
-                        $result = false;
+                        mysqli_rollback($this->db);
+                        db_close($this->db);
+                        return false;
                     }
                 }
             }
+            mysqli_commit($this->db);
             db_close($this->db);
             return $result;
         }
 
         function forgot_password($data = []) {
+            mysqli_autocommit($this->db, FALSE);
             $sql = "SELECT * FROM `user` WHERE `email`='".$data['f_email']."'";
             $result = query($this->db,$sql);
             if(empty($result)) {
+                mysqli_rollback($this->db);
                 db_close($this->db);
                 return false;
             }
+            mysqli_commit($this->db);
             db_close($this->db);
             return $result[0];
         }
 
         function forgot_verify($data = []) {
+            mysqli_autocommit($this->db, FALSE);
             $sql = "SELECT * FROM `user` WHERE username='".$data['username']."' AND password='".$data['forgot_token']."'";
             $result = query($this->db,$sql);
             if(empty($result)) {
+                mysqli_rollback($this->db);
                 db_close($this->db);
                 return false;
             }
+            mysqli_commit($this->db);
             db_close($this->db);
             return true;
         }
@@ -152,15 +170,18 @@
             || !isset($data['f_confirm_password']) || empty($data['f_confirm_password'])
             || $data['f_password'] != $data['f_confirm_password'])
                 return false;
+            mysqli_autocommit($this->db, FALSE);
             $sql = "UPDATE `user` SET `password`='".password_hash($data['f_password'], PASSWORD_BCRYPT)."' WHERE username='".$data['f_username']."'";
             $result = query($this->db,$sql);
             if(empty($result)) {
+                mysqli_rollback($this->db);
                 db_close($this->db);
                 return false;
             }
             $sql = "SELECT * FROM `user` WHERE username='".$data['f_username']."'";
             $result = query($this->db,$sql);
             if(empty($result)) {
+                mysqli_rollback($this->db);
                 db_close($this->db);
                 return false;
             }
@@ -172,22 +193,31 @@
                 $sql = "SELECT * FROM `teacher` NATURAL JOIN `user` WHERE `user_id`=".$result['user_id'];
                 $result = query($this->db, $sql);
             }
+            mysqli_commit($this->db);
             db_close($this->db);
             return $result[0];
         }
 
         function subscribe($arguments) {
+            mysqli_autocommit($this->db, FALSE);
             $sql = "INSERT INTO `subscription`(`name`, `email`) VALUES('".$arguments['s_name']."', '".$arguments['s_email']."')";
             $result = query($this->db,$sql);
             db_close($this->db);
-            if($result === false)
+            if($result === false) {
+                mysqli_rollback($this->db);
+                db_close($this->db);
                 return false;
+            }
+            mysqli_commit($this->db);
+            db_close($this->db);
             return $result;
         }
 
         function fetch_batch_data() {
+            mysqli_autocommit($this->db, FALSE);
             $sql = "SELECT * FROM batch";
             $result = query($this->db,$sql);
+            mysqli_commit($this->db);
             db_close($this->db);
             return $result;
         }

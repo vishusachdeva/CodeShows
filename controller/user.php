@@ -36,7 +36,9 @@
             }
             session_destroy();
             //print("Log out Success");
-            redirect('main','home');
+            if (isset($_SERVER) && isset($_SERVER['HTTP_REFERER'])) header("Location: ".$_SERVER['HTTP_REFERER']);
+            else redirect('main','home');
+            exit();
         }
 
         function login($arguments) {
@@ -52,14 +54,16 @@
             $result = loadModel('user', 'login', $arguments);
             if ($result == false) {
                 //echo("Wrong Password.");
-                loadView('error', ['msg' => 'Wrong Password']);
+                loadView('error', ['msg' => 'Wrong Email or Password']);
                 redirect_sleep('main','home', 3);
                 exit();
             }
             //print("Login Success");
             session_start();
             $_SESSION = $result;
-            redirect('main','home');
+            if (isset($_SERVER) && isset($_SERVER['HTTP_REFERER'])) header("Location: ".$_SERVER['HTTP_REFERER']);
+            else redirect('main','home');
+            exit();
         }
 
         function signup($arguments) {

@@ -11,33 +11,39 @@
         }
 
 		function banner() {
+            mysqli_autocommit($this->db, FALSE);
 			$sql = "SELECT * FROM (banner b JOIN contest c ON b.c_id=c.c_id)";
-			return query($this->db, $sql);
+            $result = query($this->db,$sql);
+            mysqli_commit($this->db);
+            db_close($this->db);
+            return $result;
 		}
 
         function fetch($data) {
+            mysqli_autocommit($this->db, FALSE);
             $sql = "SELECT * FROM contest";
 			if (isset($data) && isset($data['c_id']) && !empty($data['c_id'])) $sql .= " WHERE `c_id`=".$data['c_id'];
 			$sql .= " ORDER BY end_time ASC, start_time ASC";
-            return query($this->db, $sql);
+            $result = query($this->db,$sql);
+            mysqli_commit($this->db);
+            db_close($this->db);
+            return $result;
         }
 
-        function solve_part_update($data = [])
-        {
-            if(empty($data) || !isset($data))
-            {
+        function solve_part_update($data = []) {
+            if(empty($data) || !isset($data)) {
                 echo("Could not update database. Please try again later.");
                 return;
             }
             extract($data);
+            mysqli_autocommit($this->db, FALSE);
             $sql = "SELECT * FROM solves WHERE user_id = $user_id AND p_id = $p_id";
             $result = query($this->db,$sql);
             $already_exists = true;
             if(empty($result))
                 $already_exists = false;
 
-            if($already_exists)
-            {
+            if($already_exists) {
                 $sql = "DELETE FROM solves WHERE user_id = $user_id AND p_id = $p_id ;";
                 $res = query($this->db,$sql);
             }
@@ -63,20 +69,22 @@
                 $start_time = strtotime($result[0]['start_time']);
                 $end_time = strtotime($result[0]['end_time']);
                 $submit_time = strtotime($submit_time);
-                if($submit_time > $start_time && $submit_time < $end_time)
-                {
+                if($submit_time > $start_time && $submit_time < $end_time) {
                     $sql = "DELETE FROM participation WHERE c_id = $c_id AND user_id = $user_id AND p_id = $p_id";
                     query($this->db,$sql);
                     $sql = "INSERT INTO participation VALUES($user_id,$c_id,$p_id,100)";
                     query($this->db,$sql);
                 }
             }
+            mysqli_commit($this->db);
+            db_close($this->db);
             return true;
         }
-        function fetch_ranklist($data = [])
-        {
+
+        function fetch_ranklist($data = []) {
             // A query to get contest name
             extract($data);
+            mysqli_autocommit($this->db, FALSE);
             $sql = "SELECT contest_name,no_of_problems,end_time FROM contest WHERE c_id = $c_id";
             $res = query($this->db,$sql);
             $end_time = $res[0]['end_time'];
@@ -135,6 +143,8 @@
             $final_result['p_mapping'] = $p_mapping;
             $final_result['contest_name'] = $c_name;
             $final_result['end_time'] = $end_time;
+            mysqli_commit($this->db);
+            db_close($this->db);
             return $final_result;
         }
     }
