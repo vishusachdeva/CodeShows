@@ -100,7 +100,7 @@
                 $p_mapping[ $value['p_id'] ] = $value['p_code'];
             }
             // A query to get all usernames who participated in the contest.
-            $sql = "SELECT U.username,U.user_id FROM user U WHERE U.user_id IN( SELECT distinct(P.user_id) FROM participation P);";
+            $sql = "SELECT U.username,U.user_id FROM user U WHERE U.user_id IN( SELECT distinct(P.user_id) FROM participation P WHERE c_id = $c_id);";
             $res = query($this->db,$sql);
             $u_mapping = []; // An array which maps user_id and user name.
             foreach( $res As $key => $value)
