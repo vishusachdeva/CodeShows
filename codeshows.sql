@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2017 at 07:38 AM
+-- Generation Time: Nov 11, 2017 at 01:11 PM
 -- Server version: 5.5.57-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.22
 
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS `asg` (
   KEY `asg_id` (`asg_id`),
   KEY `user_id` (`user_id`),
   KEY `batch_id` (`batch_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `asg`
@@ -771,6 +771,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `dob` date NOT NULL,
   `type` int(11) NOT NULL,
   `about_me` text NOT NULL,
+  `image` varchar(50) NOT NULL DEFAULT 'any.jpg',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
@@ -782,13 +783,13 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `email`, `password`, `branch`, `dob`, `type`, `about_me`) VALUES
-(385454, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015ucp1057', 'vishusachdeva228@gmail.com', '$2y$10$Pid9CsIoNyiEOs7OehqwW.4d8dDPLKfdlGVYBEvhkjx7fIyGaA4Dm', 'CSE', '1998-01-01', 1, 'vinayak'),
-(385455, 'Shivanjal', 'Arora', 'shivi', '2015UCP1229', 'shivanjal9@gmail.com', '$2y$10$b853NQF9Yf0l6r6mkmHip.qPzkJoYx6Rz0bYZzH8pGEAOKfXEyL82', 'CSE', '1997-01-01', 1, ''),
-(385456, 'Lavkush', 'Kumar', 'lavkush', '2015UCP1463', '2015UCP1463@mnit.ac.in', '$2y$10$FBeBh7whGtCgAUmjViu1j.3WAxHnBNbUPFQq10PzAhWoI.j9dCwbS', 'CSE', '1997-12-31', 1, ''),
-(385457, 'Rahul', 'Gandhi', 'rahul', 'rgcse', 'rgcse@congress.com', '$2y$10$cVDMY1w0339hqfafDaLIu.VRRIzVf4lnqtYfYT55NtB/n0eZRM3sG', 'CSE', '1963-11-29', 2, ''),
-(385458, 'Arvind', 'Kejriwal', 'kejri', 'akcse', 'akcse@hotmail.com', '$2y$10$mpfdTXFa7j.zn2sn0pbjbuUrdC1sZqtn/krrcvh/GsEbv.W5qVQh.', 'CSE', '1930-02-02', 2, ''),
-(385459, 'Narendra', 'Modi', 'namo', 'nmcse', 'nmcse@yahoo.in', '$2y$10$9iiL0FqXHgsFoT.sP0ByIea/OeVvEkk3.7sTD0iVK4V51J5di/UzW', 'CSE', '1970-02-03', 2, '');
+INSERT INTO `user` (`user_id`, `fname`, `lname`, `username`, `institute_id`, `email`, `password`, `branch`, `dob`, `type`, `about_me`, `image`) VALUES
+(385454, 'Vinayak', 'Sachdeva', 'vishusachdeva', '2015ucp1057', 'vishusachdeva228@gmail.com', '$2y$10$Pid9CsIoNyiEOs7OehqwW.4d8dDPLKfdlGVYBEvhkjx7fIyGaA4Dm', 'CSE', '1998-01-01', 1, 'mnit student', 'any.jpg'),
+(385455, 'Shivanjal', 'Arora', 'shivi', '2015UCP1229', 'shivanjal9@gmail.com', '$2y$10$b853NQF9Yf0l6r6mkmHip.qPzkJoYx6Rz0bYZzH8pGEAOKfXEyL82', 'CSE', '1997-01-01', 1, 'mnit student', 'any.jpg'),
+(385456, 'Lavkush', 'Kumar', 'lavkush', '2015UCP1463', '2015UCP1463@mnit.ac.in', '$2y$10$FBeBh7whGtCgAUmjViu1j.3WAxHnBNbUPFQq10PzAhWoI.j9dCwbS', 'CSE', '1997-12-31', 1, 'mnit student', 'any.jpg'),
+(385457, 'Rahul', 'Gandhi', 'rahul', 'rgcse', 'rgcse@congress.com', '$2y$10$cVDMY1w0339hqfafDaLIu.VRRIzVf4lnqtYfYT55NtB/n0eZRM3sG', 'CSE', '1963-11-29', 2, 'teacher', 'any.jpg'),
+(385458, 'Arvind', 'Kejriwal', 'kejri', 'akcse', 'akcse@hotmail.com', '$2y$10$mpfdTXFa7j.zn2sn0pbjbuUrdC1sZqtn/krrcvh/GsEbv.W5qVQh.', 'CSE', '1930-02-02', 2, 'teacher', 'any.jpg'),
+(385459, 'Narendra', 'Modi', 'namo', 'nmcse', 'nmcse@yahoo.in', '$2y$10$9iiL0FqXHgsFoT.sP0ByIea/OeVvEkk3.7sTD0iVK4V51J5di/UzW', 'CSE', '1970-02-03', 2, 'Teacher', 'any.jpg');
 
 -- --------------------------------------------------------
 

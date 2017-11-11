@@ -222,5 +222,26 @@
             return $result;
         }
 
+
+        function fetch_user($data)
+        {
+            if (!isset($data['fname']) || empty($data['fname'])) {
+                echo("You are not Log in ! ");
+                redirect_sleep('main', 'home', 5);
+                exit();
+            }
+            if($data['type']=='1')
+            {
+                $sql = "SELECT * FROM `user` natural join `student` WHERE user.user_id=student.user_id and  `user_id`= ".$data['user_id'] ."";
+
+            }
+            else
+            {
+                 $sql = "SELECT * FROM `user` natural join `teacher` WHERE user.user_id=teacher.user_id and  `user_id`=".$data['user_id'] ."";
+            }
+            $result = query($this->db, $sql);
+            return $result;
+        }
+
     }
 ?>

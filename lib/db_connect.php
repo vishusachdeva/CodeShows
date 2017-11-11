@@ -6,14 +6,14 @@
 
     function db_connect() {
         //
-        //$username = 'lav_kush';
+        $username = 'lav_kush';
         $password = 'hIsIfff0MvpNobzq';
-        $username = 'shivanjal_arora';
+        //$username = 'shivanjal_arora';
          /*
         $username = 'vishusachdeva';
 		/*$username = 'root';
 		$password = '';*/
-        $hostname = 'localhost';
+//        $hostname = 'localhost';
         $database = 'codeshows';
         $db = mysqli_connect($hostname, $username, $password, $database);
         if ($db === false) {

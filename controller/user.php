@@ -271,6 +271,18 @@
             exit();
         }
 
+
+        function profile($arguments) {
+            $data = loadModel('user', 'fetch_user', $_SESSION);
+            loadView("header", array_merge($this->data, ['title' => $data[0][username]." - CodeShows"]));
+            loadView('profile',$this->data);
+            loadView("footer");
+        }
+
+
+
+
+
     }
 
 ?>
