@@ -226,8 +226,7 @@
         function fetch_user($data)
         {
             if (!isset($data['fname']) || empty($data['fname'])) {
-                echo("You are not Log in ! ");
-                redirect_sleep('main', 'home', 5);
+                redirect_sleep('main', 'home', 0);
                 exit();
             }
             if($data['type']=='1')
