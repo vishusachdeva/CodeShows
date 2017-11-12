@@ -6,17 +6,18 @@
 
     function db_connect() {
         //
-        $username = 'lav_kush';
+        $username = ['vishusachdeva', 'lav_kush', 'shivanjal_arora'];
         $password = 'hIsIfff0MvpNobzq';
-        //$username = 'shivanjal_arora';
-         /*
-        $username = 'vishusachdeva';
-		/*$username = 'root';
-		$password = '';*/
-//        $hostname = 'localhost';
+        $hostname = 'localhost';
         $database = 'codeshows';
-        $db = mysqli_connect($hostname, $username, $password, $database);
-        if ($db === false) {
+        $db = false;
+        $i = 0;
+        while ($db === false && $i < count($username)) {
+            // redirect
+            @$db = mysqli_connect($hostname, $username[$i], $password, $database);
+            $i++;
+        }
+        if ($i == count($username)) {
             // redirect
             print("Database not responding");
             redirect_sleep('main','home',5);
